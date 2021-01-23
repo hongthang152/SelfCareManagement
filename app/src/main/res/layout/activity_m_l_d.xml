@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MLD"
+    android:background="#ffce99">
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp" />
+    <!-- Toolbar is the actual app bar with text and the action items -->
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/chronometer"
+        android:orientation="horizontal"
+
+
+        >
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startChronometer"
+            android:text="Start"
+            android:background="@drawable/custome_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pauseChronometer"
+            android:text="Pause"
+            android:background="@drawable/custome_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="resetChronometer"
+            android:text="Reset"
+            android:background="@drawable/custome_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="StopChronometer"
+            android:text="Stop"
+            android:background="@drawable/custome_button"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearfortimesave"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/linear"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/savetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/brown"
+            android:layout_below="@id/linear"
+            android:inputType="textPersonName"
+            android:text="DATE "
+            />
+        <TextView
+            android:id="@+id/DateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="@color/brown"
+            android:layout_below="@id/savetime"
+            android:inputType="textPersonName"
+            android:text="Duration"
+            />
+
+    </LinearLayout>
+    <ListView
+        android:layout_below="@id/linearfortimesave"
+        android:id="@+id/user_list"
+        android:longClickable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp" />
+</RelativeLayout>

@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "com.neurondigital.cityguide"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 4
+        versionName "1.4"
+        multiDexEnabled true
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+
+    //implementation 'com.google.android.gms:play-services-ads:17.1.1'
+    implementation 'com.google.firebase:firebase-ads:18.1.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+
+    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'com.android.volley:volley:1.1.1'
+
+
+    implementation 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'//do not upgrade this library
+    implementation 'com.mikepenz:community-material-typeface:1.8.36.1@aar'
+    implementation 'com.mikepenz:materialdrawer:6.1.1'
+    implementation "com.mikepenz:iconics-views:3.1.0"
+
+
+    implementation 'me.relex:circleindicator:2.1.0'
+   // implementation 'com.github.markushi:circlebutton:1.1'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation 'com.github.frank-zhu:pullzoomview:1.0.0'
+    implementation 'jp.wasabeef:richeditor-android:1.2.1'
+    implementation 'com.koushikdutta.async:androidasync:2.2.1'
+    implementation 'com.truizlop.sectionedrecyclerview:library:1.2.0'
+
+    //implementation 'com.facebook.android:facebook-android-sdk:4.37.0'
+    implementation 'com.facebook.android:facebook-core:5.0.0' // Facebook Core only (Analytics)
+    implementation 'com.facebook.android:facebook-login:5.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    testImplementation 'junit:junit:4.12'
+}
+
+apply plugin: 'com.google.gms.google-services'

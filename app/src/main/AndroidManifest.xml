@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.neurondigital.selfcare">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name="androidx.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon"
+        tools:targetApi="m">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+        <activity
+            android:name="com.neurondigital.selfcare.SplashScreenActivity"
+            android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.neurondigital.selfcare.MainActivity"
+            android:hardwareAccelerated="true">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="com.neurondigital.selfcare.SettingsActivity"
+            android:label="@string/settings_title" />
+        <activity
+            android:name="com.neurondigital.selfcare.ProfileActivity"
+            android:label="@string/profile_title"
+            android:parentActivityName="com.neurondigital.selfcare.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neurondigital.selfcare.MainActivity" />
+        </activity> <!-- [START firebase_service] -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/GoogleMapKey" /> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" /> <!-- Include the AdActivity configChanges and theme. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.neurondigital.selfcare.TermsActivity" />
+        <activity android:name="com.neurondigital.selfcare.PolicyActivity" />
+
+
+        <activity android:name="com.neurondigital.selfcare.MLD"
+            >
+
+        </activity>
+        <activity android:name="com.neurondigital.selfcare.LLIS" />
+        <activity android:name="com.neurondigital.selfcare.infoactivity" />
+        <activity android:name="com.neurondigital.selfcare.Exe" />
+        <activity android:name="com.neurondigital.selfcare.CongestionTherapy"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name="com.neurondigital.selfcare.SkinCare" />
+        <activity android:name="com.neurondigital.selfcare.Night" />
+        <activity android:name="com.neurondigital.selfcare.Day" />
+        <activity android:name="com.neurondigital.selfcare.Measurements" />
+
+    </application>
+
+</manifest>

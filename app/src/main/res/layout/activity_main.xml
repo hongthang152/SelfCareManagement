@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#ffce99">
+
+
+    <!-- Toolbar is the actual app bar with text and the action items -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffce99"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/brown"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    <LinearLayout
+        android:id="@+id/drawer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical">
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/background_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_weight="0.9">-->
+
+<!--&lt;!&ndash;            <fragment&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/mainFragment"&ndash;&gt;-->
+<!--&lt;!&ndash;                class="com.neurondigital.cityguide.SearchFragment"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="1" />&ndash;&gt;-->
+
+
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="0.1">
+
+
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/MLD"
+                android:textColor="@color/brown"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:text="Manual Lymph Drainage (MLD) Massage "
+                android:background="@drawable/custome_button"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/CT"
+                android:layout_width="match_parent"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:layout_height="90dp"
+                android:text="Compression Therapy"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/Exe"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:text="Exercise"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/SC"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:text="Skin Care"
+                />
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/LLIS"
+                android:layout_width="match_parent"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:layout_height="90dp"
+                android:text="LLIS Report"
+                />
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/measure"
+                android:layout_width="match_parent"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:layout_height="90dp"
+                android:text="Measurement"
+                />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

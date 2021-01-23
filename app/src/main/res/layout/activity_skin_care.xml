@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffce99"
+    android:orientation="vertical"
+    tools:context=".SkinCare">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffce99"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/brown" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/SC9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="Methods for Skin Care"
+                android:textColor="#DD009688"
+                android:textSize="30dp" />
+
+
+            <TextView
+                android:id="@+id/SC2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="1)Reduce your risk of infection by avoiding potential trauma or injury.
+
+
+Use special care with razors to avoid nicks and skin irritation. If possible, avoid punctures such as injections and blood draws.
+Wear gloves during activities that may cause skin injury (i.e., washing dishes, gardening, working with tools, using chemicals such as detergent).
+If scratches or punctures to the skin occur, wash the area right away with soap and water, apply antibiotics, and continue to observe carefully for any signs of infection (i.e., redness, warmth)."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+
+            <TextView
+                android:id="@+id/SC3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="2)Keep the extremity clean and dry. Be sure to thoroughly dry your feet, especially your toes."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+
+            <TextView
+                android:id="@+id/SC4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="3)Apply moisturizer daily to prevent chapping and chafing of the skin. Steer clear of lotions that contain perfume or alcohol."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+
+            <TextView
+                android:id="@+id/SC5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="4)Always protect exposed skin with sunscreen and insect repellent."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+
+            <TextView
+                android:id="@+id/SC6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="5)Pay careful attention to nail care. Do not cut your cuticles or allow a manicurist to do so."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/SC7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="6)Always protect exposed skin with sunscreen and insect repellent."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/SC8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:text="7)se special care with razors to avoid nicks and skin irritation. If possible, avoid punctures such as injections and blood draws.Wear gloves during activities that may cause skin injury (i.e., washing dishes, gardening, working with tools, using chemicals such as detergent).If scratches or punctures to the skin occur, wash the area right away with soap and water, apply antibiotics, and continue to observe carefully for any signs of infection (i.e., redness, warmth)."
+                android:textColor="#DD009688"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+

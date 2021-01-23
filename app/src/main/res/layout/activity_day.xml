@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#DDC3A7"
+    tools:context=".Day">
+
+    <Button
+
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/day"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="Elastic Compression Garment"
+        android:textSize="30dp"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+
+        android:drawablePadding="-50dp"
+        />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/night"
+        android:layout_width="match_parent"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        android:layout_height="200dp"
+        android:text="Inelastic Velcro garment"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+
+        />
+
+</LinearLayout>
