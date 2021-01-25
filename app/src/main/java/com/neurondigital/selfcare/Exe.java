@@ -62,8 +62,6 @@ public class Exe extends AppCompatActivity {
 
                 db.deleterow(pos);
 
-
-
                 Toast.makeText(Exe.this, "long clicked, "+"pos: " + pos, Toast.LENGTH_LONG).show();
 
 

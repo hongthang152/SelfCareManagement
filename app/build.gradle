@@ -16,7 +16,7 @@ android {
         debug {
             minifyEnabled true
             useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
@@ -60,7 +60,7 @@ dependencies {
 
 
     implementation 'me.relex:circleindicator:2.1.0'
-   // implementation 'com.github.markushi:circlebutton:1.1'
+    // implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
@@ -74,6 +74,10 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:5.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
 }
 
