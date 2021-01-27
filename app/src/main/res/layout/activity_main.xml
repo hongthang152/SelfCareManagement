@@ -113,6 +113,13 @@
                 android:text="Measurement"
                 />
 
+            <Button
+             android:id="@+id/pneumatic"
+                android:layout_width="match_parent"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:text="Pneumatic Compression Theraoy"
+                android:layout_height="90dp" />
 
 
         </LinearLayout>
