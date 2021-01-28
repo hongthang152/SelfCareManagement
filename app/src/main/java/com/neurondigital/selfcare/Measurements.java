@@ -3,17 +3,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.neurondigital.selfcare.MLD.MLDModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -95,7 +93,7 @@ public class Measurements extends AppCompatActivity {
         MeasureDatabase db = new MeasureDatabase(this);
         ArrayList<HashMap<String, String>> userList = db.getAll();
         ListView lv = (ListView) findViewById(R.id.measurement_list);
-        ListAdapter adapter = new SimpleAdapter(Measurements.this, userList, R.layout.measurelist, new String[]{"date"}, new int[]{R.id.Date});
+        ListAdapter adapter = new SimpleAdapter(Measurements.this, userList, R.layout.measurelist, new String[]{"startTime"}, new int[]{R.id.Date});
         lv.setAdapter(adapter);
 
     }
