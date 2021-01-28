@@ -17,6 +17,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
+
     <LinearLayout
         android:id="@+id/drawer_container"
         android:layout_width="match_parent"
@@ -41,7 +42,9 @@
 
 
 <!--        </LinearLayout>-->
-
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -113,10 +116,19 @@
                 android:text="Measurement"
                 />
 
+            <Button
+             android:id="@+id/pneumatic"
+                android:layout_width="match_parent"
+                android:textColor="@color/brown"
+                android:background="@drawable/custome_button"
+                android:text="Pneumatic Compression Theraoy"
+                android:layout_height="90dp" />
 
 
         </LinearLayout>
+   </ScrollView>
 
     </LinearLayout>
+
 
 </RelativeLayout>
