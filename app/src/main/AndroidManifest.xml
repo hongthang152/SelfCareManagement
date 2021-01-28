@@ -18,11 +18,13 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
         tools:targetApi="m">
+
         <uses-library
             android:name="com.google.android.wearable"
             android:required="false" />
+
         <activity
-            android:name="com.neurondigital.selfcare.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,20 +32,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MLD.MLDRecordDetail"
+            android:label="Record Detail" />
         <activity
-            android:name="com.neurondigital.selfcare.MainActivity"
+            android:name=".MainActivity"
             android:hardwareAccelerated="true">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.neurondigital.selfcare.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/settings_title" />
         <activity
-            android:name="com.neurondigital.selfcare.ProfileActivity"
+            android:name=".ProfileActivity"
             android:label="@string/profile_title"
-            android:parentActivityName="com.neurondigital.selfcare.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neurondigital.selfcare.MainActivity" />
@@ -99,24 +103,19 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="com.neurondigital.selfcare.TermsActivity" />
-        <activity android:name="com.neurondigital.selfcare.PolicyActivity" />
-
-
-        <activity android:name="com.neurondigital.selfcare.MLD"
-            >
-
-        </activity>
-        <activity android:name="com.neurondigital.selfcare.LLIS" />
-        <activity android:name="com.neurondigital.selfcare.infoactivity" />
-        <activity android:name="com.neurondigital.selfcare.Exe" />
-        <activity android:name="com.neurondigital.selfcare.CongestionTherapy"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name="com.neurondigital.selfcare.SkinCare" />
-        <activity android:name="com.neurondigital.selfcare.Night" />
-        <activity android:name="com.neurondigital.selfcare.Day" />
-        <activity android:name="com.neurondigital.selfcare.Measurements" />
-
+        <activity android:name=".TermsActivity" />
+        <activity android:name=".PolicyActivity" />
+        <activity android:name=".MLD.MLD"></activity>
+        <activity android:name=".LLIS" />
+        <activity android:name=".infoactivity" />
+        <activity android:name=".Exe" />
+        <activity
+            android:name=".CongestionTherapy"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".SkinCare" />
+        <activity android:name=".Night" />
+        <activity android:name=".Day" />
+        <activity android:name=".Measurements" />
     </application>
 
 </manifest>

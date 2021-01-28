@@ -195,5 +195,18 @@
     <string name="facebook_app_id">xxxxxxxxxxx</string>
     <!--Facebook fb+ID- eg: fb2545454566987555-->
     <string name="fb_login_protocol_scheme">fbxxxxxxxxxxxxxxxxx</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="record_detail">Record detail</string>
+    <string name="start_time">Start Time:</string>
+    <string name="duration">Duration:</string>
+    <string name="end_time">End time:</string>
+    <string name="save">Save</string>
+    <string name="dummy_start_time">Jan 14, 2021, 10:39pm</string>
+    <string name="dummy_end_time">Jan 14, 2021, 11:39pm</string>
+    <string name="error">Error</string>
+    <string name="start_date_must_be_before_end_date">Start date must be before end date</string>
+    <string name="OK">OK</string>
+    <string name="select_date_time">Select time and date</string>
+    <string name="delete">Delete</string>
 
 </resources>

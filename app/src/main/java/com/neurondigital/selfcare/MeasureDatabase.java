@@ -55,7 +55,7 @@ public class MeasureDatabase  extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN1, measure.getDate()); // date
+        values.put(COLUMN1, measure.getDate()); // startTime
 
 
         // Inserting Row
@@ -71,7 +71,7 @@ public class MeasureDatabase  extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             HashMap<String, String> user = new HashMap<>();
-            user.put("date", cursor.getString(cursor.getColumnIndex(COLUMN1)));
+            user.put("startTime", cursor.getString(cursor.getColumnIndex(COLUMN1)));
 
             userList.add(user);
         }
