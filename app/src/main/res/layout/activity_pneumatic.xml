@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffce99">
 
     <Chronometer
         android:id="@+id/chronometerPneumatic"
@@ -71,13 +72,13 @@
             android:layout_weight="1"
             android:textColor="@color/brown"
             android:textSize="15dp"
-            android:text="Time"/>
+            android:text="Duration"/>
     </LinearLayout>
 
 
     <ListView
         android:layout_below="@id/linear2"
-        android:id="@+id/user_list"
+        android:id="@+id/user_list_pn"
         android:longClickable="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

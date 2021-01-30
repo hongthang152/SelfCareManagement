@@ -16,7 +16,7 @@ android {
         debug {
             minifyEnabled true
             useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
@@ -24,11 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 repositories {
     maven { url "https://jitpack.io" }
+    jcenter()
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -60,7 +66,7 @@ dependencies {
 
 
     implementation 'me.relex:circleindicator:2.1.0'
-   // implementation 'com.github.markushi:circlebutton:1.1'
+    // implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
@@ -73,6 +79,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-core:5.0.0' // Facebook Core only (Analytics)
     implementation 'com.facebook.android:facebook-login:5.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
 
     testImplementation 'junit:junit:4.12'
 }

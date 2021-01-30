@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare;
+package com.neurondigital.selfcare.MLD;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,11 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
-import static android.util.Log.*;
 
 public class MLDDatabase extends SQLiteOpenHelper {
 
@@ -20,8 +16,9 @@ public class MLDDatabase extends SQLiteOpenHelper {
     public static int VERSION_NUM = 1;
     public static final String TABLE_NAME = "MLDTABLE";
     public final static String COL_ID = "_id";
-    public static final String COLUMN1 = "Date";
-    public static final String COLUMN2 = "SavedTime";
+    public static final String COL_START_TIME = "start_time";
+    public static final String COL_END_TIME = "end_time";
+    public static final String DURATION = "duration";
 
     public MLDDatabase(Context ctx)
     {
@@ -36,8 +33,9 @@ public class MLDDatabase extends SQLiteOpenHelper {
     {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 
-                + COLUMN1  + " text,"
-                + COLUMN2 + " text);");  // add or remove columns
+                + COL_START_TIME + " text,"
+                + COL_END_TIME + " text,"
+                + DURATION + " text);");  // add or remove columns
     }
 
 
@@ -64,40 +62,50 @@ public class MLDDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN1,mld.getDate()); // Contact Name
-        values.put(COLUMN2, mld.getSavedtime()); // Contact Phone
-
+        values.put(COL_START_TIME,mld.getStartTime());
+        values.put(COL_END_TIME, mld.getEndTime());
+        values.put(DURATION, mld.getDuration());
         // Inserting Row
         db.insert(TABLE_NAME, null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
 
-    public ArrayList<HashMap<String, String>> getAll(){
+    void update(MLDModel mld) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+
+        ContentValues values = new ContentValues();
+        values.put(COL_START_TIME,mld.getStartTime());
+        values.put(DURATION, mld.getDuration());
+        values.put(COL_END_TIME, mld.getEndTime());
+
+        db.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(mld.getID())});
+        db.close(); // Closing database connection
+    }
+
+    public List<MLDModel> getAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<MLDModel> list = new ArrayList<>();
         String query = "SELECT * FROM "+ TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
-            HashMap<String,String> user = new HashMap<>();
-            user.put("Date",cursor.getString(cursor.getColumnIndex(COLUMN1)));
-            user.put("SavedTime",cursor.getString(cursor.getColumnIndex(COLUMN2)));
-            userList.add(user);
+            list.add(new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+                    cursor.getString(cursor.getColumnIndex(COL_END_TIME))));
         }
-        return  userList;
+        return list;
     }
 
     MLDModel getModel(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, new String[] { COL_ID,
-                        COLUMN1, COLUMN2 }, COL_ID + "=?",
+                        COL_START_TIME, DURATION}, COL_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        MLDModel model = new MLDModel(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+        MLDModel model = new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+                cursor.getString(cursor.getColumnIndex(COL_END_TIME)));
         // return contact
         return model;
     }
