@@ -112,7 +112,7 @@
         <activity
             android:name=".CongestionTherapy"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".SkinCare" />
+        <activity android:name=".SKINCARE.SkinCare" />
         <activity android:name=".Night" />
         <activity android:name=".Day" />
         <activity android:name=".Measurements" />
