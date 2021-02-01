@@ -117,6 +117,7 @@
         <activity android:name=".Day" />
         <activity android:name=".Measurements" />
         <activity android:name=".pneumatic" />
+        <activity android:name=".PneumaticRecordDetail"/>
     </application>
 
 </manifest>

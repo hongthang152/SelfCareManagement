@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -51,25 +52,26 @@ public class PneumaticDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-  public void addModel(PneumaticModel mdl){
-      SQLiteDatabase db = this.getWritableDatabase();
-      ContentValues cv = new ContentValues();
-      cv.put(COL_START_TIME, mdl.getStartTime() );
-      cv.put(COL_END_TIME, mdl.getEndTime() );
-      cv.put(DURATION, mdl.getDuration() );
-      long id = db.insert(TABLE_NAME,null,cv);
-      db.close();
+    public void addModel(PneumaticModel mdl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_START_TIME, mdl.getStartTime());
+        cv.put(COL_END_TIME, mdl.getEndTime());
+        cv.put(DURATION, mdl.getDuration());
+        long id = db.insert(TABLE_NAME, null, cv);
+        db.close();
 
-  }
-  public List<PneumaticModel> getAll(){
-      SQLiteDatabase db = this.getWritableDatabase();
+    }
+
+    public List<PneumaticModel> getAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
         List<PneumaticModel> pn = new ArrayList<>();
-        String query ="Select * from " + TABLE_NAME;
-        Cursor c = db.rawQuery(query,null);
-        if(c.moveToFirst()) {
+        String query = "Select * from " + TABLE_NAME;
+        Cursor c = db.rawQuery(query, null);
+        if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
 
-                pn.add(new PneumaticModel(c.getColumnIndex(COL_ID), c.getString(c.getColumnIndex(COL_START_TIME)),
+                pn.add(new PneumaticModel(c.getInt(c.getColumnIndex(COL_ID)), c.getString(c.getColumnIndex(COL_START_TIME)),
                         c.getString(c.getColumnIndex(DURATION)),
                         c.getString(c.getColumnIndex(COL_END_TIME))));
 
@@ -77,13 +79,33 @@ public class PneumaticDatabase extends SQLiteOpenHelper {
             }
         }
 
-      return pn;
+        return pn;
 
 
+    }
 
+     public void  recordDelete(PneumaticModel mdl){
+         SQLiteDatabase db = this.getWritableDatabase();
+         db.delete(TABLE_NAME,COL_ID + "=?", new String[]{Long.toString(mdl.getID())});
+     }
+
+  /*  public void deleterow(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COL_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        Log.d("deleting: ", "id: "+id);
+
+        db.close();
+    }*/
+  void update(PneumaticModel mld) {
+      SQLiteDatabase db = this.getWritableDatabase();
+
+      ContentValues values = new ContentValues();
+      values.put(COL_START_TIME,mld.getStartTime());
+      values.put(DURATION, mld.getDuration());
+      values.put(COL_END_TIME, mld.getEndTime());
+
+      db.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(mld.getID())});
+      db.close(); // Closing database connection
   }
-
-
-
-
 }

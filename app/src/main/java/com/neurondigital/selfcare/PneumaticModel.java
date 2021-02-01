@@ -1,9 +1,10 @@
 package com.neurondigital.selfcare;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class PneumaticModel {
+public class PneumaticModel implements Serializable {
     public static final String DATE_FORMAT_STRING = "dd-MM-yyyy HH:mm:ss";
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
     int id;
@@ -22,7 +23,7 @@ public class PneumaticModel {
         this.endTime = endTime;
     }
     public PneumaticModel( String startTime, String duration, String endTime) {
-       // this.id = id;
+        this.id = id;
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
