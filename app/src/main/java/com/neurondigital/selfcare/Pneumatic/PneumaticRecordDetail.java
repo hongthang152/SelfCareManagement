@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare;
+package com.neurondigital.selfcare.Pneumatic;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -15,8 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.neurondigital.helpers.Utility;
-import com.neurondigital.selfcare.MLD.MLDDatabase;
-import com.neurondigital.selfcare.MLD.MLDModel;
+import com.neurondigital.selfcare.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

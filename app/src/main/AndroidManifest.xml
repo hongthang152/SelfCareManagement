@@ -119,8 +119,8 @@
         <activity android:name=".Night" />
         <activity android:name=".Day" />
         <activity android:name=".Measurements" />
-        <activity android:name=".pneumatic" />
-        <activity android:name=".PneumaticRecordDetail"/>
+        <activity android:name=".Pneumatic.pneumatic" />
+        <activity android:name=".Pneumatic.PneumaticRecordDetail"/>
     </application>
 
 </manifest>

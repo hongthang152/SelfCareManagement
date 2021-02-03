@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare;
+package com.neurondigital.selfcare.Pneumatic;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import com.neurondigital.selfcare.R;
 
 import java.util.List;
 

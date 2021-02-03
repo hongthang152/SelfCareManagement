@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare;
+package com.neurondigital.selfcare.Pneumatic;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
