@@ -1,6 +1,7 @@
 package com.neurondigital.selfcare.MLD;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.ContextMenu;
@@ -30,6 +31,7 @@ public class MLD extends AppCompatActivity {
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
+    public static final String url = "https://klosetraining.com/resources/self-care-videos/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,12 @@ public class MLD extends AppCompatActivity {
             chronometer.start();
             running = true;
         }
+    }
+
+    public void help(View v) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     public void pauseChronometer(View v) {
