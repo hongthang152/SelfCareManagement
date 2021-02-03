@@ -10,25 +10,21 @@
     android:background="#DDC3A7"
     tools:context=".Night">
     <Button
-
         style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/day"
+        android:id="@+id/garment1"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:text="Self Bandaging"
         android:textSize="30dp"
-
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-
-
         android:drawablePadding="-50dp"
         />
 
     <Button
         style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/night"
+        android:id="@+id/garment2"
         android:layout_width="match_parent"
         android:textColor="#ffffff"
         android:textSize="30dp"
@@ -36,7 +32,5 @@
         android:text="Chip Foam Garment"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-
-
         />
 </LinearLayout>
