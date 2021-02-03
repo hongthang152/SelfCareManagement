@@ -18,6 +18,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
         tools:targetApi="m">
+        <activity android:name=".ct.CTRecordListActivity"></activity>
+        <activity android:name=".ct.CTRecordDetailsActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -32,7 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MLD.MLDRecordDetail"
+        <activity
+            android:name=".MLD.MLDRecordDetail"
             android:label="Record Detail" />
         <activity
             android:name=".MainActivity"
@@ -105,14 +108,14 @@
         </activity>
         <activity android:name=".TermsActivity" />
         <activity android:name=".PolicyActivity" />
-        <activity android:name=".MLD.MLD"></activity>
+        <activity android:name=".MLD.MLD" />
         <activity android:name=".LLIS" />
         <activity android:name=".infoactivity" />
         <activity android:name=".Exe" />
         <activity
             android:name=".CongestionTherapy"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".SkinCare" />
+        <activity android:name=".SKINCARE.SkinCare" />
         <activity android:name=".Night" />
         <activity android:name=".Day" />
         <activity android:name=".Measurements" />
