@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.ct;
+package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.neurondigital.helpers.Utility;
-import com.neurondigital.selfcare.MLD.MLDModel;
+import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.R;
 
 import java.text.ParseException;

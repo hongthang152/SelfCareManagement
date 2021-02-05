@@ -1,40 +1,23 @@
-package com.neurondigital.selfcare.SKINCARE;
+package com.neurondigital.selfcare.treatment.skincare;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.neurondigital.selfcare.R;
-import com.neurondigital.selfcare.SKINCARE.SkinCareDatabase;
-import com.neurondigital.selfcare.SKINCARE.SkinCareModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 public class SkinCare extends AppCompatActivity {
     private Button addButton;

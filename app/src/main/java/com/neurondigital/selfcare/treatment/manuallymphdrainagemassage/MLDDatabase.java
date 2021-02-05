@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.SKINCARE;
+package com.neurondigital.selfcare.treatment.manuallymphdrainagemassage;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,20 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
-public class SkinCareDatabase extends SQLiteOpenHelper {
+public class MLDDatabase extends SQLiteOpenHelper {
 
-
-    public static final String DATABASE_NAME = "SKINCARE";
+    public static final String DATABASE_NAME = "SELFCARE";
     public static int VERSION_NUM = 1;
-    public static final String TABLE_NAME = "SCTABLE";
+    public static final String TABLE_NAME = "MLDTABLE";
     public final static String COL_ID = "_id";
-    public static final String COLUMN1 = "Date";
-    public static final String COLUMN2 = "Note";
+    public static final String COL_START_TIME = "start_time";
+    public static final String COL_END_TIME = "end_time";
+    public static final String DURATION = "duration";
 
-
-    public SkinCareDatabase(Context ctx)
+    public MLDDatabase(Context ctx)
     {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
@@ -34,9 +33,11 @@ public class SkinCareDatabase extends SQLiteOpenHelper {
     {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 
-                + COLUMN1  + " text,"
-                + COLUMN2  + " text);");  // add or remove columns
+                + COL_START_TIME + " text,"
+                + COL_END_TIME + " text,"
+                + DURATION + " text);");  // add or remove columns
     }
+
 
     //this function gets called if the database version on your device is lower than VERSION_NUM
     @Override
@@ -57,76 +58,69 @@ public class SkinCareDatabase extends SQLiteOpenHelper {
         //Create the new table:
         onCreate(db);
     }
-    void addmodel(SkinCareModel sc) {
+    void addmodel(MLDModel mld) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN1,sc.getDate()); // get the date
-        values.put(COLUMN2, sc.getNote()); // get the note
-
+        values.put(COL_START_TIME,mld.getStartTime());
+        values.put(COL_END_TIME, mld.getEndTime());
+        values.put(DURATION, mld.getDuration());
         // Inserting Row
         db.insert(TABLE_NAME, null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
 
-    //get cursor from db with all rows, load them into the list of Hashmaps
-    public ArrayList<HashMap<String, String>> getAll(){
+    void update(MLDModel mld) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> scList = new ArrayList<>();
+
+        ContentValues values = new ContentValues();
+        values.put(COL_START_TIME,mld.getStartTime());
+        values.put(DURATION, mld.getDuration());
+        values.put(COL_END_TIME, mld.getEndTime());
+
+        db.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(mld.getID())});
+        db.close(); // Closing database connection
+    }
+
+    public List<MLDModel> getAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<MLDModel> list = new ArrayList<>();
         String query = "SELECT * FROM "+ TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
-            HashMap<String,String> scItem = new HashMap<>();
-            scItem.put("_id", cursor.getString(cursor.getColumnIndex(COL_ID)));
-            scItem.put("Date",cursor.getString(cursor.getColumnIndex(COLUMN1)));
-            scItem.put("Note",cursor.getString(cursor.getColumnIndex(COLUMN2)));
-            scList.add(scItem);
+            list.add(new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+                    cursor.getString(cursor.getColumnIndex(COL_END_TIME))));
         }
-        return  scList;
+        return list;
     }
 
-    //convert rows from cursor into SkinCareModel objects
-    SkinCareModel getModel(int id) {
+    MLDModel getModel(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, new String[] { COL_ID,
-                        COLUMN1, COLUMN2 }, COL_ID + "=?",
+                        COL_START_TIME, DURATION}, COL_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        SkinCareModel model = new SkinCareModel(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2) );
+        MLDModel model = new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+                cursor.getString(cursor.getColumnIndex(COL_END_TIME)));
         // return contact
         return model;
     }
 
-    //delete 1 row by id
+
     public void deleterow(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_NAME, COL_ID + " = ?",
-                new String[] {String.valueOf(id) });
+        new String[] { String.valueOf(id) });
         Log.d("deleting: ", "id: "+id);
 
         db.close();
     }
 
-    //delete all rows
-    public void deleteAll() {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Log.d("SkinCare DB: ", "Deleting all");
-
-        db.delete(TABLE_NAME, null, null);
-
-        db.close();
-    }
-
-
 }
-
 
 
 

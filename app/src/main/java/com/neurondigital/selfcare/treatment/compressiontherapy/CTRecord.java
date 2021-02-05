@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.ct;
+package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import java.io.Serializable;
 

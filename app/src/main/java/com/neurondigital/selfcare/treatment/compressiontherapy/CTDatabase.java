@@ -1,12 +1,10 @@
-package com.neurondigital.selfcare.ct;
+package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.neurondigital.selfcare.MLD.MLDModel;
 
 import java.util.ArrayList;
 import java.util.List;

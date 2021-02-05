@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.MLD;
+package com.neurondigital.selfcare.treatment.exercise;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,20 +7,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MLDDatabase extends SQLiteOpenHelper {
+public class ExerciseDatabase extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "SELFCARE";
+    public static final String DATABASE_NAME = "EXERCISE_DB";
     public static int VERSION_NUM = 1;
-    public static final String TABLE_NAME = "MLDTABLE";
+    public static final String TABLE_NAME = "EXERCISE";
     public final static String COL_ID = "_id";
     public static final String COL_START_TIME = "start_time";
     public static final String COL_END_TIME = "end_time";
     public static final String DURATION = "duration";
 
-    public MLDDatabase(Context ctx)
+    public ExerciseDatabase(Context ctx)
     {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
@@ -58,7 +59,7 @@ public class MLDDatabase extends SQLiteOpenHelper {
         //Create the new table:
         onCreate(db);
     }
-    void addmodel(MLDModel mld) {
+    void addmodel(ExerciseModel mld) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -71,7 +72,7 @@ public class MLDDatabase extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    void update(MLDModel mld) {
+    void update(ExerciseModel mld) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -83,19 +84,19 @@ public class MLDDatabase extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public List<MLDModel> getAll(){
+    public List<ExerciseModel> getAll(){
         SQLiteDatabase db = this.getWritableDatabase();
-        List<MLDModel> list = new ArrayList<>();
+        List<ExerciseModel> list = new ArrayList<>();
         String query = "SELECT * FROM "+ TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
-            list.add(new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+            list.add(new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
                     cursor.getString(cursor.getColumnIndex(COL_END_TIME))));
         }
         return list;
     }
 
-    MLDModel getModel(int id) {
+    ExerciseModel getModel(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, new String[] { COL_ID,
@@ -104,7 +105,7 @@ public class MLDDatabase extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        MLDModel model = new MLDModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+        ExerciseModel model = new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
                 cursor.getString(cursor.getColumnIndex(COL_END_TIME)));
         // return contact
         return model;
@@ -114,7 +115,7 @@ public class MLDDatabase extends SQLiteOpenHelper {
     public void deleterow(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_ID + " = ?",
-        new String[] { String.valueOf(id) });
+                new String[] { String.valueOf(id) });
         Log.d("deleting: ", "id: "+id);
 
         db.close();

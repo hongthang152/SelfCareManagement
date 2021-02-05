@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.Pneumatic;
+package com.neurondigital.selfcare.treatment.pneumatic;
 
 import android.content.Context;
 import android.view.LayoutInflater;

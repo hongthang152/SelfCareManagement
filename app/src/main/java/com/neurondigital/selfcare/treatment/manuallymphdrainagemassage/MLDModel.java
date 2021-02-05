@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.MLD;
+package com.neurondigital.selfcare.treatment.manuallymphdrainagemassage;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

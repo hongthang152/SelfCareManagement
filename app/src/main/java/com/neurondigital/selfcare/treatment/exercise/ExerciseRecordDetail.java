@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.Pneumatic;
+package com.neurondigital.selfcare.treatment.exercise;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.neurondigital.helpers.Utility;
+import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.R;
 
 import java.text.ParseException;
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class PneumaticRecordDetail extends AppCompatActivity {
+public class ExerciseRecordDetail extends AppCompatActivity {
 
     public static String MLD_RECORD_DETAIL_DATE_FORMAT = "MMM dd, yyyy, hh:mm a";
     public static SimpleDateFormat MLD_RECORD_DETAIL_DATE_FORMATTER = new SimpleDateFormat(MLD_RECORD_DETAIL_DATE_FORMAT, Locale.ENGLISH);
@@ -36,8 +37,8 @@ public class PneumaticRecordDetail extends AppCompatActivity {
 
     Button recordDetailSaveBtn;
 
-    PneumaticModel record;
-    PneumaticDatabase db;
+    ExerciseModel record;
+    ExerciseDatabase db;
 
     Date start;
     Date end;
@@ -47,14 +48,14 @@ public class PneumaticRecordDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new PneumaticDatabase(this);
+        db = new ExerciseDatabase(this);
         setContentView(R.layout.activity_record_detail);
         Toolbar toolbar = findViewById(R.id.record_detail_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        record = (PneumaticModel) getIntent().getSerializableExtra("record");
+        record = (ExerciseModel) getIntent().getSerializableExtra("record");
 
         recordDetailStartDate = findViewById(R.id.record_detail_start_date);
         recordDetailEndDate = findViewById(R.id.record_detail_end_date);
@@ -71,8 +72,8 @@ public class PneumaticRecordDetail extends AppCompatActivity {
         recordDetailDurationCap.setTypeface(recordDetailEndDateCap.getTypeface(), Typeface.BOLD);
 
         try {
-            start = PneumaticModel.DATE_FORMATTER.parse(record.getStartTime());
-            end = PneumaticModel.DATE_FORMATTER.parse(record.getEndTime());
+            start = MLDModel.DATE_FORMATTER.parse(record.getStartTime());
+            end = MLDModel.DATE_FORMATTER.parse(record.getEndTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -120,8 +121,8 @@ public class PneumaticRecordDetail extends AppCompatActivity {
                 builder.show();
                 return;
             }
-            record.setStartTime(PneumaticModel.DATE_FORMATTER.format(start));
-            record.setEndTime(PneumaticModel.DATE_FORMATTER.format(end));
+            record.setStartTime(MLDModel.DATE_FORMATTER.format(start));
+            record.setEndTime(MLDModel.DATE_FORMATTER.format(end));
             record.setDuration(Utility.diff(start, end));
             db.update(record);
             finish();

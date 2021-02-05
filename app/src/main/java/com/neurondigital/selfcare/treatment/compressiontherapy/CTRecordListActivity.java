@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.ct;
+package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,12 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.neurondigital.selfcare.MLD.MLDDatabase;
-import com.neurondigital.selfcare.MLD.MLDModel;
 import com.neurondigital.selfcare.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CTRecordListActivity extends AppCompatActivity {

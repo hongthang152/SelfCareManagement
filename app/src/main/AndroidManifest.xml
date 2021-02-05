@@ -18,8 +18,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
         tools:targetApi="m">
-        <activity android:name=".ct.CTRecordListActivity"></activity>
-        <activity android:name=".ct.CTRecordDetailsActivity" />
+        <activity android:name=".treatment.compressiontherapy.CTRecordListActivity"></activity>
+        <activity android:name=".treatment.compressiontherapy.CTRecordDetailsActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -35,10 +35,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MLD.MLDRecordDetail"
+            android:name=".treatment.manuallymphdrainagemassage.MLDRecordDetail"
             android:label="Record Detail" />
         <activity
-            android:name=".MainActivity"
+            android:name=".treatment.TreatmentModuleActivity"
             android:hardwareAccelerated="true">
             <meta-data
                 android:name="android.app.searchable"
@@ -50,10 +50,10 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/profile_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".treatment.TreatmentModuleActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neurondigital.selfcare.MainActivity" />
+                android:value="com.neurondigital.selfcare.treatment.TreatmentModuleActivity" />
         </activity> <!-- [START firebase_service] -->
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
@@ -108,19 +108,20 @@
         </activity>
         <activity android:name=".TermsActivity" />
         <activity android:name=".PolicyActivity" />
-        <activity android:name=".MLD.MLD" />
+        <activity android:name=".treatment.manuallymphdrainagemassage.MLD" />
         <activity android:name=".LLIS" />
         <activity android:name=".infoactivity" />
-        <activity android:name=".Exe" />
+        <activity android:name=".treatment.exercise.Exercise" />
+        <activity android:name=".treatment.exercise.ExerciseRecordDetail" />
         <activity
             android:name=".CongestionTherapy"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".SKINCARE.SkinCare" />
-        <activity android:name=".Night" />
-        <activity android:name=".Day" />
+            android:parentActivityName=".treatment.TreatmentModuleActivity" />
+        <activity android:name=".treatment.skincare.SkinCare" />
+        <activity android:name=".treatment.skincare.Night" />
+        <activity android:name=".treatment.skincare.Day" />
         <activity android:name=".Measurements" />
-        <activity android:name=".Pneumatic.pneumatic" />
-        <activity android:name=".Pneumatic.PneumaticRecordDetail"/>
+        <activity android:name=".treatment.pneumatic.Pneumatic" />
+        <activity android:name=".treatment.pneumatic.PneumaticRecordDetail"/>
     </application>
 
 </manifest>

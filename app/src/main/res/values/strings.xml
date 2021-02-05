@@ -210,5 +210,6 @@
     <string name="delete">Delete</string>
     <string name="name">Name</string>
     <string name="day_night">Day / Night</string>
+    <string name="show_help_video">Help Video</string>
 
 </resources>

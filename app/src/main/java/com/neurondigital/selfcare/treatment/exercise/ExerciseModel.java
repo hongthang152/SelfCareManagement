@@ -1,34 +1,33 @@
-package com.neurondigital.selfcare.Pneumatic;
+package com.neurondigital.selfcare.treatment.exercise;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class PneumaticModel implements Serializable {
+public class ExerciseModel implements Serializable {
     public static final String DATE_FORMAT_STRING = "dd-MM-yyyy HH:mm:ss";
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
+
     int id;
     String startTime;
     String duration;
     String endTime;
 
-    public PneumaticModel(){
-
+    public ExerciseModel() {
     }
 
-    public PneumaticModel(int id, String startTime, String duration, String endTime) {
-        this.id = id;
-        this.startTime = startTime;
-        this.duration = duration;
-        this.endTime = endTime;
-    }
-    public PneumaticModel( String startTime, String duration, String endTime) {
+    public ExerciseModel(int id, String startTime, String duration, String endTime) {
         this.id = id;
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
     }
 
+    public ExerciseModel(String startTime, String duration, String endTime) {
+        this.startTime = startTime;
+        this.duration = duration;
+        this.endTime = endTime;
+    }
 
     public int getID() {
         return this.id;
@@ -62,5 +61,4 @@ public class PneumaticModel implements Serializable {
         this.endTime = endTime;
     }
 }
-
 

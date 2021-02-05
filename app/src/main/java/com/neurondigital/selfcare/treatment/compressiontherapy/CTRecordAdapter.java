@@ -1,4 +1,4 @@
-package com.neurondigital.selfcare.ct;
+package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.neurondigital.selfcare.MLD.MLDModel;
 import com.neurondigital.selfcare.R;
 
 import java.util.List;

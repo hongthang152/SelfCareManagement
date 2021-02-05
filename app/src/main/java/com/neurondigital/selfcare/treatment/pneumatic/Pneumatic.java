@@ -1,63 +1,75 @@
-package com.neurondigital.selfcare.MLD;
+package com.neurondigital.selfcare.treatment.pneumatic;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+
 import android.os.SystemClock;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Chronometer;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.neurondigital.selfcare.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class MLD extends AppCompatActivity {
-
-    MLDDatabase db = new MLDDatabase(this);
+public class Pneumatic extends AppCompatActivity {
+    private PneumaticDatabase db = new PneumaticDatabase(this);
     Date startTime;
     Date endTime;
-    List<MLDModel> records;
-    ArrayAdapter<MLDModel> adapter;
+
+    private List<PneumaticModel> records;
+    private ListView lv;
+    private ArrayAdapter<PneumaticModel> adapter;
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
-    public static final String url = "https://klosetraining.com/resources/self-care-videos/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_m_l_d);
-
-        chronometer = findViewById(R.id.chronometer);
+        setContentView(R.layout.activity_pneumatic);
+        chronometer = findViewById(R.id.chronometerPneumatic);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
 
-        ListView lv = findViewById(R.id.user_list);
-        records = db.getAll();
 
-        adapter = new MLDRecordAdapter(this, records);
+        lv = findViewById(R.id.user_list_pn);
+        records = db.getAll();
+        adapter = new PneumaticAdapter(this, records);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MLD.this, MLDRecordDetail.class);
+                Intent intent = new Intent(Pneumatic.this, PneumaticRecordDetail.class);
                 intent.putExtra("record", records.get(position));
                 startActivityForResult(intent, 0);
             }
         });
 
-        registerForContextMenu(lv);
+        lv.setOnItemLongClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+             PneumaticModel model = records.get(position);
+            AlertDialog.Builder al = new AlertDialog.Builder(this);
+            al.setPositiveButton("Delete", (click, s) -> {
+                        db.recordDelete(model);
+                       records.remove(position);
+                       adapter.notifyDataSetChanged();
+                    })
+                    .create().show();
+            return true;
+
+        });
+        loadDataFromDatabase();
     }
+
 
     public void startChronometer(View v) {
         if (!running) {
@@ -66,12 +78,6 @@ public class MLD extends AppCompatActivity {
             chronometer.start();
             running = true;
         }
-    }
-
-    public void help(View v) {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
     }
 
     public void pauseChronometer(View v) {
@@ -85,10 +91,11 @@ public class MLD extends AppCompatActivity {
     public void resetChronometer(View v) {
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
+
     }
 
     public void StopChronometer(View v) {
-        MLDDatabase db = new MLDDatabase(this);
+        PneumaticDatabase db = new PneumaticDatabase(this);
 
         if (running) {
             endTime = Calendar.getInstance().getTime();
@@ -96,7 +103,7 @@ public class MLD extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String start = formatter.format(startTime);
             String end = formatter.format(endTime);
-            db.addmodel(new MLDModel(start, chronometer.getText().toString(), end));
+            db.addModel(new PneumaticModel(start, chronometer.getText().toString(), end));
             loadDataFromDatabase();
             running = false;
         }
@@ -105,8 +112,11 @@ public class MLD extends AppCompatActivity {
     public void loadDataFromDatabase() {
         records.clear();
         records.addAll(db.getAll());
+        Collections.reverse(records);
         adapter.notifyDataSetChanged();
+
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -114,27 +124,5 @@ public class MLD extends AppCompatActivity {
         loadDataFromDatabase();
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.mld_menu, menu);
 
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.mld_menu_delete:
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                int position = (int) info.id;
-                db.deleterow(records.get(position).getID());
-                records.remove(position);
-                adapter.notifyDataSetChanged();
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
 }
-
-
