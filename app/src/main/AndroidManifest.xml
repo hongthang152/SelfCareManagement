@@ -38,7 +38,7 @@
             android:name=".treatment.manuallymphdrainagemassage.MLDRecordDetail"
             android:label="Record Detail" />
         <activity
-            android:name=".treatment.TreatmentModuleActivity"
+            android:name=".treatment.TreatmentModuleFragment"
             android:hardwareAccelerated="true">
             <meta-data
                 android:name="android.app.searchable"
@@ -47,13 +47,14 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title" />
+        <activity android:name="com.neurondigital.selfcare.MainActivity"/>
         <activity
             android:name=".ProfileActivity"
             android:label="@string/profile_title"
-            android:parentActivityName=".treatment.TreatmentModuleActivity">
+            android:parentActivityName=".treatment.TreatmentModuleFragment">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neurondigital.selfcare.treatment.TreatmentModuleActivity" />
+                android:value="com.neurondigital.selfcare.treatment.TreatmentModuleFragment" />
         </activity> <!-- [START firebase_service] -->
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
@@ -115,7 +116,7 @@
         <activity android:name=".treatment.exercise.ExerciseRecordDetail" />
         <activity
             android:name=".CongestionTherapy"
-            android:parentActivityName=".treatment.TreatmentModuleActivity" />
+            android:parentActivityName=".treatment.TreatmentModuleFragment" />
         <activity android:name=".treatment.skincare.SkinCare" />
         <activity android:name=".treatment.skincare.Night" />
         <activity android:name=".treatment.skincare.Day" />

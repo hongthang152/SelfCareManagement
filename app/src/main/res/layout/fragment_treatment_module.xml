@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/apptitlebackground"
+    android:fitsSystemWindows="true">
+
+
+    <!-- Toolbar is the actual app bar with text and the action items -->
+
+
+    <LinearLayout
+        android:id="@+id/drawer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:context=".treatment.TreatmentModuleFragment">
+
+
+                <Button
+                    android:id="@+id/MLD"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Manual Lymph Drainage (MLD) Massage "
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/pneumatic"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Pneumatic Compression Pump"
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/CT"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Compression Therapy"
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/Exe"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Exercise"
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/SC"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Skin Care"
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/LLIS"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="LLIS Report"
+                    android:textColor="@color/brown" />
+
+                <Button
+                    android:id="@+id/measure"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Measurement"
+                    android:textColor="@color/brown" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

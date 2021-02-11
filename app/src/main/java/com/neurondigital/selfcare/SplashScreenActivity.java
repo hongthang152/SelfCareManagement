@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
-import com.neurondigital.selfcare.treatment.TreatmentModuleActivity;
+import com.neurondigital.selfcare.treatment.TreatmentModuleFragment;
 
 import static com.neurondigital.selfcare.Configurations.SHOW_SPLASH_SCREEN_BACKGROUND_IMAGE;
 
@@ -32,14 +32,14 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         //go directly to main Activity if users are disabled
         if (!Configurations.ENABLE_USER_SYSTEM) {
-            Intent intent = new Intent(this, TreatmentModuleActivity.class);
+            Intent intent = new Intent(this, TreatmentModuleFragment.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 
         //go directly to main Activity if user already logged in.
         if (User.isUserLoggedIn(activity)) {
-            Intent intent = new Intent(activity, TreatmentModuleActivity.class);
+            Intent intent = new Intent(activity, TreatmentModuleFragment.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
@@ -75,7 +75,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, TreatmentModuleActivity.class);
+                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -93,7 +93,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 User.login(activity, emailView.getText().toString(), passwordView.getText().toString(), new User.onLoginListener() {
                     @Override
                     public void onLogin(String email) {
-                        Intent intent = new Intent(activity, TreatmentModuleActivity.class);
+                        Intent intent = new Intent(activity, TreatmentModuleFragment.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }

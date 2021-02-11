@@ -81,6 +81,7 @@
     <string name="place_address">Location</string>
     <string name="place_telephone">Phone</string>
     <string name="place_featured">Featured</string>
+    <string name="main">Main</string>
     <string name="place_card_ratings">RATINGS</string>
 
     <!-- News/Blog -->
@@ -211,5 +212,8 @@
     <string name="name">Name</string>
     <string name="day_night">Day / Night</string>
     <string name="show_help_video">Help Video</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
