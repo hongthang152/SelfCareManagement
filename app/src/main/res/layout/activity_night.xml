@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="#DDC3A7"
-    tools:context=".Night">
+    tools:context=".treatment.skincare.Night">
     <Button
         style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/garment1"

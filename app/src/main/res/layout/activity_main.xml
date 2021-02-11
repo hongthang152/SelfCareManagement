@@ -1,134 +1,50 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="#ffce99">
+    android:layout_height="match_parent">
 
-
-    <!-- Toolbar is the actual app bar with text and the action items -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#ffce99"
         android:minHeight="?attr/actionBarSize"
-        app:titleTextColor="@color/brown"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/brown" />
 
-
-
-    <LinearLayout
-        android:id="@+id/drawer_container"
+    <FrameLayout
+        android:id="@+id/mainFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"></View>
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/background_layout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical"-->
-<!--            android:layout_weight="0.9">-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:itemHorizontalTranslationEnabled="true"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        tools:labelVisibilityMode="labeled"
+        android:background="@color/apptitlebackground"/>
 
-<!--&lt;!&ndash;            <fragment&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/mainFragment"&ndash;&gt;-->
-<!--&lt;!&ndash;                class="com.neurondigital.cityguide.SearchFragment"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_weight="1" />&ndash;&gt;-->
-
-
-<!--        </LinearLayout>-->
-   <ScrollView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="0.1">
-
-
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/MLD"
-                android:textColor="@color/brown"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:text="Manual Lymph Drainage (MLD) Massage "
-                android:background="@drawable/custome_button"
-                />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/CT"
-                android:layout_width="match_parent"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:layout_height="90dp"
-                android:text="Compression Therapy"
-                />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/Exe"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:text="Exercise"
-                />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/SC"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:text="Skin Care"
-                />
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/LLIS"
-                android:layout_width="match_parent"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:layout_height="90dp"
-                android:text="LLIS Report"
-                />
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/measure"
-                android:layout_width="match_parent"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:layout_height="90dp"
-                android:text="Measurement"
-                />
-
-            <Button
-             android:id="@+id/pneumatic"
-                android:layout_width="match_parent"
-                android:textColor="@color/brown"
-                android:background="@drawable/custome_button"
-                android:text="Pneumatic Compression Theraoy"
-                android:layout_height="90dp" />
-
-
-        </LinearLayout>
-   </ScrollView>
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

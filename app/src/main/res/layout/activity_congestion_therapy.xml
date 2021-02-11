@@ -53,12 +53,5 @@
         android:layout_height="wrap_content"
         android:text="Open CT Record List"/>
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gold Time to start massage is 23hr/day" />
-
 
 </LinearLayout>
