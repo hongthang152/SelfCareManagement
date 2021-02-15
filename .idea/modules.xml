@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Project-SelfCareManagement.iml" filepath="$PROJECT_DIR$/Project-SelfCareManagement.iml" group="SelfCareManagement" />
-      <module fileurl="file://$PROJECT_DIR$/app/Project-SelfCareManagement-app.iml" filepath="$PROJECT_DIR$/app/Project-SelfCareManagement-app.iml" group="SelfCareManagement/app" />
       <module fileurl="file://$PROJECT_DIR$/SelfCareManagement.iml" filepath="$PROJECT_DIR$/SelfCareManagement.iml" group="SelfCareManagement" />
-      <module fileurl="file://$PROJECT_DIR$/app/SelfCareManagement-app.iml" filepath="$PROJECT_DIR$/app/SelfCareManagement-app.iml" group="SelfCareManagement/app" />
-      <module fileurl="file://$PROJECT_DIR$/Selfcaremanagement-SelfCareManagement.iml" filepath="$PROJECT_DIR$/Selfcaremanagement-SelfCareManagement.iml" group="SelfCareManagement" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

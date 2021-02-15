@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toolbar;
 
-import com.neurondigital.selfcare.ct.CTRecordListActivity;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordListActivity;
+import com.neurondigital.selfcare.treatment.skincare.Day;
+import com.neurondigital.selfcare.treatment.skincare.Night;
 
 public class CongestionTherapy extends AppCompatActivity {
 Toolbar toolbar;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/apptitlebackground"
-    tools:context=".ct.CTRecordListActivity">
+    tools:context=".treatment.compressiontherapy.CTRecordListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/record_detail_bar"

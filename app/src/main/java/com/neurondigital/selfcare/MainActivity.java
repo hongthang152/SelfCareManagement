@@ -6,54 +6,50 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.icu.util.ULocale;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.view.View;
-import android.widget.Button;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.neurondigital.selfcare.Pneumatic.pneumatic;
-import com.neurondigital.selfcare.SKINCARE.SkinCare;
+import com.neurondigital.selfcare.graph.GraphModuleFragment;
+import com.neurondigital.selfcare.treatment.TreatmentModuleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
-
     Toolbar toolbar;
     Drawer drawer;
     Context context;
     AppCompatActivity activity;
+    BottomNavigationView bottomNavigationView;
 
     //navigation drawer item identification numbers
     final int  NAV_INFO = 4, NAVSETTINGS = 6,  NAV_PROFILE = 8, NAV_LOGOUT = 9, NAV_CATEGORIES = 100, NAV_POLICY = 10, NAV_TERMS = 11;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        activity = this;
-        this.context = this;
-
-        //portrait only
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
+        activity = this;
+        context = this;
 
         //enable/disable Firebase topic subscription
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -63,16 +59,27 @@ public class MainActivity extends AppCompatActivity {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(Configurations.FIREBASE_PUSH_NOTIFICATION_TOPIC);
 
 
-        //set toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener((MenuItem item) -> {
+            switch (item.getItemId()){
+                case R.id.treament_module:
+                    loadFragment(new TreatmentModuleFragment());
+                    return true;
+                case R.id.graph_module:
+                    loadFragment(new GraphModuleFragment());
+                    return true;
+            }
+            return false;
+        });
+        bottomNavigationView.setSelectedItemId(R.id.treament_module);
 
         //Generate the side navigation drawer
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withRootView(R.id.drawer_container)
+//                .withRootView(R.id.flFragment)
                 //.withDisplayBelowStatusBar(true)
                 .withActionBarDrawerToggle(true)
                 .withActionBarDrawerToggleAnimated(true)
@@ -83,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                         //On click: open the required activity or fragment
                         Intent intent;
                         switch ((int) drawerItem.getIdentifier()) {
-
                             case NAV_INFO:
                                 intent = new Intent(MainActivity.this, infoactivity.class);
                                 startActivity(intent);
@@ -142,66 +148,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button MLD = findViewById(R.id.MLD);
-        Button LLIS = findViewById(R.id.LLIS);
-        Button CT = findViewById(R.id.CT);
-        Button skincare = findViewById(R.id.SC);
-        Button Exe = findViewById(R.id.Exe);
-        Button measure = findViewById(R.id.measure);
-        Button pneumaticbtn = findViewById(R.id.pneumatic);
 
 
-        MLD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToMLD = new Intent(MainActivity.this, com.neurondigital.selfcare.MLD.MLD.class);
-                MainActivity.this.startActivity(goToMLD);
-            }
-        });
+    }
 
-        LLIS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToLLIS = new Intent(MainActivity.this, LLIS.class);
-                MainActivity.this.startActivity(goToLLIS);
-            }
-        });
-        CT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToCT = new Intent(MainActivity.this, CongestionTherapy.class);
-                MainActivity.this.startActivity(goToCT);
-            }
-        });
-        skincare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToSC = new Intent(MainActivity.this, SkinCare.class);
-                MainActivity.this.startActivity(goToSC);
-            }
-        });
-        Exe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToExe = new Intent(MainActivity.this, Exe.class);
-                MainActivity.this.startActivity(goToExe);
-            }
-        });
-        measure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToMeasure = new Intent(MainActivity.this, Measurements.class);
-                MainActivity.this.startActivity(goToMeasure);
-            }
-        });
-
-        pneumaticbtn.setOnClickListener( view ->{
-            Intent pn = new Intent(MainActivity.this, pneumatic.class);
-            MainActivity.this.startActivity(pn);
-        });
-
-
-
+    private void loadFragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.mainFragment,fragment);
+        fragmentTransaction.commit();
     }
 
     public IDrawerItem[] getDrawerItems(List<ULocale.Category> categories) {
@@ -224,24 +178,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void changeFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.commit();
-        activity.invalidateOptionsMenu();
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-
-            super.onBackPressed();
-        }
-    }
-
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -255,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
     @Override
@@ -269,37 +204,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-        super.onDestroy();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-
-    }
-
 }

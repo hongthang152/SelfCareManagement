@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:gravity="center"
-    tools:context="com.neurondigital.selfcare.MainActivity">
+    tools:context="com.neurondigital.selfcare.treatment.TreatmentModuleFragment">
 
 
     <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"

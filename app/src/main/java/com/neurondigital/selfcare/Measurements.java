@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.neurondigital.selfcare.MLD.MLDModel;
+import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
