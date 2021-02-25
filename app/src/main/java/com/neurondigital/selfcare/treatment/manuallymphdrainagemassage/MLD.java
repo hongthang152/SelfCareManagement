@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.neurondigital.selfcare.R;
 
@@ -36,6 +37,7 @@ public class MLD extends AppCompatActivity {
     private boolean running;
     public static final String url = "https://klosetraining.com/resources/self-care-videos/";
     TextView helpVidText;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,12 @@ public class MLD extends AppCompatActivity {
         helpVidText = findViewById(R.id.help_vid_text);
         helpVidText.setPaintFlags(helpVidText.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
+        toolbar = findViewById(R.id.mld_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         records = db.getAll();
 
         adapter = new MLDRecordAdapter(this, records);
@@ -58,7 +66,7 @@ public class MLD extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MLD.this, MLDRecordDetail.class);
-                intent.putExtra("record", records.get(position));
+                intent.putExtra(MLDRecordDetail.RECORD_EXTRA, records.get(position));
                 startActivityForResult(intent, 0);
             }
         });
@@ -142,6 +150,15 @@ public class MLD extends AppCompatActivity {
                 return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

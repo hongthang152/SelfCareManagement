@@ -7,10 +7,21 @@
     tools:context=".treatment.manuallymphdrainagemassage.MLD"
     android:background="#ffce99">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mld_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/apptitlebackground"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/mld_massage"
+        app:titleTextColor="@color/brown" />
+
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/mld_toolbar"
         android:layout_centerHorizontal="true"
         android:textSize="30sp" />
     <!-- Toolbar is the actual app bar with text and the action items -->
