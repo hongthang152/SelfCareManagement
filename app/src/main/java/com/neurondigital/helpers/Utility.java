@@ -31,4 +31,22 @@ public class Utility {
         }
         return builder.toString();
     }
+
+    public static String getReadableDuration(String duration) {
+        String[] durArr = duration.split(":");
+        if(durArr.length < 0 || durArr.length > 3) return "";
+        if(durArr.length == 2) durArr = new String[]{"00", durArr[0], durArr[1]};
+        StringBuilder builder = new StringBuilder();
+        if(!durArr[0].equals("00")) {
+            builder.append(Integer.parseInt(durArr[0])).append("h ");
+        }
+        if(!durArr[1].equals("00")) {
+            builder.append(Integer.parseInt(durArr[1])).append("m ");
+        }
+        if(!durArr[2].equals("00")) {
+            builder.append(Integer.parseInt(durArr[2])).append("s ");
+        }
+
+        return builder.toString().trim();
+    }
 }

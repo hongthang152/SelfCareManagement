@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.neurondigital.selfcare.graph.GraphModuleFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <com.alamkanak.weekview.WeekView
         android:id="@+id/weekView"
@@ -19,7 +16,7 @@
         app:headerColumnTextColor="#8f000000"
         app:headerRowPadding="12dp"
         app:columnGap="3dp"
-        app:noOfVisibleDays="7"
+        app:noOfVisibleDays="6"
         app:headerRowBackgroundColor="#ffefefef"
         app:dayBackgroundColor="#05000000"
         app:todayBackgroundColor="#1848adff"
@@ -28,5 +25,15 @@
         app:showNowLine="true"
         app:nowLineColor="@color/brown"
         app:nowLineThickness="2dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/event_list_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/event_list"
+        android:src="@drawable/ic_event_note_brown_24dp"
+        app:backgroundTint="@color/apptitlebackground" />
 
 </FrameLayout>
