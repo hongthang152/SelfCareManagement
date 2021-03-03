@@ -1,11 +1,13 @@
 package com.neurondigital.selfcare.graph.eventlist;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +23,16 @@ import com.neurondigital.selfcare.graph.model.ItemEvent;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDRecordDetail;
+import com.neurondigital.selfcare.treatment.skincare.SCRecordDetail;
+import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
+import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,15 +42,17 @@ import java.util.Map;
 public class EventListActivity extends AppCompatActivity {
 
     MLDDatabase mldDB;
+    SkinCareDatabase scDB;
 //    ExerciseDatabase exerciseDB;
 //    PneumaticDatabase pneumaticDB;
 //    SkinCareDatabase skincareDB;
 
     Toolbar toolbar;
 
+    ItemEventAdapter adapter;
     LinearLayout eventListView;
 
-    Map<String, List<ItemEvent>> dayMap;
+    Map<String, List<ItemEvent>> dayMap = new HashMap<>();
     private static final String DATE_FORMAT_STRING = "dd-MM-yyyy";
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
     public static final SimpleDateFormat EVENT_LIST_DF = new SimpleDateFormat("EEE, MMM dd, yyyy");
@@ -61,7 +71,9 @@ public class EventListActivity extends AppCompatActivity {
         mldDB = new MLDDatabase(getBaseContext());
         List<MLDModel> mldEventList = mldDB.getAll();
 
-        dayMap = new HashMap<>();
+        scDB = new SkinCareDatabase(getBaseContext());
+        ArrayList<HashMap<String, String>> scEventList = scDB.getAll();
+
         for(MLDModel mld : mldEventList) {
             try {
                 Date startDate = MLDModel.DATE_FORMATTER.parse(mld.getStartTime());
@@ -79,6 +91,8 @@ public class EventListActivity extends AppCompatActivity {
             }
         }
 
+        loadDayMap(scEventList);
+
         for(Map.Entry<String, List<ItemEvent>> entry : dayMap.entrySet()) {
             View day = LayoutInflater.from(getBaseContext()).inflate(R.layout.activity_event_item, null);
             TextView date  = day.findViewById(R.id.event_item_date);
@@ -89,13 +103,53 @@ public class EventListActivity extends AppCompatActivity {
             }
 
             ListView eventsPerDayListView = day.findViewById(R.id.event_list_per_day);
-            eventsPerDayListView.setAdapter(new ItemEventAdapter(getBaseContext(), entry.getValue()));
+            adapter = new ItemEventAdapter(getBaseContext(), entry.getValue());
+            eventsPerDayListView.setAdapter(adapter);
 
             eventsPerDayListView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
                 startActivity(entry.getValue().get(position).getDetailActivityIntent());
             });
 
             eventListView.addView(day);
+        }
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        Log.d("onResume", "called");
+        super.onResume();
+        //can we refresh the list here?
+    }
+
+
+
+    public void loadDayMap(ArrayList<HashMap<String, String>> scEventList) {
+        for(HashMap<String, String> sc : scEventList) {
+            Log.d("starting SC loop", ":)");
+            try {
+                Date startDate = SkinCareModel.DATE_FORMATTER.parse(sc.get("Date"));
+                String startDateStr = DATE_FORMATTER.format(startDate);
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startDate);
+                cal.add(Calendar.MINUTE, 5);
+                String endDateStr = SkinCareModel.DATE_FORMATTER.format(cal.getTime());
+
+                if(!dayMap.containsKey(startDateStr))
+                    dayMap.put(startDateStr, new ArrayList<>());
+                Intent intent = new Intent(EventListActivity.this, SCRecordDetail.class);
+                intent.putExtra(SCRecordDetail.RECORD_EXTRA, sc);
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.skincare_icon),
+                        "Skincare performed: " + sc.get("Note"),
+                        ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(SkinCareModel.DATE_FORMATTER.parse(sc.get("Date")) ) + " - "
+                                +  ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(SkinCareModel.DATE_FORMATTER.parse(endDateStr)),
+                        intent));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

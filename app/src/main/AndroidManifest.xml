@@ -122,6 +122,7 @@
             android:name=".CongestionTherapy"
             android:parentActivityName=".treatment.TreatmentModuleFragment" />
         <activity android:name=".treatment.skincare.SkinCare" />
+        <activity android:name=".treatment.skincare.SCRecordDetail" />
         <activity android:name=".treatment.skincare.Night" />
         <activity android:name=".treatment.skincare.Day" />
         <activity android:name=".Measurements" />

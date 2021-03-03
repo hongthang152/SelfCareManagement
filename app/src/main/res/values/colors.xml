@@ -7,6 +7,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="brown">#A83B33</color>
     <color name="apptitlebackground">#ffce99</color>
+    <color name="blue">#49B2C7</color>
 
     <!--redo search overlay color-->
     <color name="color_mapOverlay">#aa03A9F4</color>

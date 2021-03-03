@@ -113,6 +113,19 @@ public class SkinCareDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    void update(SkinCareModel model) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(COL_ID, model.getID());
+        values.put(COLUMN1 , model.getDate());
+        values.put(COLUMN2, model.getNote());
+
+        db.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(model.getID())});
+        db.close(); // Closing database connection
+    }
+
     //delete all rows
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();

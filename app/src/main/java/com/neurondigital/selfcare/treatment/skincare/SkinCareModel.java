@@ -1,6 +1,12 @@
 package com.neurondigital.selfcare.treatment.skincare;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class SkinCareModel {
+    public static final String DATE_FORMAT_STRING = "dd-MM-yyyy HH:mm:ss";
+    public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
+
 
     int id;
     String date;
