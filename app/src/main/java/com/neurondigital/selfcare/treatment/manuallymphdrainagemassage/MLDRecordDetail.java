@@ -26,6 +26,7 @@ public class MLDRecordDetail  extends AppCompatActivity {
 
     public static String MLD_RECORD_DETAIL_DATE_FORMAT = "MMM dd, yyyy, hh:mm a";
     public static SimpleDateFormat MLD_RECORD_DETAIL_DATE_FORMATTER = new SimpleDateFormat(MLD_RECORD_DETAIL_DATE_FORMAT, Locale.ENGLISH);
+    public static String RECORD_EXTRA = "record";
 
     TextView recordDetailStartDate;
     TextView recordDetailEndDate;

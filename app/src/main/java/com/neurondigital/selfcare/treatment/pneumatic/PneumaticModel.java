@@ -2,6 +2,7 @@ package com.neurondigital.selfcare.treatment.pneumatic;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class PneumaticModel implements Serializable {

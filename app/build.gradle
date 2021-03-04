@@ -11,6 +11,7 @@ android {
         versionCode 4
         versionName "1.4"
         multiDexEnabled true
+        versionName "1.0.0"
     }
     buildTypes {
         debug {
@@ -82,8 +83,8 @@ dependencies {
     implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.alamkanak:android-week-view:1.2.6'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.github.alamkanak:android-week-view:1.2.6'
 }
 
 
