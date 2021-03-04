@@ -1,7 +1,6 @@
 package com.neurondigital.selfcare.graph.eventlist;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.neurondigital.helpers.Utility;
@@ -32,8 +29,6 @@ import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class EventListActivity extends AppCompatActivity {
 
@@ -51,11 +47,19 @@ public class EventListActivity extends AppCompatActivity {
 //    SkinCareDatabase skincareDB;
 
     Toolbar toolbar;
-
-    ItemEventAdapter adapter;
     LinearLayout eventListView;
 
-    Map<String, List<ItemEvent>> dayMap = new HashMap<>();
+    Map<String, List<ItemEvent>> dayMap = new TreeMap<>((String d1, String d2) -> {
+        try {
+            Date date1 = DATE_FORMATTER.parse(d1);
+            Date date2 = DATE_FORMATTER.parse(d2);
+            return date2.compareTo(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    });
     private static final String DATE_FORMAT_STRING = "dd-MM-yyyy";
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
     public static final SimpleDateFormat EVENT_LIST_DF = new SimpleDateFormat("EEE, MMM dd, yyyy");
@@ -109,13 +113,12 @@ public class EventListActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            ListView eventsPerDayListView = day.findViewById(R.id.event_list_per_day);
-            adapter = new ItemEventAdapter(getBaseContext(), entry.getValue());
-            eventsPerDayListView.setAdapter(adapter);
-
-            eventsPerDayListView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
-                startActivity(entry.getValue().get(position).getDetailActivityIntent());
-            });
+            LinearLayout eventsPerDayListView = day.findViewById(R.id.event_list_per_day);
+            for(ItemEvent itemEvent : entry.getValue()) {
+                View view = generateItemPerDayView(itemEvent);
+                eventsPerDayListView.addView(view);
+                view.setOnClickListener(e -> startActivity(itemEvent.getDetailActivityIntent()));
+            }
 
             eventListView.addView(day);
         }
@@ -167,6 +170,20 @@ public class EventListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private View generateItemPerDayView(ItemEvent itemEvent) {
+        View convertView = LayoutInflater.from(getBaseContext()).inflate(R.layout.activity_event_per_day_item, null);
+
+        ImageView eventIcon = convertView.findViewById(R.id.event_icon);
+        TextView eventDescDuration = convertView.findViewById(R.id.event_desc_duration);
+        TextView eventTime = convertView.findViewById(R.id.event_time);
+
+        eventIcon.setImageDrawable(itemEvent.getIconDrawable());
+        eventDescDuration.setText(itemEvent.getActivityDesc());
+        eventTime.setText(itemEvent.getStartAndEnd());
+
+        return convertView;
     }
 
 }
