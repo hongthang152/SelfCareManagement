@@ -110,7 +110,7 @@ public class EventListActivity extends AppCompatActivity {
             for(ItemEvent itemEvent : entry.getValue()) {
                 View view = generateItemPerDayView(itemEvent);
                 eventsPerDayListView.addView(view);
-                view.setOnClickListener(e -> startActivity(itemEvent.getDetailActivityIntent()));
+                view.setOnClickListener(e -> startActivityForResult(itemEvent.getDetailActivityIntent(), 1));
             }
 
             eventListView.addView(day);
@@ -124,10 +124,13 @@ public class EventListActivity extends AppCompatActivity {
     public void onResume() {
         Log.d("onResume", "called");
         super.onResume();
-        //can we refresh the list here?
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        this.recreate();
+    }
 
     public void loadDayMap(ArrayList<HashMap<String, String>> scEventList) {
         for(HashMap<String, String> sc : scEventList) {
