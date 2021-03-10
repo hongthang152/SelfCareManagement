@@ -71,7 +71,7 @@ public class GraphModuleFragment extends Fragment {
         pnDB = new PneumaticDatabase(getContext());
         pnList = pnDB.getAll();
 
-        mWeekView = view.findViewById(R.id.weekView);
+       mWeekView = view.findViewById(R.id.weekView);
         mWeekView.goToHour(7);
 
         mWeekView.setMonthChangeListener((int newYear, int newMonth) -> {
@@ -120,7 +120,7 @@ public class GraphModuleFragment extends Fragment {
                 calStart.setTime(start);
                 Calendar calEnd = Calendar.getInstance();
                 calEnd.setTime(end);
-                if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+               if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
                         calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
                     continue;
                 WeekViewEvent event = new WeekViewEvent(p.getID(), "PN", calStart, calEnd);

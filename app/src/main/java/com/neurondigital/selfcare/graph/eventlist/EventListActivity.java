@@ -100,7 +100,22 @@ public class EventListActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
+        for(PneumaticModel pn : pnEventList) {
+            try {
+                Date startDate = PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime());
+                String startDateStr = DATE_FORMATTER.format(startDate);
+                if(!dayMap.containsKey(startDateStr))
+                    dayMap.put(startDateStr, new ArrayList<>());
+                Intent intent = new Intent(EventListActivity.this, PneumaticRecordDetail.class);
+                intent.putExtra("record", pn);
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.ic_accessibility_brown_24dp),
+                        "You Performed Pneumatic" + Utility.getReadableDuration(pn.getDuration()),
+                        ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getEndTime())),
+                        intent));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         loadDayMap(scEventList);
 
