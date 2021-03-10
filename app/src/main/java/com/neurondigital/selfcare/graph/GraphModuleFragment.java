@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -32,7 +33,6 @@ import java.util.List;
 
 
 public class GraphModuleFragment extends Fragment {
-
     WeekView mWeekView;
 
     MLDDatabase mldDB;
@@ -41,6 +41,7 @@ public class GraphModuleFragment extends Fragment {
 
     SkinCareDatabase scDB;
     ArrayList<HashMap<String, String>> scList;
+    View view;
 
     PneumaticDatabase pnDB;
     List<PneumaticModel> pnList;
@@ -58,8 +59,16 @@ public class GraphModuleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_graph_module, container, false);
 
+       // View view = inflater.inflate(R.layout.fragment_graph_module, container, false);
+
+        view = inflater.inflate(R.layout.fragment_graph_module, container, false);
+        load();
+        return view;
+    }
+
+
+    private void load() {
         eventListBtn = view.findViewById(R.id.event_list_btn);
 
         mldDB = new MLDDatabase(getContext());
@@ -89,12 +98,15 @@ public class GraphModuleFragment extends Fragment {
                 calStart.setTime(start);
                 Calendar calEnd = Calendar.getInstance();
                 calEnd.setTime(end);
+
                 if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
                         calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
                     continue;
                     WeekViewEvent event = new WeekViewEvent(mld.getID(), "MLD", calStart, calEnd);
                     event.setColor(getResources().getColor(R.color.brown));
                     eventList.add(event);
+
+
 
 
             }
@@ -137,9 +149,8 @@ public class GraphModuleFragment extends Fragment {
 
         eventListBtn.setOnClickListener(e -> {
             Intent intent = new Intent(getContext(), EventListActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         });
-        return view;
     }
 
 
@@ -177,4 +188,17 @@ public class GraphModuleFragment extends Fragment {
 
 
 
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getFragmentManager()
+                .beginTransaction()
+                .detach(this)
+                .attach(this)
+                .commit();
+    }
 }
+
