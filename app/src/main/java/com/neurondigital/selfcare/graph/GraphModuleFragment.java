@@ -80,8 +80,13 @@ public class GraphModuleFragment extends Fragment {
         pnDB = new PneumaticDatabase(getContext());
         pnList = pnDB.getAll();
 
-       mWeekView = view.findViewById(R.id.weekView);
-        mWeekView.goToHour(7);
+        mWeekView = view.findViewById(R.id.weekView);
+        Calendar calInstant = Calendar.getInstance();
+        calInstant.add(Calendar.HOUR_OF_DAY, -2);
+        calInstant.add(Calendar.DAY_OF_YEAR, -2);
+
+        mWeekView.goToHour(calInstant.get(Calendar.HOUR_OF_DAY));
+        mWeekView.goToDate(calInstant);
 
         mWeekView.setMonthChangeListener((int newYear, int newMonth) -> {
             List<WeekViewEvent> eventList = new ArrayList<>();
@@ -102,13 +107,10 @@ public class GraphModuleFragment extends Fragment {
                 if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
                         calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
                     continue;
-                    WeekViewEvent event = new WeekViewEvent(mld.getID(), "MLD", calStart, calEnd);
-                    event.setColor(getResources().getColor(R.color.brown));
-                    eventList.add(event);
 
-
-
-
+                WeekViewEvent event = new WeekViewEvent(mld.getID(), "MLD", calStart, calEnd);
+                event.setColor(getResources().getColor(R.color.brown));
+                eventList.add(event);
             }
 
             for (HashMap<String, String> sc : scList) {

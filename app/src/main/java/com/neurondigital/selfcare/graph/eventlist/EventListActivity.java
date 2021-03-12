@@ -93,7 +93,7 @@ public class EventListActivity extends AppCompatActivity {
                 Intent intent = new Intent(EventListActivity.this, MLDRecordDetail.class);
                 intent.putExtra(MLDRecordDetail.RECORD_EXTRA, mld);
                 dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.ic_accessibility_brown_24dp),
-                        "You massaged " + Utility.getReadableDuration(mld.getDuration()),
+                        "You massaged for " + Utility.getReadableDuration(mld.getDuration()),
                         ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(MLDModel.DATE_FORMATTER.parse(mld.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(MLDModel.DATE_FORMATTER.parse(mld.getEndTime())),
                         intent));
             } catch (ParseException e) {
@@ -108,8 +108,8 @@ public class EventListActivity extends AppCompatActivity {
                     dayMap.put(startDateStr, new ArrayList<>());
                 Intent intent = new Intent(EventListActivity.this, PneumaticRecordDetail.class);
                 intent.putExtra("record", pn);
-                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.ic_accessibility_brown_24dp),
-                        "You Performed Pneumatic" + Utility.getReadableDuration(pn.getDuration()),
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.air_pump),
+                        "Pneumatic Compression Pump performed: " + Utility.getReadableDuration(pn.getDuration()),
                         ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getEndTime())),
                         intent));
             } catch (ParseException e) {
