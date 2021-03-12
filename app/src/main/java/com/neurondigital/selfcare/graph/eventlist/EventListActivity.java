@@ -20,6 +20,9 @@ import com.neurondigital.selfcare.graph.model.ItemEvent;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDRecordDetail;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticModel;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticRecordDetail;
 import com.neurondigital.selfcare.treatment.skincare.SCRecordDetail;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
@@ -40,7 +43,7 @@ public class EventListActivity extends AppCompatActivity {
     MLDDatabase mldDB;
     SkinCareDatabase scDB;
 //    ExerciseDatabase exerciseDB;
-//    PneumaticDatabase pneumaticDB;
+    PneumaticDatabase pnDB;
 //    SkinCareDatabase skincareDB;
 
     Toolbar toolbar;
@@ -78,6 +81,9 @@ public class EventListActivity extends AppCompatActivity {
         scDB = new SkinCareDatabase(getBaseContext());
         ArrayList<HashMap<String, String>> scEventList = scDB.getAll();
 
+        pnDB = new PneumaticDatabase(getBaseContext());
+        List<PneumaticModel> pnEventList = pnDB.getAll();
+
         for(MLDModel mld : mldEventList) {
             try {
                 Date startDate = MLDModel.DATE_FORMATTER.parse(mld.getStartTime());
@@ -87,8 +93,24 @@ public class EventListActivity extends AppCompatActivity {
                 Intent intent = new Intent(EventListActivity.this, MLDRecordDetail.class);
                 intent.putExtra(MLDRecordDetail.RECORD_EXTRA, mld);
                 dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.ic_accessibility_brown_24dp),
-                        "You massaged " + Utility.getReadableDuration(mld.getDuration()),
+                        "You massaged for " + Utility.getReadableDuration(mld.getDuration()),
                         ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(MLDModel.DATE_FORMATTER.parse(mld.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(MLDModel.DATE_FORMATTER.parse(mld.getEndTime())),
+                        intent));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        for(PneumaticModel pn : pnEventList) {
+            try {
+                Date startDate = PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime());
+                String startDateStr = DATE_FORMATTER.format(startDate);
+                if(!dayMap.containsKey(startDateStr))
+                    dayMap.put(startDateStr, new ArrayList<>());
+                Intent intent = new Intent(EventListActivity.this, PneumaticRecordDetail.class);
+                intent.putExtra("record", pn);
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.air_pump),
+                        "Pneumatic Compression Pump performed: " + Utility.getReadableDuration(pn.getDuration()),
+                        ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getEndTime())),
                         intent));
             } catch (ParseException e) {
                 e.printStackTrace();

@@ -19,6 +19,8 @@ import com.neurondigital.selfcare.R;
 import com.neurondigital.selfcare.graph.eventlist.EventListActivity;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticModel;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
@@ -32,6 +34,7 @@ import java.util.List;
 
 public class GraphModuleFragment extends Fragment {
     WeekView mWeekView;
+
     MLDDatabase mldDB;
     List<MLDModel> mldList;
     FloatingActionButton eventListBtn;
@@ -40,7 +43,12 @@ public class GraphModuleFragment extends Fragment {
     ArrayList<HashMap<String, String>> scList;
     View view;
 
-    public GraphModuleFragment() {}
+    PneumaticDatabase pnDB;
+    List<PneumaticModel> pnList;
+
+
+    public GraphModuleFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +59,14 @@ public class GraphModuleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+       // View view = inflater.inflate(R.layout.fragment_graph_module, container, false);
+
         view = inflater.inflate(R.layout.fragment_graph_module, container, false);
         load();
         return view;
     }
+
 
     private void load() {
         eventListBtn = view.findViewById(R.id.event_list_btn);
@@ -64,6 +76,9 @@ public class GraphModuleFragment extends Fragment {
 
         scDB = new SkinCareDatabase(getContext());
         scList = scDB.getAll();
+
+        pnDB = new PneumaticDatabase(getContext());
+        pnList = pnDB.getAll();
 
         mWeekView = view.findViewById(R.id.weekView);
         Calendar calInstant = Calendar.getInstance();
@@ -75,7 +90,7 @@ public class GraphModuleFragment extends Fragment {
 
         mWeekView.setMonthChangeListener((int newYear, int newMonth) -> {
             List<WeekViewEvent> eventList = new ArrayList<>();
-            for(MLDModel mld : mldList) {
+            for (MLDModel mld : mldList) {
                 Date start = null;
                 Date end = null;
                 try {
@@ -88,8 +103,11 @@ public class GraphModuleFragment extends Fragment {
                 calStart.setTime(start);
                 Calendar calEnd = Calendar.getInstance();
                 calEnd.setTime(end);
-                if(calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
-                        calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear) continue;
+
+                if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+                        calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+                    continue;
+
                 WeekViewEvent event = new WeekViewEvent(mld.getID(), "MLD", calStart, calEnd);
                 event.setColor(getResources().getColor(R.color.brown));
                 eventList.add(event);
@@ -97,8 +115,35 @@ public class GraphModuleFragment extends Fragment {
 
             for (HashMap<String, String> sc : scList) {
                 WeekViewEvent scEvent = loadSkinCareEvents(sc, newYear, newMonth);
-                if(scEvent != null){ eventList.add(scEvent); }
+                if (scEvent != null) {
+                    eventList.add(scEvent);
+                }
             }
+
+
+            for (PneumaticModel p : pnList) {
+                Date start = null;
+                Date end = null;
+                try {
+                    start = PneumaticModel.DATE_FORMATTER.parse(p.getStartTime());
+                    end = PneumaticModel.DATE_FORMATTER.parse(p.getEndTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar calStart = Calendar.getInstance();
+                calStart.setTime(start);
+                Calendar calEnd = Calendar.getInstance();
+                calEnd.setTime(end);
+               if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+                        calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+                    continue;
+                WeekViewEvent event = new WeekViewEvent(p.getID(), "PN", calStart, calEnd);
+                event.setColor(getResources().getColor(R.color.gray));
+                eventList.add(event);
+
+
+            }
+
 
             return eventList;
         });
@@ -110,33 +155,42 @@ public class GraphModuleFragment extends Fragment {
         });
     }
 
+
     public WeekViewEvent loadSkinCareEvents(HashMap<String, String> sc, int newYear, int newMonth) {
-            Date start = null;
-            Date end = null;
-            try {
-                start = SkinCareModel.DATE_FORMATTER.parse(sc.get("Date"));
+        Date start = null;
+        Date end = null;
 
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(start);
-                cal.add(Calendar.MINUTE, 5);
-                String endDateStr = SkinCareModel.DATE_FORMATTER.format(cal.getTime());
-                end = SkinCareModel.DATE_FORMATTER.parse(endDateStr);
+        try {
+            start = SkinCareModel.DATE_FORMATTER.parse(sc.get("Date"));
 
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Calendar calStart = Calendar.getInstance();
-            calStart.setTime(start);
-            Calendar calEnd = Calendar.getInstance();
-            calEnd.setTime(end);
-            if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
-                    calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
-                return null;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(start);
+            cal.add(Calendar.MINUTE, 5);
+            String endDateStr = SkinCareModel.DATE_FORMATTER.format(cal.getTime());
+            end = SkinCareModel.DATE_FORMATTER.parse(endDateStr);
 
-                WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "SC", calStart, calEnd);
-                event.setColor(getResources().getColor(R.color.blue));
-                return event;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calStart = Calendar.getInstance();
+        calStart.setTime(start);
+        Calendar calEnd = Calendar.getInstance();
+        calEnd.setTime(end);
+        if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+                calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+            return null;
+
+        WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "SC", calStart, calEnd);
+        event.setColor(getResources().getColor(R.color.blue));
+        return event;
     }
+
+
+
+
+
+
+
 
 
     @Override
@@ -149,3 +203,4 @@ public class GraphModuleFragment extends Fragment {
                 .commit();
     }
 }
+
