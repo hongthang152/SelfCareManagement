@@ -66,7 +66,12 @@ public class GraphModuleFragment extends Fragment {
         scList = scDB.getAll();
 
         mWeekView = view.findViewById(R.id.weekView);
-        mWeekView.goToHour(7);
+        Calendar calInstant = Calendar.getInstance();
+        calInstant.add(Calendar.HOUR_OF_DAY, -2);
+        calInstant.add(Calendar.DAY_OF_YEAR, -2);
+
+        mWeekView.goToHour(calInstant.get(Calendar.HOUR_OF_DAY));
+        mWeekView.goToDate(calInstant);
 
         mWeekView.setMonthChangeListener((int newYear, int newMonth) -> {
             List<WeekViewEvent> eventList = new ArrayList<>();
