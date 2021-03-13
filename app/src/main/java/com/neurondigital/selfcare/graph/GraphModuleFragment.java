@@ -17,6 +17,9 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.neurondigital.selfcare.R;
 import com.neurondigital.selfcare.graph.eventlist.EventListActivity;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordDetailsActivity;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
@@ -46,6 +49,8 @@ public class GraphModuleFragment extends Fragment {
     PneumaticDatabase pnDB;
     List<PneumaticModel> pnList;
 
+    CTDatabase ctDatabase;
+    List<CTRecord> ctList;
 
     public GraphModuleFragment() {
     }
@@ -79,6 +84,9 @@ public class GraphModuleFragment extends Fragment {
 
         pnDB = new PneumaticDatabase(getContext());
         pnList = pnDB.getAll();
+
+        ctDatabase = new CTDatabase(getContext());
+        ctList = ctDatabase.getAllCTRecords();
 
         mWeekView = view.findViewById(R.id.weekView);
         Calendar calInstant = Calendar.getInstance();
@@ -140,11 +148,30 @@ public class GraphModuleFragment extends Fragment {
                 WeekViewEvent event = new WeekViewEvent(p.getID(), "PN", calStart, calEnd);
                 event.setColor(getResources().getColor(R.color.gray));
                 eventList.add(event);
-
-
             }
 
+            for(CTRecord ctRecord : ctList){
+                Date start = null;
+                Date end = null;
+                try{
+                    start = CTRecordDetailsActivity.DATE_FORMATTER.parse(ctRecord.getStartTime());
+                    end = CTRecordDetailsActivity.DATE_FORMATTER.parse(ctRecord.getEndTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar calStart = Calendar.getInstance();
+                calStart.setTime(start);
+                Calendar calEnd = Calendar.getInstance();
+                calEnd.setTime(end);
+                if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+                        calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+                    continue;
 
+                WeekViewEvent event = new WeekViewEvent(ctRecord.getId(), "CT", calStart, calEnd);
+                event.setColor(getResources().getColor(R.color.blue));
+                eventList.add(event);
+            }
+            
             return eventList;
         });
 
