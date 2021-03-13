@@ -31,7 +31,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="startChronometer"
+            android:onClick="startName"
             android:text="Start"
             android:background="@drawable/custome_button"/>
         <Button
@@ -57,12 +57,40 @@
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/linear"
+        android:id="@+id/enterLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Please Enter Exercise Name:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etExeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnOk"
+            android:background="@drawable/custome_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearfortimesave"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/linear"
+        android:layout_below="@id/enterLayout"
         android:orientation="horizontal"
         >
         <TextView
