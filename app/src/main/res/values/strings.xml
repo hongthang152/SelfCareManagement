@@ -220,5 +220,7 @@
     <string name="title_activity_event_list">EventListActivity</string>
     <string name="dummy_date">Wed January 27, 2021</string>
     <string name="mld_massage">MLD Massage</string>
+    <string name="file_password">File Password</string>
+    <string name="file_password_message">Please share this password to the email recipient via other means</string>
 
 </resources>
