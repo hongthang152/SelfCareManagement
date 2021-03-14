@@ -1,16 +1,21 @@
 package com.neurondigital.selfcare.treatment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.icu.util.ULocale;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -218,11 +223,15 @@ public class TreatmentModuleFragment extends Fragment {
         sendDataEmail.setOnClickListener((View view) -> {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
+//            verifyStoragePermissions(getActivity());
 
             Document document = new Document();
             File encryptedPdfFile;
             try {
-                encryptedPdfFile = File.createTempFile("health-encrypted-", ".pdf", getContext().getExternalCacheDir());
+                encryptedPdfFile = new File(context.getFilesDir() + File.separator + "directory" + File.separator + "health-encrypted.pdf");
+                if(encryptedPdfFile.exists()) encryptedPdfFile.delete();
+                encryptedPdfFile.getParentFile().mkdirs();
+                encryptedPdfFile.createNewFile();
                 String key = Utility.generateRandomKey();
 
                 PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(encryptedPdfFile));
@@ -260,6 +269,8 @@ public class TreatmentModuleFragment extends Fragment {
                     document.add(new Paragraph(ct.getDaynightTime() + ". " + ct.getStartTime() + " - " + ct.getEndTime() + ". Duration: " + ct.getDuration()));
                 }
 
+
+
                 document.close();
 
                 File finalEncryptedPdfFile = encryptedPdfFile;
@@ -273,7 +284,7 @@ public class TreatmentModuleFragment extends Fragment {
 
                             it.putExtra(Intent.EXTRA_EMAIL, new String[]{"nguy0817@algonquinlive.com"});
                             it.putExtra(Intent.EXTRA_SUBJECT,"Selfcare Management Report");
-                            it.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(finalEncryptedPdfFile));
+                            it.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getContext(), "com.neurondigital.selfcare", encryptedPdfFile));
                             startActivity(it);
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -423,7 +434,8 @@ public class TreatmentModuleFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-
     }
+
+
 
 }
