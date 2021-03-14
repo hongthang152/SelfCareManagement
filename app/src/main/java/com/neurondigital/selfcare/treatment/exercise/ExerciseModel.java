@@ -9,6 +9,7 @@ public class ExerciseModel implements Serializable {
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT_STRING, Locale.ENGLISH);
 
     int id;
+    String name;
     String startTime;
     String duration;
     String endTime;
@@ -16,14 +17,16 @@ public class ExerciseModel implements Serializable {
     public ExerciseModel() {
     }
 
-    public ExerciseModel(int id, String startTime, String duration, String endTime) {
+    public ExerciseModel(int id, String name,String startTime, String duration, String endTime) {
         this.id = id;
+        this.name = name;
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
     }
 
-    public ExerciseModel(String startTime, String duration, String endTime) {
+    public ExerciseModel(String name,String startTime, String duration, String endTime) {
+        this.name = name;
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
@@ -35,6 +38,14 @@ public class ExerciseModel implements Serializable {
 
     public void setID(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStartTime() {

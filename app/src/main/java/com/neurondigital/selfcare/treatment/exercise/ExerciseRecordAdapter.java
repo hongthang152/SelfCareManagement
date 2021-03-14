@@ -25,7 +25,10 @@ public class ExerciseRecordAdapter extends ArrayAdapter<ExerciseModel> {
         TextView date = convertView.findViewById(R.id.Date);
         TextView time = convertView.findViewById(R.id.Time);
 
-        date.setText(record.getStartTime());
+        if(record.getName()!=null)
+            date.setText(record.getName()+"\n"+record.getStartTime());
+        else
+            date.setText(record.getStartTime());
         time.setText(record.getDuration());
         // Return the completed view to render on screen
         return convertView;

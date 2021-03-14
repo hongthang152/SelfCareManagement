@@ -8,8 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.neurondigital.selfcare.R;
@@ -30,6 +33,9 @@ public class Exercise extends AppCompatActivity {
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
+    EditText etExeName;
+    Button btnOk;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,23 @@ public class Exercise extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
+
+        etExeName = findViewById(R.id.etExeName);
+        btnOk = findViewById(R.id.btnOk);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(etExeName.getText().toString().isEmpty()){
+                    Toast.makeText(Exercise.this, "Please Enter exercise name!", Toast.LENGTH_SHORT).show();
+                }else{
+                    name = etExeName.getText().toString().trim();
+                    findViewById(R.id.linear).setVisibility(View.VISIBLE);
+                    findViewById(R.id.enterLayout).setVisibility(View.GONE);
+                    startChronometer(v);
+                }
+            }
+        });
 
         ListView lv = findViewById(R.id.user_list);
 
@@ -56,6 +79,11 @@ public class Exercise extends AppCompatActivity {
         });
         loadDataFromDatabase();
         registerForContextMenu(lv);
+    }
+
+    public void startName(View v){
+        findViewById(R.id.linear).setVisibility(View.GONE);
+        findViewById(R.id.enterLayout).setVisibility(View.VISIBLE);
     }
 
     public void startChronometer(View v) {
@@ -90,7 +118,7 @@ public class Exercise extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String start = formatter.format(startTime);
             String end = formatter.format(endTime);
-            db.addmodel(new ExerciseModel(start, chronometer.getText().toString(), end));
+            db.addmodel(new ExerciseModel(name,start, chronometer.getText().toString(), end));
             loadDataFromDatabase();
             running = false;
         }
