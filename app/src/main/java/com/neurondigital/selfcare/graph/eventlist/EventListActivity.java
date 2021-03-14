@@ -14,9 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alamkanak.weekview.WeekViewEvent;
 import com.neurondigital.helpers.Utility;
 import com.neurondigital.selfcare.R;
 import com.neurondigital.selfcare.graph.model.ItemEvent;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseDatabase;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseRecordDetail;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDRecordDetail;
@@ -45,6 +49,7 @@ public class EventListActivity extends AppCompatActivity {
 //    ExerciseDatabase exerciseDB;
     PneumaticDatabase pnDB;
 //    SkinCareDatabase skincareDB;
+    ExerciseDatabase exDB;
 
     Toolbar toolbar;
     LinearLayout eventListView;
@@ -84,6 +89,9 @@ public class EventListActivity extends AppCompatActivity {
         pnDB = new PneumaticDatabase(getBaseContext());
         List<PneumaticModel> pnEventList = pnDB.getAll();
 
+        exDB = new ExerciseDatabase(getBaseContext());
+        List<ExerciseModel> exEventList = exDB.getAll();
+
         for(MLDModel mld : mldEventList) {
             try {
                 Date startDate = MLDModel.DATE_FORMATTER.parse(mld.getStartTime());
@@ -113,6 +121,24 @@ public class EventListActivity extends AppCompatActivity {
                         ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(pn.getEndTime())),
                         intent));
             } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (ExerciseModel mld : exEventList) {
+            try {
+                Date start = ExerciseModel.DATE_FORMATTER.parse(mld.getStartTime());
+                String startDateStr = DATE_FORMATTER.format(start);
+
+                if(!dayMap.containsKey(startDateStr))
+                    dayMap.put(startDateStr, new ArrayList<>());
+                Intent intent = new Intent(EventListActivity.this, ExerciseRecordDetail.class);
+                intent.putExtra("record", mld);
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.exercise_icon),
+                        "Exercise performed: " + Utility.getReadableDuration(mld.getDuration()),
+                        ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(mld.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(mld.getEndTime())),
+                        intent));
+             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }

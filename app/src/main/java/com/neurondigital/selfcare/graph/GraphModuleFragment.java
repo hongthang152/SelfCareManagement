@@ -20,6 +20,8 @@ import com.neurondigital.selfcare.graph.eventlist.EventListActivity;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordDetailsActivity;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseDatabase;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
@@ -51,6 +53,9 @@ public class GraphModuleFragment extends Fragment {
 
     CTDatabase ctDatabase;
     List<CTRecord> ctList;
+
+    ExerciseDatabase exerciseDatabase;
+    List<ExerciseModel> exerciseModels;
 
     public GraphModuleFragment() {
     }
@@ -87,6 +92,9 @@ public class GraphModuleFragment extends Fragment {
 
         ctDatabase = new CTDatabase(getContext());
         ctList = ctDatabase.getAllCTRecords();
+
+        exerciseDatabase = new ExerciseDatabase(getContext());
+        exerciseModels = exerciseDatabase.getAll();
 
         mWeekView = view.findViewById(R.id.weekView);
         Calendar calInstant = Calendar.getInstance();
@@ -171,7 +179,37 @@ public class GraphModuleFragment extends Fragment {
                 event.setColor(getResources().getColor(R.color.blue));
                 eventList.add(event);
             }
-            
+
+            for (ExerciseModel mld : exerciseModels) {
+                Date start = null;
+                Date end = null;
+                try {
+                    start = ExerciseModel.DATE_FORMATTER.parse(mld.getStartTime());
+                    end = ExerciseModel.DATE_FORMATTER.parse(mld.getEndTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar calStart = Calendar.getInstance();
+                calStart.setTime(start);
+                Calendar calEnd = Calendar.getInstance();
+                calEnd.setTime(end);
+
+                if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
+                        calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+                    continue;
+
+                WeekViewEvent event = new WeekViewEvent(mld.getID(), "Exe", calStart, calEnd);
+                event.setColor(getResources().getColor(R.color.md_yellow_A700));
+                eventList.add(event);
+            }
+
+            for (HashMap<String, String> sc : scList) {
+                WeekViewEvent scEvent = loadSkinCareEvents(sc, newYear, newMonth);
+                if (scEvent != null) {
+                    eventList.add(scEvent);
+                }
+            }
+
             return eventList;
         });
 
@@ -206,7 +244,6 @@ public class GraphModuleFragment extends Fragment {
         if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
                 calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
             return null;
-
         WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "SC", calStart, calEnd);
         event.setColor(getResources().getColor(R.color.blue));
         return event;
