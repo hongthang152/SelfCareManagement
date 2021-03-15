@@ -12,6 +12,7 @@ android {
         versionName "1.4"
         multiDexEnabled true
         versionName "1.0.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
