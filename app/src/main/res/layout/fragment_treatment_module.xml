@@ -92,6 +92,14 @@
                     android:text="Measurement"
                     android:textColor="@color/brown" />
 
+                <Button
+                    android:id="@+id/send_data_email"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/custome_button"
+                    android:text="Send email for analysis"
+                    android:textColor="@color/brown" />
 
             </LinearLayout>
         </ScrollView>

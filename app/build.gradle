@@ -29,6 +29,10 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 repositories {
@@ -85,6 +89,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.github.alamkanak:android-week-view:1.2.6'
+
+    implementation 'com.itextpdf:itextpdf:5.5.10'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.4'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.56'
 }
 
 

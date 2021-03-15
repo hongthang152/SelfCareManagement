@@ -17,6 +17,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
     public static int VERSION_NUM = 1;
     public static final String TABLE_NAME = "EXERCISE";
     public final static String COL_ID = "_id";
+    public final static String COL_NAME = "name";
     public static final String COL_START_TIME = "start_time";
     public static final String COL_END_TIME = "end_time";
     public static final String DURATION = "duration";
@@ -33,7 +34,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
+                + COL_NAME + " text,"
                 + COL_START_TIME + " text,"
                 + COL_END_TIME + " text,"
                 + DURATION + " text);");  // add or remove columns
@@ -63,6 +64,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(COL_NAME,mld.getName());
         values.put(COL_START_TIME,mld.getStartTime());
         values.put(COL_END_TIME, mld.getEndTime());
         values.put(DURATION, mld.getDuration());
@@ -76,6 +78,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(COL_NAME,mld.getName());
         values.put(COL_START_TIME,mld.getStartTime());
         values.put(DURATION, mld.getDuration());
         values.put(COL_END_TIME, mld.getEndTime());
@@ -90,7 +93,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
         String query = "SELECT * FROM "+ TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
-            list.add(new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+            list.add(new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)),cursor.getString(cursor.getColumnIndex(COL_NAME)),cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
                     cursor.getString(cursor.getColumnIndex(COL_END_TIME))));
         }
         return list;
@@ -105,7 +108,7 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        ExerciseModel model = new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
+        ExerciseModel model = new ExerciseModel(cursor.getInt(cursor.getColumnIndex(COL_ID)),cursor.getString(cursor.getColumnIndex(COL_NAME)), cursor.getString(cursor.getColumnIndex(COL_START_TIME)), cursor.getString(cursor.getColumnIndex(DURATION)),
                 cursor.getString(cursor.getColumnIndex(COL_END_TIME)));
         // return contact
         return model;

@@ -1,6 +1,7 @@
 package com.neurondigital.helpers;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Utility {
     public static String diff(Date d1, Date d2) {
@@ -48,5 +49,14 @@ public class Utility {
         }
 
         return builder.toString().trim();
+    }
+
+    public static String generateRandomKey() {
+        Random ran = new Random();
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < 5; i++) {
+            builder.append(ran.nextInt(10));
+        }
+        return builder.toString();
     }
 }
