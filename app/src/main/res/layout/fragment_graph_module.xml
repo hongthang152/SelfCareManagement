@@ -33,7 +33,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:contentDescription="@string/event_list"
-        android:src="@drawable/ic_event_note_brown_24dp"
+        android:src="@drawable/ic_event_note_24dp"
         app:backgroundTint="@color/apptitlebackground" />
 
 </FrameLayout>

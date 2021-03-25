@@ -10,11 +10,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#ffce99"
+        android:background="@color/apptitlebackground"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@color/brown" />
+        app:title="@string/menu"
+        app:titleTextColor="@color/colorWhiteBackground" />
 
     <FrameLayout
         android:id="@+id/mainFragment"
@@ -35,16 +36,16 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:background="@color/apptitlebackground"
         app:itemHorizontalTranslationEnabled="true"
-        app:itemTextColor="@color/bottom_nav_color"
-        app:itemIconTint="@color/bottom_nav_color"
+        app:itemIconTint="@color/colorWhiteBackground"
+        app:itemTextColor="@color/colorWhiteBackground"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        tools:labelVisibilityMode="labeled"
-        android:background="@color/apptitlebackground"/>
+        tools:labelVisibilityMode="labeled" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

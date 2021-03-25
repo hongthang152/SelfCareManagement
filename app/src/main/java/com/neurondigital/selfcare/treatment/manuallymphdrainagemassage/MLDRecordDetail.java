@@ -85,9 +85,7 @@ public class MLDRecordDetail  extends AppCompatActivity {
                     .title(getResources().getString(R.string.select_date_time))
                     .defaultDate(start)
                     .minutesStep(1)
-                    .backgroundColor(getResources().getColor(R.color.apptitlebackground))
-                    .mainColor(getResources().getColor(R.color.brown))
-                    .titleTextColor(getResources().getColor(R.color.apptitlebackground))
+                    .mainColor(getResources().getColor(R.color.apptitlebackground))
                     .listener((Date date) -> {
                         start = date;
                         update();
@@ -108,9 +106,6 @@ public class MLDRecordDetail  extends AppCompatActivity {
                     }).display();
         });
 
-
-
-//        recordDu
 
         recordDetailSaveBtn.setOnClickListener(e -> {
             if(end.compareTo(start) < 0) {

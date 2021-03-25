@@ -27,14 +27,14 @@
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custome_button"
+            android:background="@drawable/custom_button"
             android:text="Log Skincare" />
 
         <Button
             android:id="@+id/clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custome_button"
+            android:background="@drawable/custom_button"
             android:text="Clear" />
     </LinearLayout>
 

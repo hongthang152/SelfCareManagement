@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="a83b33" />
-                            <entry key="outputName" value="ic_accessibility_brown_24dp" />
-                            <entry key="sourceFile" value="C:\Users\DELL" />
+                            <entry key="outputName" value="ic_massage" />
+                            <entry key="sourceFile" value="C:\Users\DELL\Downloads\massage.svg" />
                           </map>
                         </option>
                       </PersistentState>

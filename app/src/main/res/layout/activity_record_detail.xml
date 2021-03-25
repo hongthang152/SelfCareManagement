@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/apptitlebackground"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,7 +11,8 @@
         android:background="@color/apptitlebackground"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/record_detail"
-        app:titleTextColor="@color/brown" />
+        app:titleTextColor="@color/colorWhiteBackground"
+        android:theme="@style/ToolbarColoredBackArrow"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +32,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/start_time"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
             <TextView
@@ -45,7 +43,6 @@
                 android:ems="10"
                 android:gravity="end"
                 android:text="@string/dummy_start_time"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
         </RelativeLayout>
@@ -61,7 +58,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/end_time"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
             <TextView
@@ -73,7 +69,6 @@
                 android:ems="10"
                 android:gravity="end"
                 android:text="@string/dummy_end_time"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
         </RelativeLayout>
@@ -89,7 +84,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/duration"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
             <TextView
@@ -100,7 +94,6 @@
                 android:layout_centerVertical="true"
                 android:gravity="end"
                 android:text="00:00"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
         </RelativeLayout>
@@ -130,9 +123,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/custome_button"
-            android:text="@string/save"
-            android:textColor="@color/brown" />
+            android:background="@drawable/custom_button"
+            android:text="@string/save"/>
     </LinearLayout>
 
 
