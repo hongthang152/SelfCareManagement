@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MLDDatabase extends SQLiteOpenHelper {
@@ -93,6 +95,19 @@ public class MLDDatabase extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(COL_END_TIME))));
         }
         return list;
+    }
+
+    public MLDModel getLatest() {
+        List<MLDModel> list = this.getAll();
+        Collections.sort(list, (m1, m2) -> {
+            try {
+                return MLDModel.DATE_FORMATTER.parse(m2.getStartTime()).compareTo(MLDModel.DATE_FORMATTER.parse(m1.getStartTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        });
+        return list.isEmpty() ? null : list.get(0);
     }
 
     MLDModel getModel(int id) {

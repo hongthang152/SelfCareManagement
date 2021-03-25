@@ -65,6 +65,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title" />
+        <activity android:name=".treatment.manuallymphdrainagemassage.MLDList"
+            android:label="MLD List" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ProfileActivity"

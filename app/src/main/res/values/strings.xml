@@ -25,7 +25,7 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_categories_more">more</string>
     <string name="nav_logout">Logout</string>
-
+    <string name="menu">Menu</string>
 
     <!-- Profile -->
     <string name="profile_title">My Profile</string>
@@ -203,6 +203,7 @@
     <string name="duration">Duration:</string>
     <string name="end_time">End time:</string>
     <string name="save">Save</string>
+    <string name="start_timer">START\nTIMER</string>
     <string name="dummy_start_time">Jan 14, 2021, 10:39pm</string>
     <string name="dummy_end_time">Jan 14, 2021, 11:39pm</string>
     <string name="error">Error</string>
@@ -213,13 +214,14 @@
     <string name="name">Name</string>
     <string name="day_night">Day / Night</string>
     <string name="show_help_video">Help Video</string>
-
+    <string name="reset">Reset</string>
+    <string name="coninue_str">Continue</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="event_list">Event List</string>
     <string name="title_activity_event_list">EventListActivity</string>
     <string name="dummy_date">Wed January 27, 2021</string>
-    <string name="mld_massage">MLD Massage</string>
+    <string name="mld_massage">Add a MLD massage session</string>
     <string name="file_password">File Password</string>
     <string name="file_password_message">Please share this password to the email recipient via other means</string>
 

@@ -28,25 +28,25 @@
         android:layout_height="wrap_content"
         android:onClick="startChronometer"
         android:text="Start"
-        android:background="@drawable/custome_button"/>
+        android:background="@drawable/custom_button"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="pauseChronometer"
         android:text="Pause"
-        android:background="@drawable/custome_button"/>
+        android:background="@drawable/custom_button"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="resetChronometer"
         android:text="Reset"
-        android:background="@drawable/custome_button"/>
+        android:background="@drawable/custom_button"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="StopChronometer"
         android:text="Stop"
-        android:background="@drawable/custome_button"/>
+        android:background="@drawable/custom_button"/>
     </LinearLayout>
 
     <LinearLayout

@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/apptitlebackground"
+    android:background="@color/colorWhiteBackground"
     android:fitsSystemWindows="true">
 
 
@@ -19,87 +20,183 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="20dp"
                 android:layout_weight="0.1"
                 android:gravity="center"
                 android:orientation="vertical"
                 tools:context=".treatment.TreatmentModuleFragment">
 
 
-                <Button
+                <RelativeLayout
                     android:id="@+id/MLD"
-                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
+                    android:layout_height="@dimen/treatment_menu_button_height"
+                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"
+                    android:background="@drawable/mld_menu_button"
+                    android:orientation="horizontal"
                     android:text="Manual Lymph Drainage (MLD) Massage "
-                    android:textColor="@color/brown" />
+                    android:textColor="@color/colorWhiteBackground">
 
-                <Button
-                    android:id="@+id/pneumatic"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Pneumatic Compression Pump"
-                    android:textColor="@color/brown" />
+                    <TextView
+                        android:id="@+id/last_massage_detailed_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/last_duration"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="00:00:04"
+                        android:textColor="#00a2ed"
+                        android:textSize="11sp" />
 
-                <Button
-                    android:id="@+id/CT"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Compression Therapy"
-                    android:textColor="@color/brown" />
+                    <ImageView
+                        android:id="@+id/massage_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/ic_massage" />
 
-                <Button
-                    android:id="@+id/Exe"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Exercise"
-                    android:textColor="@color/brown" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/massage_icon">
 
-                <Button
-                    android:id="@+id/SC"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Skin Care"
-                    android:textColor="@color/brown" />
+                        <TextView
+                            android:id="@+id/massage_treatment_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Massage"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="17sp"
+                            android:textStyle="bold"></TextView>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@id/massage_treatment_name"
+                            android:id="@+id/latest_massage_detail_container">
+                            <TextView
+                                android:id="@+id/last_massage_duration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:text="4h"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:gravity="center"
+                                android:text="·"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/LLIS"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="LLIS Report"
-                    android:textColor="@color/brown" />
+                            <TextView
+                                android:id="@+id/massage_days_ago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="54 days ago"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
-                <Button
-                    android:id="@+id/measure"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Measurement"
-                    android:textColor="@color/brown" />
 
-                <Button
-                    android:id="@+id/send_data_email"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@drawable/custome_button"
-                    android:text="Send email for analysis"
-                    android:textColor="@color/brown" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/MLD"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Manual Lymph Drainage (MLD) Massage "-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/pneumatic"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Pneumatic Compression Pump"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/CT"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Compression Therapy"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/Exe"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Exercise"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/SC"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Skin Care"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/LLIS"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="LLIS Report"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/measure"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Measurement"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/send_data_email"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/treatment_menu_button_height"-->
+                <!--                    android:background="@drawable/custom_button"-->
+                <!--                    android:text="Send email for analysis"-->
+                <!--                    android:textColor="@color/colorWhiteBackground" />-->
 
             </LinearLayout>
         </ScrollView>

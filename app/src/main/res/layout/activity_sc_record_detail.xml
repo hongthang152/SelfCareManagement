@@ -75,7 +75,7 @@
                 android:layout_alignLeft="@id/sc_note"
                 android:layout_marginLeft="243dp"
                 android:layout_toRightOf="@+id/sc_note"
-                android:background="@drawable/custome_button"
+                android:background="@drawable/custom_button"
                 android:text="Edit Note" />
 
             <EditText
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/custome_button"
+            android:background="@drawable/custom_button"
             android:text="@string/save"
             android:textColor="@color/brown" />
     </LinearLayout>
