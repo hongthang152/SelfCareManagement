@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffce99"
+    android:background="#ebf2f7"
     tools:context="com.neurondigital.selfcare.SplashScreenActivity">
 
     <ImageView
@@ -37,7 +37,7 @@
                    android:layout_height="match_parent"
                    android:text="SelfCareManagement"
                    android:textAlignment="center"
-                   android:textColor="#A83B33"
+                   android:textColor="#635c91"
                    android:textSize="34dp"
 
 
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="30dp"
-                    android:background="#ffdab3">
+                    android:background="@color/colorWhiteBackground">
 
 
                     <EditText
@@ -105,7 +105,7 @@
                         android:paddingRight="20dp"
                         android:text="@string/login_button"
                         android:background="@drawable/custome_button1"
-                        android:textColor="#ffe6cc"
+                        android:textColor="@color/colorWhiteBackground"
                          />
 
                 </LinearLayout>
@@ -118,7 +118,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/login_skip"
-                android:textColor="#A83B33"
+                android:textColor="#f76c45"
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>

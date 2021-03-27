@@ -32,14 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="You slept 4h 0m"
-            android:textColor="@color/brown"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/event_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="6:53 PM - 10:53PM"
-            android:textColor="@color/brown" />
+            android:text="6:53 PM - 10:53PM" />
     </LinearLayout>
 </LinearLayout>

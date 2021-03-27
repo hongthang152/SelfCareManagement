@@ -212,7 +212,7 @@ public class TreatmentModuleFragment extends Fragment {
         RelativeLayout MLD = view.findViewById(R.id.MLD);
         Button LLIS = view.findViewById(R.id.LLIS);
         Button CT = view.findViewById(R.id.CT);
-        Button skincare = view.findViewById(R.id.SC);
+        RelativeLayout skincare = view.findViewById(R.id.SC);
         Button Exe = view.findViewById(R.id.Exe);
         Button measure = view.findViewById(R.id.measure);
 //        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
@@ -337,13 +337,13 @@ public class TreatmentModuleFragment extends Fragment {
 //                TreatmentModuleFragment.this.startActivity(goToCT);
 //            }
 //        });
-//        skincare.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View btn) {
-//                Intent goToSC = new Intent(getActivity(), SkinCare.class);
-//                TreatmentModuleFragment.this.startActivity(goToSC);
-//            }
-//        });
+           skincare.setOnClickListener(new View.OnClickListener() {
+            @Override
+           public void onClick(View btn) {
+                Intent goToSC = new Intent(getActivity(), SkinCare.class);
+               TreatmentModuleFragment.this.startActivity(goToSC);
+            }
+        });
 //        Exe.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View btn) {
