@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.neurondigital.selfcare.MainActivity;
 import com.neurondigital.selfcare.R;
 
 import java.text.SimpleDateFormat;
@@ -46,7 +46,6 @@ public class MLD extends AppCompatActivity {
     private long pauseOffset;
     private boolean running;
     public static final String url = "https://klosetraining.com/resources/self-care-videos/";
-    TextView helpVidText;
     Toolbar toolbar;
 
     TextView newRecordStartTextView;
@@ -83,10 +82,6 @@ public class MLD extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
-
-//        ListView lv = findViewById(R.id.user_list);
-//        helpVidText = findViewById(R.id.help_vid_text);
-//        helpVidText.setPaintFlags(helpVidText.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
         toolbar = findViewById(R.id.mld_toolbar);
         setSupportActionBar(toolbar);
@@ -148,9 +143,7 @@ public class MLD extends AppCompatActivity {
                     .listener((Date date) -> {
                         startTime = date;
                         newRecordStartTextView.setText(DATE_FORMATTER.format(startTime));
-                        if(startTime != null && endTime != null) {
-                            this.stopTimerListener(null);
-                        }
+                        updateChronometer();
                     }).display();
         });
 
@@ -163,22 +156,20 @@ public class MLD extends AppCompatActivity {
                     .listener((Date date) -> {
                         endTime = date;
                         newRecordEndTextView.setText(DATE_FORMATTER.format(endTime));
+                        updateChronometer();
                     }).display();
         });
-//        records = db.getAll();
+    }
 
-//        adapter = new MLDRecordAdapter(this, records);
-//        lv.setAdapter(adapter);
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(MLD.this, MLDRecordDetail.class);
-//                intent.putExtra(MLDRecordDetail.RECORD_EXTRA, records.get(position));
-//                startActivityForResult(intent, 0);
-//            }
-//        });
-//        loadDataFromDatabase();
-//        registerForContextMenu(lv);
+    public void updateChronometer() {
+        if(startTime != null && endTime != null) {
+            pauseOffset = endTime.getTime() - startTime.getTime();
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            setSaveTimerBtnVisible();
+        } else if(endTime == null) {
+            pauseOffset = System.currentTimeMillis() - startTime.getTime();
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+        }
     }
 
     public void startChronometer() {
@@ -202,10 +193,14 @@ public class MLD extends AppCompatActivity {
             pauseChronometer();
             endTime = Calendar.getInstance().getTime();
             newRecordEndTextView.setText(DATE_FORMATTER.format(endTime));
-            timerButton.setBackground(getResources().getDrawable(R.drawable.rounded_save_button_green));
-            timerButton.setText("Save");
-            resetContinueContainer.setVisibility(View.VISIBLE);
-            timerButton.setOnClickListener(this::saveTimerListener);
+            setSaveTimerBtnVisible();
+    }
+
+    private void setSaveTimerBtnVisible() {
+        timerButton.setBackground(getResources().getDrawable(R.drawable.rounded_save_button_green));
+        timerButton.setText("Save");
+        resetContinueContainer.setVisibility(View.VISIBLE);
+        timerButton.setOnClickListener(this::saveTimerListener);
     }
 
     private void saveTimerListener(View v) {
@@ -220,7 +215,7 @@ public class MLD extends AppCompatActivity {
     }
 
 
-    public void help(View v) {
+    public void help() {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
@@ -240,16 +235,9 @@ public class MLD extends AppCompatActivity {
     }
 
     public void StopChronometer() {
-//        MLDDatabase db = new MLDDatabase(this);
-
         if (running) {
             endTime = Calendar.getInstance().getTime();
             chronometer.stop();
-//            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//            String start = formatter.format(startTime);
-//            String end = formatter.format(endTime);
-//            db.addmodel(new MLDModel(start, chronometer.getText().toString(), end));
-//            loadDataFromDatabase();
             running = false;
         }
     }
@@ -271,8 +259,15 @@ public class MLD extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.mld_menu, menu);
+        getMenuInflater().inflate(R.menu.mld_record_menu, menu);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.mld_toolbar_menu, menu);
+        return true;
     }
 
     @Override
@@ -293,6 +288,8 @@ public class MLD extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+        } else if(item.getItemId() == R.id.action_help) {
+            help();
         }
 
         return super.onOptionsItemSelected(item);

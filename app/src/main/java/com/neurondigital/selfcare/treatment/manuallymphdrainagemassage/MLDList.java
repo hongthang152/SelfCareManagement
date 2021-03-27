@@ -182,7 +182,7 @@ public class MLDList extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.mld_menu, menu);
+        getMenuInflater().inflate(R.menu.mld_record_menu, menu);
 
     }
 //
