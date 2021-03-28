@@ -95,14 +95,14 @@ public class SCRecordDetail extends AppCompatActivity {
             recordDetailSaveBtn.setOnClickListener(e -> {
 
                 SkinCareModel model = new SkinCareModel();
-                model.setDate(SkinCareModel.DATE_FORMATTER.format(time));
-                model.setNote(newNote.getText().toString());
+
                 if(!newNote.getText().toString().isEmpty()){
                     model.setNote(newNote.getText().toString());
-                } else
-                    model.setDate(SkinCareModel.DATE_FORMATTER.format(time));
-                    model.setNote(note);
-                    model.setID(id);
+                    note = newNote.getText().toString();
+                }
+                model.setNote(note);
+                model.setDate(SkinCareModel.DATE_FORMATTER.format(time));
+                model.setID(id);
                 db.update(model);
                 finish();
             });

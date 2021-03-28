@@ -167,6 +167,25 @@
                                 android:text="Lotion"
                                 android:textColor="@color/colorWhiteBackground"
                                 android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/dot_sc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:gravity="center"
+                                android:text="·"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/sc_days_ago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="54 days ago"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 

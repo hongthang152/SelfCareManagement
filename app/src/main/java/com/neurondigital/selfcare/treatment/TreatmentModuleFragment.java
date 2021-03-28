@@ -80,6 +80,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,6 +102,9 @@ public class TreatmentModuleFragment extends Fragment {
     TextView lastMassageDuration;
     TextView massageDaysAgoTextView;
     TextView lastMassageDetailedDurationTextView;
+    TextView lastSC;
+    TextView lastNote;
+    TextView scDot;
 
     //navigation drawer item identification numbers
     final int  NAV_INFO = 4, NAVSETTINGS = 6,  NAV_PROFILE = 8, NAV_LOGOUT = 9, NAV_CATEGORIES = 100, NAV_POLICY = 10, NAV_TERMS = 11;
@@ -122,6 +126,10 @@ public class TreatmentModuleFragment extends Fragment {
         lastMassageDuration = view.findViewById(R.id.last_massage_duration);
         massageDaysAgoTextView = view.findViewById(R.id.massage_days_ago);
         lastMassageDetailedDurationTextView = view.findViewById(R.id.last_massage_detailed_duration);
+
+        lastSC = view.findViewById(R.id.sc_days_ago);
+        lastNote = view.findViewById(R.id.last_sc_note);
+        scDot = view.findViewById(R.id.dot_sc);
         //enable/disable Firebase topic subscription
 //        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 //        if (sharedPref.getBoolean("pref_enable_push_notifications", true))
@@ -242,6 +250,9 @@ public class TreatmentModuleFragment extends Fragment {
             }
 
         }
+
+        this.displayLatestSC();
+
 
 
 //        LLIS.setOnClickListener(new View.OnClickListener() {
@@ -371,6 +382,25 @@ public class TreatmentModuleFragment extends Fragment {
         return view;
     }
 
+    public void displayLatestSC(){
+        HashMap<String, String> latestSC = skinCareDB.getLatest();
+        if(latestSC == null) {
+            lastSC.setVisibility(View.INVISIBLE);
+            lastNote.setVisibility(View.INVISIBLE);
+            scDot.setVisibility(View.INVISIBLE);
+        } else {
+            try {
+                Date latestStartTime = SkinCareModel.DATE_FORMATTER.parse(latestSC.get("Date"));
+                lastSC.setText(Utility.getDaysAgoStr(latestStartTime));
+                lastNote.setText(latestSC.get("Note"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     public IDrawerItem[] getDrawerItems(List<ULocale.Category> categories) {
         List<IDrawerItem> drawerItems = new ArrayList<>();
 
@@ -451,6 +481,7 @@ public class TreatmentModuleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        this.displayLatestSC();
 
     }
 
