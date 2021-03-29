@@ -114,7 +114,7 @@ public class SCRecordDetail extends AppCompatActivity {
                         .title(getResources().getString(R.string.select_date_time))
                         .defaultDate(time)
                         .minutesStep(1)
-                        .mainColor(getResources().getColor(R.color.apptitlebackground))
+                        .mainColor(getResources().getColor(R.color.appcolor))
                         .listener((Date date) -> {
                             time = date;
                             update();

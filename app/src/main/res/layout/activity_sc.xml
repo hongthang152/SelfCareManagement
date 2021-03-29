@@ -15,7 +15,7 @@
         android:id="@+id/mld_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:theme="@style/ToolbarColoredBackArrow"
         app:title="Add a skincare activity"
@@ -81,7 +81,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/event_list"
         android:src="@drawable/ic_event_note_24dp"
-        app:backgroundTint="@color/apptitlebackground" />
+        app:backgroundTint="@color/appcolor" />
 </FrameLayout>
 
 
@@ -89,7 +89,7 @@
 <!--        android:id="@+id/mld_toolbar"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/apptitlebackground"-->
+<!--        android:background="@color/appcolor"-->
 <!--        android:minHeight="?attr/actionBarSize"-->
 <!--        android:theme="?attr/actionBarTheme"-->
 <!--        app:title="@string/mld_massage"-->

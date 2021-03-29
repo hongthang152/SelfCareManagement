@@ -9,6 +9,14 @@
 
     </style>
 
+    <style name="LoginTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/appcolor</item>
+        <item name="colorPrimaryDark">#8BC34A</item>
+        <item name="colorAccent">@color/appcolor</item>
+
+    </style>
+
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">@color/colorWhiteBackground</item>
     </style>

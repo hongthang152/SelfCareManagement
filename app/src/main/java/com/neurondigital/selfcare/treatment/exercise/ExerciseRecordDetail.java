@@ -85,9 +85,9 @@ public class ExerciseRecordDetail extends AppCompatActivity {
                     .title(getResources().getString(R.string.select_date_time))
                     .defaultDate(start)
                     .minutesStep(1)
-                    .backgroundColor(getResources().getColor(R.color.apptitlebackground))
+                    .backgroundColor(getResources().getColor(R.color.appcolor))
                     .mainColor(getResources().getColor(R.color.brown))
-                    .titleTextColor(getResources().getColor(R.color.apptitlebackground))
+                    .titleTextColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         start = date;
                         update();
@@ -98,10 +98,10 @@ public class ExerciseRecordDetail extends AppCompatActivity {
             new SingleDateAndTimePickerDialog.Builder(this)
                     .defaultDate(end)
                     .title(getResources().getString(R.string.select_date_time))
-                    .backgroundColor(getResources().getColor(R.color.apptitlebackground))
+                    .backgroundColor(getResources().getColor(R.color.appcolor))
                     .minutesStep(1)
                     .mainColor(getResources().getColor(R.color.brown))
-                    .titleTextColor(getResources().getColor(R.color.apptitlebackground))
+                    .titleTextColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         end = date;
                         update();

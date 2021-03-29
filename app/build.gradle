@@ -94,6 +94,7 @@ dependencies {
     implementation 'com.itextpdf:itextpdf:5.5.10'
     implementation 'org.apache.pdfbox:pdfbox:2.0.4'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.56'
+    implementation 'com.android.support:design:28.0.0'
 }
 
 
