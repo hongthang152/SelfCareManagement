@@ -15,7 +15,7 @@
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/event_list"
-        app:titleTextColor="@color/brown" />
+        app:titleTextColor="@color/colorWhiteBackground" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

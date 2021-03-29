@@ -112,7 +112,88 @@
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
+
+
+
                     </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/SC"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/treatment_menu_button_height"
+                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"
+                    android:background="@drawable/sc_button_bg"
+                    android:orientation="horizontal"
+                    android:text="Skincare "
+                    android:textColor="@color/colorWhiteBackground">
+
+                    <ImageView
+                        android:id="@+id/sc_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/sunscreen" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/sc_icon">
+
+                        <TextView
+                            android:id="@+id/sc_treatment_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Skincare"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="17sp"
+                            android:textStyle="bold"></TextView>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@id/sc_treatment_name"
+                            android:id="@+id/latest_sc_detail_container">
+                            <TextView
+                                android:id="@+id/last_sc_note"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:text="Lotion"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/dot_sc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:gravity="center"
+                                android:text="·"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/sc_days_ago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="54 days ago"
+                                android:textColor="@color/colorWhiteBackground"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
                 </RelativeLayout>
 
                 <RelativeLayout

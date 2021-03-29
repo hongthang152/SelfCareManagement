@@ -40,7 +40,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:theme="@style/AppTheme">
+                android:theme="@style/LoginTheme">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
@@ -55,7 +55,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:theme="@style/AppTheme">
+                android:theme="@style/LoginTheme">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"

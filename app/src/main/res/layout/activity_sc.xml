@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".treatment.manuallymphdrainagemassage.MLD"
+        tools:context=".treatment.skincare.SkinCare"
         android:background="@color/colorWhiteBackground">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mld_toolbar"
@@ -17,147 +18,59 @@
         android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:theme="@style/ToolbarColoredBackArrow"
-        app:title="Add a massage session"
+        app:title="Add a skincare activity"
         app:titleTextColor="@color/colorWhiteBackground" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/start_time_cap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/start_time"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+            <RelativeLayout
+                android:id="@+id/firstLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/new_record_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:ems="10"
-                android:gravity="end"
-                android:text="@string/dummy_start_time"
-                android:textSize="18sp"
-                android:paddingBottom="1dp"/>
+                <EditText
+                    android:id="@+id/enterNote"
+                    android:layout_width="327dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:hint="Enter type of skincare..."
+                    android:gravity="top"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:alpha="0.2"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
+        </LinearLayout>
 
 
-
-            <TextView
-                android:id="@+id/end_time_cap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/end_time"
-                android:textStyle="bold"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/new_record_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:ems="10"
-                android:gravity="end"
-                android:text="@string/dummy_end_time"
-                android:textSize="18sp"
-                android:paddingBottom="1dp"/>
-
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:alpha="0.2"/>
-
-
-    </LinearLayout>
-
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:gravity="bottom"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginBottom="20dp"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center">
 
-        <Chronometer
-            android:id="@+id/chronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="30sp"
-            android:layout_marginBottom="50dp"/>
+
 
         <Button
-            android:id="@+id/timer_btn"
+            android:id="@+id/addButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_save_button"
-            android:text="@string/start_timer"
+            android:background="@drawable/rounded_save_button_green"
+            android:text="SAVE"
             android:textStyle="bold"
             android:textColor="@color/colorWhiteBackground" />
-        <RelativeLayout
-            android:id="@+id/reset_continue_container"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reset"
-                android:textSize="18sp"
-                android:textColor="@color/appcolor"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/reset_btn"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/coninue_str"
-                android:textSize="18sp"
-                android:textColor="@color/appcolor"
-                android:textStyle="bold"
-                android:layout_alignParentRight="true"
-                android:id="@+id/continue_btn"/>
-        </RelativeLayout>
+
     </LinearLayout>
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton

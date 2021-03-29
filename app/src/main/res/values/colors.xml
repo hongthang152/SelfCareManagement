@@ -24,6 +24,7 @@
     <color name="colorSecondaryTextWhite">#7fffffff</color>
     <color name="colorText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
+    <color name="colorPurple">#BD9CED</color>
 
     <!--Divider line color-->
     <color name="colorDivider">#e1e1e1</color>
