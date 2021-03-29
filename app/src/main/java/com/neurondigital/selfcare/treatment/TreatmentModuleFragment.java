@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.itextpdf.text.BaseColor;
@@ -59,6 +60,8 @@ import com.neurondigital.selfcare.SettingsActivity;
 import com.neurondigital.selfcare.TermsActivity;
 import com.neurondigital.selfcare.User;
 import com.neurondigital.selfcare.infoactivity;
+import com.neurondigital.selfcare.service.AuthenticationAPI;
+import com.neurondigital.selfcare.service.SyncAPI;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
 import com.neurondigital.selfcare.treatment.exercise.Exercise;
@@ -72,6 +75,8 @@ import com.neurondigital.selfcare.treatment.pneumatic.PneumaticModel;
 import com.neurondigital.selfcare.treatment.skincare.SkinCare;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -210,6 +215,7 @@ public class TreatmentModuleFragment extends Fragment {
 //        });
 
         RelativeLayout MLD = view.findViewById(R.id.MLD);
+        RelativeLayout sync = view.findViewById(R.id.sync_btn);
         Button LLIS = view.findViewById(R.id.LLIS);
         Button CT = view.findViewById(R.id.CT);
         Button skincare = view.findViewById(R.id.SC);
@@ -227,6 +233,22 @@ public class TreatmentModuleFragment extends Fragment {
             }
         });
 
+        sync.setOnClickListener((e) -> {
+            if(!AuthenticationAPI.isAuthenticated(getContext())) {
+                new AlertDialog.Builder(context)
+                        .setMessage("You need to be signed in order to sync with out server")
+                        .setPositiveButton(android.R.string.yes, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                return;
+            }
+            SyncAPI syncAPI = new SyncAPI(getContext(), (JSONObject result) -> {
+                Toast.makeText(getContext(), "All treatment data have been synced to server", Toast.LENGTH_SHORT).show();
+            });
+            syncAPI.execute();
+
+        });
+
         MLDModel latestMLD = mldDB.getLatest();
         if(latestMLD == null) {
             latestMassageDetailContainer.setVisibility(View.INVISIBLE);
@@ -240,7 +262,6 @@ public class TreatmentModuleFragment extends Fragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
         }
 
 

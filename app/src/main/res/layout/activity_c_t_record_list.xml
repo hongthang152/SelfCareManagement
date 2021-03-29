@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/apptitlebackground"
+    android:background="@color/appcolor"
     tools:context=".treatment.compressiontherapy.CTRecordListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/record_detail_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="CT Record List"
         app:titleTextColor="@color/brown" />

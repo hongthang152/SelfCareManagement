@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/event_list"

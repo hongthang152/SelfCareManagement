@@ -14,7 +14,7 @@
         android:id="@+id/mld_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:theme="@style/ToolbarColoredBackArrow"
         app:title="Add a massage session"
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/reset"
                 android:textSize="18sp"
-                android:textColor="@color/apptitlebackground"
+                android:textColor="@color/appcolor"
                 android:textStyle="bold"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coninue_str"
                 android:textSize="18sp"
-                android:textColor="@color/apptitlebackground"
+                android:textColor="@color/appcolor"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
                 android:id="@+id/continue_btn"/>
@@ -168,7 +168,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/event_list"
         android:src="@drawable/ic_event_note_24dp"
-        app:backgroundTint="@color/apptitlebackground" />
+        app:backgroundTint="@color/appcolor" />
 </FrameLayout>
 
 

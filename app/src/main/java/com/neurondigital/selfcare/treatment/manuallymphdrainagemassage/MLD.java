@@ -139,7 +139,7 @@ public class MLD extends AppCompatActivity {
                     .defaultDate(startTime == null ? new Date() : startTime)
                     .title(getResources().getString(R.string.select_date_time))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.apptitlebackground))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         startTime = date;
                         newRecordStartTextView.setText(DATE_FORMATTER.format(startTime));
@@ -152,7 +152,7 @@ public class MLD extends AppCompatActivity {
                     .defaultDate(endTime == null ? new Date() : endTime)
                     .title(getResources().getString(R.string.select_date_time))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.apptitlebackground))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         endTime = date;
                         newRecordEndTextView.setText(DATE_FORMATTER.format(endTime));

@@ -112,12 +112,44 @@
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/sync_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/treatment_menu_button_height"
+                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"
+                    android:background="@drawable/sync_menu_btn"
+                    android:orientation="horizontal"
+                    android:text="Manual Lymph Drainage (MLD) Massage "
+                    android:textColor="@color/colorWhiteBackground">
 
+                    <ImageView
+                        android:id="@+id/sync_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/ic_sync_arrows" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/sync_icon">
+
+                        <TextView
+                            android:id="@+id/sync_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sync"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="17sp"
+                            android:textStyle="bold"></TextView>
 
                     </RelativeLayout>
-
-
                 </RelativeLayout>
 
 

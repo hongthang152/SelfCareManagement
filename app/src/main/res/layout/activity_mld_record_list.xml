@@ -7,7 +7,7 @@
         android:id="@+id/mld_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:theme="@style/ToolbarColoredBackArrow"
         app:title="Massage Record List"

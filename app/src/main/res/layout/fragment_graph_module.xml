@@ -34,6 +34,6 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/event_list"
         android:src="@drawable/ic_event_note_24dp"
-        app:backgroundTint="@color/apptitlebackground" />
+        app:backgroundTint="@color/appcolor" />
 
 </FrameLayout>
