@@ -26,6 +26,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.itextpdf.text.BaseColor;
@@ -56,6 +60,8 @@ import com.neurondigital.selfcare.SettingsActivity;
 import com.neurondigital.selfcare.TermsActivity;
 import com.neurondigital.selfcare.User;
 import com.neurondigital.selfcare.infoactivity;
+import com.neurondigital.selfcare.service.AuthenticationAPI;
+import com.neurondigital.selfcare.service.SyncAPI;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
 import com.neurondigital.selfcare.treatment.exercise.Exercise;
@@ -70,11 +76,16 @@ import com.neurondigital.selfcare.treatment.skincare.SkinCare;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +103,14 @@ public class TreatmentModuleFragment extends Fragment {
     CTDatabase compressionTherapyDB;
     ExerciseDatabase exerciseDB;
 
+    LinearLayout latestMassageDetailContainer;
+    TextView lastMassageDuration;
+    TextView massageDaysAgoTextView;
+    TextView lastMassageDetailedDurationTextView;
+    TextView lastSC;
+    TextView lastNote;
+    TextView scDot;
+
     //navigation drawer item identification numbers
     final int  NAV_INFO = 4, NAVSETTINGS = 6,  NAV_PROFILE = 8, NAV_LOGOUT = 9, NAV_CATEGORIES = 100, NAV_POLICY = 10, NAV_TERMS = 11;
 
@@ -107,6 +126,15 @@ public class TreatmentModuleFragment extends Fragment {
         exerciseDB = new ExerciseDatabase(getContext());
 
         context = getActivity();
+
+        latestMassageDetailContainer = view.findViewById(R.id.latest_massage_detail_container);
+        lastMassageDuration = view.findViewById(R.id.last_massage_duration);
+        massageDaysAgoTextView = view.findViewById(R.id.massage_days_ago);
+        lastMassageDetailedDurationTextView = view.findViewById(R.id.last_massage_detailed_duration);
+
+        lastSC = view.findViewById(R.id.sc_days_ago);
+        lastNote = view.findViewById(R.id.last_sc_note);
+        scDot = view.findViewById(R.id.dot_sc);
         //enable/disable Firebase topic subscription
 //        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 //        if (sharedPref.getBoolean("pref_enable_push_notifications", true))
@@ -194,14 +222,15 @@ public class TreatmentModuleFragment extends Fragment {
 //            }
 //        });
 
-        Button MLD = view.findViewById(R.id.MLD);
+        RelativeLayout MLD = view.findViewById(R.id.MLD);
+        RelativeLayout sync = view.findViewById(R.id.sync_btn);
         Button LLIS = view.findViewById(R.id.LLIS);
         Button CT = view.findViewById(R.id.CT);
-        Button skincare = view.findViewById(R.id.SC);
+        RelativeLayout skincare = view.findViewById(R.id.SC);
         Button Exe = view.findViewById(R.id.Exe);
         Button measure = view.findViewById(R.id.measure);
-        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
-        Button sendDataEmail = view.findViewById(R.id.send_data_email);
+//        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
+//        Button sendDataEmail = view.findViewById(R.id.send_data_email);
 
 
         MLD.setOnClickListener(new View.OnClickListener() {
@@ -212,133 +241,186 @@ public class TreatmentModuleFragment extends Fragment {
             }
         });
 
-        LLIS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToLLIS = new Intent(getActivity(), com.neurondigital.selfcare.LLIS.class);
-                TreatmentModuleFragment.this.startActivity(goToLLIS);
-            }
-        });
-
-        sendDataEmail.setOnClickListener((View view) -> {
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-//            verifyStoragePermissions(getActivity());
-
-            Document document = new Document();
-            File encryptedPdfFile;
-            try {
-                encryptedPdfFile = new File(context.getFilesDir() + File.separator + "directory" + File.separator + "health-encrypted.pdf");
-                if(encryptedPdfFile.exists()) encryptedPdfFile.delete();
-                encryptedPdfFile.getParentFile().mkdirs();
-                encryptedPdfFile.createNewFile();
-                String key = Utility.generateRandomKey();
-
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(encryptedPdfFile));
-                writer.createXmpMetadata();
-                writer.setEncryption(key.getBytes(), key.getBytes(), PdfWriter.ALLOW_COPY, PdfWriter.STANDARD_ENCRYPTION_40);
-
-                document.open();
-                document.add(new Paragraph("Manual Lymph Drainage Massage sessions: "));
-
-                for(MLDModel mld : mldDB.getAll()) {
-                    document.add(new Paragraph(mld.getStartTime() + " - " + mld.getEndTime() + ". Duration: " + mld.getDuration()));
-                }
-                document.add(new Paragraph("\n"));
-
-                document.add(new Paragraph("Pneumatic Compression Pump sessions: "));
-                for(PneumaticModel pneumaticModel : pneumaticDB.getAll()) {
-                    document.add(new Paragraph(pneumaticModel.getStartTime() + " - " + pneumaticModel.getEndTime() + ". Duration: " + pneumaticModel.getDuration()));
-                }
-                document.add(new Paragraph("\n"));
-
-                document.add(new Paragraph("Skin Care sessions"));
-                for(Map<String, String> sc : skinCareDB.getAll()) {
-                    document.add(new Paragraph("Date/Time: " + sc.get("Date") + ". Note: " + sc.get("Note")));
-                }
-                document.add(new Paragraph("\n"));
-
-                document.add(new Paragraph("Exercise sessions"));
-                for(ExerciseModel exercise : exerciseDB.getAll()) {
-                    document.add(new Paragraph(exercise.getStartTime() + " - " + exercise.getEndTime() + ". Duration: " + exercise.getDuration()));
-                }
-                document.add(new Paragraph("\n"));
-
-                document.add(new Paragraph("Compression Therapy sessions"));
-                for(CTRecord ct : compressionTherapyDB.getAllCTRecords()) {
-                    document.add(new Paragraph(ct.getDaynightTime() + ". " + ct.getStartTime() + " - " + ct.getEndTime() + ". Duration: " + ct.getDuration()));
-                }
-
-
-
-                document.close();
-
-                File finalEncryptedPdfFile = encryptedPdfFile;
+        sync.setOnClickListener((e) -> {
+            if(!AuthenticationAPI.isAuthenticated(getContext())) {
                 new AlertDialog.Builder(context)
-                        .setTitle(getString(R.string.file_password))
-                        .setMessage(getString(R.string.file_password_message) + "\n\n" + key)
-                        .setPositiveButton(R.string.OK, (DialogInterface dialog, int which) -> {
-                            Intent it = new Intent(Intent.ACTION_SEND);
-                            it.setData(Uri.parse("mailto:"));
-                            it.setType("text/pdf");
-
-                            it.putExtra(Intent.EXTRA_EMAIL, new String[]{"nguy0817@algonquinlive.com"});
-                            it.putExtra(Intent.EXTRA_SUBJECT,"Selfcare Management Report");
-                            it.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getContext(), "com.neurondigital.selfcare", encryptedPdfFile));
-                            startActivity(it);
-                        })
+                        .setMessage("You need to be signed in order to sync with out server")
+                        .setPositiveButton(android.R.string.yes, null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                return;
             }
+            SyncAPI syncAPI = new SyncAPI(getContext(), (JSONObject result) -> {
+                Toast.makeText(getContext(), "All treatment data have been synced to server", Toast.LENGTH_SHORT).show();
+            });
+            syncAPI.execute();
+
         });
 
-        CT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToCT = new Intent(getActivity(), CongestionTherapy.class);
-                TreatmentModuleFragment.this.startActivity(goToCT);
+        MLDModel latestMLD = mldDB.getLatest();
+        if(latestMLD == null) {
+            latestMassageDetailContainer.setVisibility(View.INVISIBLE);
+            lastMassageDetailedDurationTextView.setVisibility(View.INVISIBLE);
+        } else {
+            try {
+                lastMassageDuration.setText(Utility.getReadableDuration(latestMLD.getDuration()));
+                Date latestStartTime = MLDModel.DATE_FORMATTER.parse(latestMLD.getStartTime());
+                massageDaysAgoTextView.setText(Utility.getDaysAgoStr(latestStartTime));
+                lastMassageDetailedDurationTextView.setText(latestMLD.getDuration());
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        });
-        skincare.setOnClickListener(new View.OnClickListener() {
+        }
+
+        this.displayLatestSC();
+
+
+
+//        LLIS.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View btn) {
+//                Intent goToLLIS = new Intent(getActivity(), com.neurondigital.selfcare.LLIS.class);
+//                TreatmentModuleFragment.this.startActivity(goToLLIS);
+//            }
+//        });
+
+//        sendDataEmail.setOnClickListener((View view) -> {
+//            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//            StrictMode.setVmPolicy(builder.build());
+////            verifyStoragePermissions(getActivity());
+//
+//            Document document = new Document();
+//            File encryptedPdfFile;
+//            try {
+//                encryptedPdfFile = new File(context.getFilesDir() + File.separator + "directory" + File.separator + "health-encrypted.pdf");
+//                if(encryptedPdfFile.exists()) encryptedPdfFile.delete();
+//                encryptedPdfFile.getParentFile().mkdirs();
+//                encryptedPdfFile.createNewFile();
+//                String key = Utility.generateRandomKey();
+//
+//                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(encryptedPdfFile));
+//                writer.createXmpMetadata();
+//                writer.setEncryption(key.getBytes(), key.getBytes(), PdfWriter.ALLOW_COPY, PdfWriter.STANDARD_ENCRYPTION_40);
+//
+//                document.open();
+//                document.add(new Paragraph("Manual Lymph Drainage Massage sessions: "));
+//
+//                for(MLDModel mld : mldDB.getAll()) {
+//                    document.add(new Paragraph(mld.getStartTime() + " - " + mld.getEndTime() + ". Duration: " + mld.getDuration()));
+//                }
+//                document.add(new Paragraph("\n"));
+//
+//                document.add(new Paragraph("Pneumatic Compression Pump sessions: "));
+//                for(PneumaticModel pneumaticModel : pneumaticDB.getAll()) {
+//                    document.add(new Paragraph(pneumaticModel.getStartTime() + " - " + pneumaticModel.getEndTime() + ". Duration: " + pneumaticModel.getDuration()));
+//                }
+//                document.add(new Paragraph("\n"));
+//
+//                document.add(new Paragraph("Skin Care sessions"));
+//                for(Map<String, String> sc : skinCareDB.getAll()) {
+//                    document.add(new Paragraph("Date/Time: " + sc.get("Date") + ". Note: " + sc.get("Note")));
+//                }
+//                document.add(new Paragraph("\n"));
+//
+//                document.add(new Paragraph("Exercise sessions"));
+//                for(ExerciseModel exercise : exerciseDB.getAll()) {
+//                    document.add(new Paragraph(exercise.getStartTime() + " - " + exercise.getEndTime() + ". Duration: " + exercise.getDuration()));
+//                }
+//                document.add(new Paragraph("\n"));
+//
+//                document.add(new Paragraph("Compression Therapy sessions"));
+//                for(CTRecord ct : compressionTherapyDB.getAllCTRecords()) {
+//                    document.add(new Paragraph(ct.getDaynightTime() + ". " + ct.getStartTime() + " - " + ct.getEndTime() + ". Duration: " + ct.getDuration()));
+//                }
+//
+//
+//
+//                document.close();
+//
+//                new AlertDialog.Builder(context)
+//                        .setTitle(getString(R.string.file_password))
+//                        .setMessage(getString(R.string.file_password_message) + "\n\n" + key)
+//                        .setPositiveButton(R.string.OK, (DialogInterface dialog, int which) -> {
+//                            Intent it = new Intent(Intent.ACTION_SEND);
+//                            it.setData(Uri.parse("mailto:"));
+//                            it.setType("text/pdf");
+//
+//                            it.putExtra(Intent.EXTRA_EMAIL, new String[]{"nguy0817@algonquinlive.com"});
+//                            it.putExtra(Intent.EXTRA_SUBJECT,"Selfcare Management Report");
+//                            it.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getContext(), "com.neurondigital.selfcare", encryptedPdfFile));
+//                            startActivity(it);
+//                        })
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .show();
+//
+//            } catch (DocumentException e) {
+//                e.printStackTrace();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+
+//        CT.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View btn) {
+//                Intent goToCT = new Intent(getActivity(), CongestionTherapy.class);
+//                TreatmentModuleFragment.this.startActivity(goToCT);
+//            }
+//        });
+           skincare.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View btn) {
+           public void onClick(View btn) {
                 Intent goToSC = new Intent(getActivity(), SkinCare.class);
-                TreatmentModuleFragment.this.startActivity(goToSC);
+               TreatmentModuleFragment.this.startActivity(goToSC);
             }
         });
-        Exe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToExe = new Intent(getActivity(), Exercise.class);
-                TreatmentModuleFragment.this.startActivity(goToExe);
-            }
-        });
-        measure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View btn) {
-                Intent goToMeasure = new Intent(getActivity(), Measurements.class);
-                TreatmentModuleFragment.this.startActivity(goToMeasure);
+//        Exe.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View btn) {
+//                Intent goToExe = new Intent(getActivity(), Exercise.class);
+//                TreatmentModuleFragment.this.startActivity(goToExe);
+//            }
+//        });
+//        measure.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View btn) {
+//                Intent goToMeasure = new Intent(getActivity(), Measurements.class);
+//                TreatmentModuleFragment.this.startActivity(goToMeasure);
+//
+//
+//
+//            }
+//        });
 
-
-
-            }
-        });
-
-        pneumaticbtn.setOnClickListener(v ->{
-            Intent pn = new Intent(getActivity(), Pneumatic.class);
-            TreatmentModuleFragment.this.startActivity(pn);
-        });
+//        pneumaticbtn.setOnClickListener(v ->{
+//            Intent pn = new Intent(getActivity(), Pneumatic.class);
+//            TreatmentModuleFragment.this.startActivity(pn);
+//        });
 
 
         return view;
     }
+
+    public void displayLatestSC(){
+        HashMap<String, String> latestSC = skinCareDB.getLatest();
+        if(latestSC == null) {
+            lastSC.setVisibility(View.INVISIBLE);
+            lastNote.setVisibility(View.INVISIBLE);
+            scDot.setVisibility(View.INVISIBLE);
+        } else {
+            try {
+                Date latestStartTime = SkinCareModel.DATE_FORMATTER.parse(latestSC.get("Date"));
+                lastSC.setText(Utility.getDaysAgoStr(latestStartTime));
+                lastNote.setText(latestSC.get("Note"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     public IDrawerItem[] getDrawerItems(List<ULocale.Category> categories) {
         List<IDrawerItem> drawerItems = new ArrayList<>();
@@ -420,6 +502,7 @@ public class TreatmentModuleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        this.displayLatestSC();
 
     }
 

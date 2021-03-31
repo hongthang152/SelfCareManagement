@@ -7,8 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class SkinCareDatabase extends SQLiteOpenHelper {
 
@@ -136,6 +141,21 @@ public class SkinCareDatabase extends SQLiteOpenHelper {
 
         db.close();
     }
+
+    public HashMap<String, String> getLatest() {
+        ArrayList<HashMap<String, String>> scList = this.getAll();
+
+        Collections.sort(scList, (sc1, sc2) -> {
+            try {
+                return SkinCareModel.DATE_FORMATTER.parse(sc2.get("Date")).compareTo(SkinCareModel.DATE_FORMATTER.parse(sc1.get("Date")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        });
+        return scList.isEmpty() ? null : scList.get(0);
+    }
+
 
 
 }

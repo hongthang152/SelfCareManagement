@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p>List of treatment records for Manual Lymph Drainage Massage</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+        </tr>
+        <% for(var rec of mldRecords) { %>
+            <tr>
+                <td><%= rec._id %></td>
+                <td><%= rec.startTime %></td>
+                <td><%= rec.endTime %></td>
+                <td><%= rec.duration %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

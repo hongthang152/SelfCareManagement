@@ -65,6 +65,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title" />
+        <activity android:name=".treatment.manuallymphdrainagemassage.MLDList"
+            android:label="MLD List" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ProfileActivity"
@@ -136,6 +138,7 @@
             android:name=".CongestionTherapy"
             android:parentActivityName=".treatment.TreatmentModuleFragment" />
         <activity android:name=".treatment.skincare.SkinCare" />
+        <activity android:name=".treatment.skincare.ScList" />
         <activity android:name=".treatment.skincare.SCRecordDetail" />
         <activity android:name=".treatment.skincare.Night" />
         <activity android:name=".treatment.skincare.Day" />

@@ -93,26 +93,34 @@ public class SCRecordDetail extends AppCompatActivity {
 
 
             recordDetailSaveBtn.setOnClickListener(e -> {
-                if(newNote.getText().toString().isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Save without changes?")
-                            .setMessage("Confirm save with no changes made to note")
-                            .setPositiveButton(R.string.OK, null);
-                    builder.show();
-                    return;
-                }
 
                 SkinCareModel model = new SkinCareModel();
-                model.setDate(SkinCareModel.DATE_FORMATTER.format(time));
-                model.setNote(newNote.getText().toString());
+
                 if(!newNote.getText().toString().isEmpty()){
                     model.setNote(newNote.getText().toString());
-                } else
-                    model.setNote(note);
-                    model.setID(id);
+                    note = newNote.getText().toString();
+                }
+                model.setNote(note);
+                model.setDate(SkinCareModel.DATE_FORMATTER.format(time));
+                model.setID(id);
                 db.update(model);
                 finish();
             });
+
+
+         //set date picker
+            recordTime.setOnClickListener(e -> {
+                new SingleDateAndTimePickerDialog.Builder(this)
+                        .title(getResources().getString(R.string.select_date_time))
+                        .defaultDate(time)
+                        .minutesStep(1)
+                        .mainColor(getResources().getColor(R.color.appcolor))
+                        .listener((Date date) -> {
+                            time = date;
+                            update();
+                        }).display();
+            });
+
 
         }
 

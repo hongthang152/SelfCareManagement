@@ -103,6 +103,7 @@ public class GraphModuleFragment extends Fragment {
 
         mWeekView.goToHour(calInstant.get(Calendar.HOUR_OF_DAY));
         mWeekView.goToDate(calInstant);
+       // mWeekView.setNumberOfVisibleDays(3);
 
         mWeekView.setMonthChangeListener((int newYear, int newMonth) -> {
             List<WeekViewEvent> eventList = new ArrayList<>();
@@ -203,13 +204,6 @@ public class GraphModuleFragment extends Fragment {
                 eventList.add(event);
             }
 
-            for (HashMap<String, String> sc : scList) {
-                WeekViewEvent scEvent = loadSkinCareEvents(sc, newYear, newMonth);
-                if (scEvent != null) {
-                    eventList.add(scEvent);
-                }
-            }
-
             return eventList;
         });
 
@@ -230,23 +224,29 @@ public class GraphModuleFragment extends Fragment {
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(start);
-            cal.add(Calendar.MINUTE, 5);
+            cal.add(Calendar.MINUTE, 20);
             String endDateStr = SkinCareModel.DATE_FORMATTER.format(cal.getTime());
             end = SkinCareModel.DATE_FORMATTER.parse(endDateStr);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         Calendar calStart = Calendar.getInstance();
         calStart.setTime(start);
         Calendar calEnd = Calendar.getInstance();
         calEnd.setTime(end);
+
         if (calStart.get(Calendar.MONTH) != newMonth || calEnd.get(Calendar.MONTH) != newMonth ||
-                calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
+                calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear){
             return null;
-        WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "SC", calStart, calEnd);
+        }
+        else{
+        WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "Skincare", calStart, calEnd);
         event.setColor(getResources().getColor(R.color.blue));
-        return event;
+
+        return event;}
+
     }
 
 

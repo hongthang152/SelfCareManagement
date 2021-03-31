@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         verifyStoragePermissions(this);
         //enable/disable Firebase topic subscription
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sharedPref.getBoolean("pref_enable_push_notifications", true))
-            FirebaseMessaging.getInstance().subscribeToTopic(Configurations.FIREBASE_PUSH_NOTIFICATION_TOPIC);
-        else
-            FirebaseMessaging.getInstance().unsubscribeFromTopic(Configurations.FIREBASE_PUSH_NOTIFICATION_TOPIC);
+//        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        if (sharedPref.getBoolean("pref_enable_push_notifications", true))
+//            FirebaseMessaging.getInstance().subscribeToTopic(Configurations.FIREBASE_PUSH_NOTIFICATION_TOPIC);
+//        else
+//            FirebaseMessaging.getInstance().unsubscribeFromTopic(Configurations.FIREBASE_PUSH_NOTIFICATION_TOPIC);
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -138,19 +138,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load showauthorname
-        Preference.load(context, "showauthorname", new Preference.onPreferenceDownloadedListener() {
-            @Override
-            public void onPreferenceDownloaded(String value) {
-                //just load it. It is now cached
-            }
-        });
+//        Preference.load(context, "showauthorname", new Preference.onPreferenceDownloadedListener() {
+//            @Override
+//            public void onPreferenceDownloaded(String value) {
+//                //just load it. It is now cached
+//            }
+//        });
         //load showfeatureimage
-        Preference.load(context, "showfeatureimage", new Preference.onPreferenceDownloadedListener() {
-            @Override
-            public void onPreferenceDownloaded(String value) {
-                //just load it. It is now cached
-            }
-        });
+//        Preference.load(context, "showfeatureimage", new Preference.onPreferenceDownloadedListener() {
+//            @Override
+//            public void onPreferenceDownloaded(String value) {
+//                //just load it. It is now cached
+//            }
+//        });
 
 
 

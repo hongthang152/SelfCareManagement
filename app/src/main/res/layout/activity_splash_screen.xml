@@ -4,24 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffce99"
+    android:background="@color/colorWhiteBackground"
     tools:context="com.neurondigital.selfcare.SplashScreenActivity">
-
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:visibility="invisible"
-        />
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,87 +22,99 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="49dp">
 
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
-                   android:text="SelfCareManagement"
+                   android:text="Welcome"
                    android:textAlignment="center"
-                   android:textColor="#A83B33"
                    android:textSize="34dp"
-
+                   android:textStyle="bold"
 
                    />
             </RelativeLayout>
 
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="20dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:background="#fff"-->
-            <!--android:orientation="vertical"-->
-            <!--android:padding="30dp">-->
-
-            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                card_view:cardCornerRadius="0dp">
+                android:layout_width="match_parent"
+                android:theme="@style/LoginTheme">
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="30dp"
-                    android:background="#ffdab3">
+                    android:layout_margin="8dp"
+                    android:hint="@string/login_email"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <EditText
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@string/login_email"
-                        android:inputType="textEmailAddress" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:theme="@style/LoginTheme">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="@string/login_password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/appcolor"/>
+            </com.google.android.material.textfield.TextInputLayout>
+/>
 
-                    <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@string/login_password"
-                        android:inputType="textPassword" />
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/login_button"
+                android:background="@drawable/login_btn"
+                android:textColor="@color/colorWhiteBackground"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
 
-                    <Button
-                        android:id="@+id/login_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="center"
-                        android:layout_margin="8dp"
-                        android:gravity="center"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:text="@string/login_button"
-                        android:background="@drawable/custome_button1"
-                        android:textColor="#ffe6cc"
-                         />
+                <TextView
+                    android:id="@+id/tvText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="OR"/>
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toLeftOf="@id/tvText"
+                    android:background="#e0e0e0"
+                    />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/tvText"
+                    android:background="#e0e0e0"
+                    />
+
+            </RelativeLayout>
             <TextView
                 android:id="@+id/skip_button"
                 android:layout_width="wrap_content"
@@ -118,8 +122,17 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/login_skip"
-                android:textColor="#A83B33"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="15dp"/>
+
+            <ImageView
+                android:id="@+id/background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

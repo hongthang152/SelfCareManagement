@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/apptitlebackground"
+    android:background="@color/colorWhiteBackground"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/record_detail_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/apptitlebackground"
+        android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/record_detail"
-        app:titleTextColor="@color/brown" />
+        app:titleTextColor="@color/colorWhiteBackground" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content"
+            android:id="@+id/relLayout1">
 
             <TextView
                 android:id="@+id/time_txt"
@@ -34,38 +35,44 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/time"
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/time_txt"
-            android:ems="10"
-            android:text="@string/dummy_start_time"
-            android:textColor="@color/brown"
-            android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/time_txt"
+                android:ems="10"
+                android:text="@string/dummy_start_time"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_below="@id/relLayout1"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/sc_note_txt"
-                android:layout_below="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:text="You applied: "
-                android:textColor="@color/brown"
                 android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/sc_note"
-            android:layout_below="@+id/sc_note_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="cream?"
-            android:textColor="@color/brown"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/sc_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sc_note_txt"
+                android:ems="10"
+                android:text="cream?"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/editButton"
@@ -75,19 +82,20 @@
                 android:layout_alignLeft="@id/sc_note"
                 android:layout_marginLeft="243dp"
                 android:layout_toRightOf="@+id/sc_note"
-                android:background="@drawable/custome_button"
-                android:text="Edit Note" />
+                android:background="@drawable/custom_button"
+                android:text="Edit Note"
+                android:textColor="@color/colorWhiteBackground" />
 
             <EditText
                 android:id="@+id/new_note"
-                android:layout_below="@+id/sc_note"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_below="@id/sc_note"
+                android:layout_marginTop="13dp"
                 android:ems="10"
                 android:hint="Enter new note here, then click save"
-                android:textColor="@color/brown"
+                android:gravity="top"
                 android:textSize="18sp" />
-
         </RelativeLayout>
 
     </LinearLayout>
@@ -115,9 +123,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/custome_button"
+            android:background="@drawable/custom_button"
             android:text="@string/save"
-            android:textColor="@color/brown" />
+            android:textColor="@color/colorWhiteBackground" />
     </LinearLayout>
 
 

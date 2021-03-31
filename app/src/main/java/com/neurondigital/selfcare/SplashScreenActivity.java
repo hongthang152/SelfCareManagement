@@ -15,7 +15,10 @@ import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
+import com.neurondigital.selfcare.service.AuthenticationAPI;
 import com.neurondigital.selfcare.treatment.TreatmentModuleFragment;
+
+import org.json.JSONObject;
 
 import static com.neurondigital.selfcare.Configurations.SHOW_SPLASH_SCREEN_BACKGROUND_IMAGE;
 
@@ -89,15 +92,21 @@ public class SplashScreenActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //login to server
-                User.login(activity, emailView.getText().toString(), passwordView.getText().toString(), new User.onLoginListener() {
-                    @Override
-                    public void onLogin(String email) {
-                        Intent intent = new Intent(activity, TreatmentModuleFragment.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
+                AuthenticationAPI authAPI = new AuthenticationAPI(getApplicationContext(), (JSONObject result) -> {
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 });
+                authAPI.execute(emailView.getText().toString(), passwordView.getText().toString());
+//                authAPI.
+//                User.login(activity, emailView.getText().toString(), passwordView.getText().toString(), new User.onLoginListener() {
+//                    @Override
+//                    public void onLogin(String email) {
+//                        Intent intent = new Intent(activity, TreatmentModuleFragment.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                    }
+//                });
             }
         });
 

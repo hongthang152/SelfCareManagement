@@ -1,7 +1,9 @@
 package com.neurondigital.helpers;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Utility {
     public static String diff(Date d1, Date d2) {
@@ -58,5 +60,12 @@ public class Utility {
             builder.append(ran.nextInt(10));
         }
         return builder.toString();
+    }
+
+    public static String getDaysAgoStr(Date date) {
+        long diff = new Date().getTime() - date.getTime();
+        long daysAgo = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        if(daysAgo == 0) return "Today";
+        return daysAgo + " days ago";
     }
 }
