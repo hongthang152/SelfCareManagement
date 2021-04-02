@@ -22,5 +22,22 @@
             </tr>
         <% } %>
     </table>
+
+    <p>List of Skincare Treatments</p>
+    <table>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Note</th>
+            </tr>
+            <% for(var rec of scRecords) { %>
+                <tr>
+                    <td><%= rec._id %></td>
+                    <td><%= rec.date %></td>
+                    <td><%= rec.note %></td>
+                </tr>
+            <% } %>
+        </table>
+
 </body>
 </html>
