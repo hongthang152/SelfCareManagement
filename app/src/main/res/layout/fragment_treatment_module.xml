@@ -197,6 +197,42 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/send_data_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/treatment_menu_button_height"
+                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"
+                    android:background="@drawable/email_menu_btn"
+                    android:orientation="horizontal"
+                    android:textColor="@color/colorWhiteBackground">
+
+                    <ImageView
+                        android:id="@+id/email_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/ic_email" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/email_icon">
+
+                        <TextView
+                            android:id="@+id/email_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Send email for analysis"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="17sp"
+                            android:textStyle="bold"></TextView>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/sync_btn"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/treatment_menu_button_height"

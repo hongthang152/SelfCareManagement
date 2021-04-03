@@ -1,5 +1,8 @@
 package com.neurondigital.selfcare.treatment.skincare;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -14,6 +17,18 @@ public class SkinCareModel {
     String note;
 
     public SkinCareModel() {
+    }
+
+    public JSONObject toJSONObject() {
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("date", getDate());
+            jsonObject.put("note", getNote());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+
     }
 
     public SkinCareModel(int id, String date, String note) {

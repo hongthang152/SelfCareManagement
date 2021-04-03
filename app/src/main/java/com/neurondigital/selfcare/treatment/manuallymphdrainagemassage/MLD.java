@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -206,6 +207,14 @@ public class MLD extends AppCompatActivity {
     private void saveTimerListener(View v) {
             ProgressDialog pd = ProgressDialog.show(this, "Loading", "Saving session...");
             endTime = Calendar.getInstance().getTime();
+            if(endTime.compareTo(startTime) < 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.error)
+                        .setMessage(R.string.start_date_must_be_before_end_date)
+                        .setPositiveButton(R.string.OK, null);
+                builder.show();
+                return;
+            }
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String start = formatter.format(startTime);
             String end = formatter.format(endTime);
