@@ -67,9 +67,11 @@ router.post('/sync', authMiddleware, async (req, res, next) => {
 })
 
 router.get('/:username', async (req, res, next) => {
-  var username = req.params.username;
+  var username = req.params.username; // admin
   if(!username) return res.status(400);
+
   var user = await User.findOne({ username: username });
+  console.log(user);
   if(!user) return res.status(400);
   var mldRecords = await ManualLymphDrainageMassage.find({ user: user._id });
   return res.render("table", {
