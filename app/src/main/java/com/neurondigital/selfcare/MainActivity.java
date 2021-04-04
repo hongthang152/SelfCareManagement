@@ -69,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener((MenuItem item) -> {
             switch (item.getItemId()){
                 case R.id.treament_module:
+                    toolbar.setTitle("Menu");
                     loadFragment(new TreatmentModuleFragment());
                     return true;
                 case R.id.graph_module:
+                    toolbar.setTitle("Graph");
                     loadFragment(new GraphModuleFragment());
                     return true;
             }
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
 //                .withRootView(R.id.flFragment)
                 //.withDisplayBelowStatusBar(true)
+
                 .withActionBarDrawerToggle(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(getDrawerItems(null))
