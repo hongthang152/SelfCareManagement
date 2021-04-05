@@ -24,8 +24,8 @@ import java.util.Locale;
 
 public class PneumaticRecordDetail extends AppCompatActivity {
 
-    public static String MLD_RECORD_DETAIL_DATE_FORMAT = "MMM dd, yyyy, hh:mm a";
-    public static SimpleDateFormat MLD_RECORD_DETAIL_DATE_FORMATTER = new SimpleDateFormat(MLD_RECORD_DETAIL_DATE_FORMAT, Locale.ENGLISH);
+    public static String PC_RECORD_DETAIL_DATE_FORMAT = "MMM dd, yyyy, hh:mm a";
+    public static SimpleDateFormat PC_RECORD_DETAIL_DATE_FORMATTER = new SimpleDateFormat(PC_RECORD_DETAIL_DATE_FORMAT, Locale.ENGLISH);
 
     TextView recordDetailStartDate;
     TextView recordDetailEndDate;
@@ -48,7 +48,7 @@ public class PneumaticRecordDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new PneumaticDatabase(this);
-        setContentView(R.layout.activity_record_detail);
+        setContentView(R.layout.activity_pc_record_detail);
         Toolbar toolbar = findViewById(R.id.record_detail_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,9 +84,9 @@ public class PneumaticRecordDetail extends AppCompatActivity {
                     .title(getResources().getString(R.string.select_date_time))
                     .defaultDate(start)
                     .minutesStep(1)
-                    .backgroundColor(getResources().getColor(R.color.appcolor))
-                    .mainColor(getResources().getColor(R.color.brown))
-                    .titleTextColor(getResources().getColor(R.color.appcolor))
+                    .backgroundColor(getResources().getColor(R.color.colorWhite))
+                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .titleTextColor(getResources().getColor(R.color.colorWhite))
                     .listener((Date date) -> {
                         start = date;
                         update();
@@ -97,10 +97,10 @@ public class PneumaticRecordDetail extends AppCompatActivity {
             new SingleDateAndTimePickerDialog.Builder(this)
                     .defaultDate(end)
                     .title(getResources().getString(R.string.select_date_time))
-                    .backgroundColor(getResources().getColor(R.color.appcolor))
+                    .backgroundColor(getResources().getColor(R.color.colorWhite))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.brown))
-                    .titleTextColor(getResources().getColor(R.color.appcolor))
+                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .titleTextColor(getResources().getColor(R.color.colorWhite))
                     .listener((Date date) -> {
                         end = date;
                         update();
@@ -109,7 +109,6 @@ public class PneumaticRecordDetail extends AppCompatActivity {
 
 
 
-//        recordDu
 
         recordDetailSaveBtn.setOnClickListener(e -> {
             if(end.compareTo(start) < 0) {
@@ -132,8 +131,8 @@ public class PneumaticRecordDetail extends AppCompatActivity {
     }
 
     private void update() {
-        recordDetailStartDate.setText(MLD_RECORD_DETAIL_DATE_FORMATTER.format(start));
-        recordDetailEndDate.setText(MLD_RECORD_DETAIL_DATE_FORMATTER.format(end));
+        recordDetailStartDate.setText(PC_RECORD_DETAIL_DATE_FORMATTER.format(start));
+        recordDetailEndDate.setText(PC_RECORD_DETAIL_DATE_FORMATTER.format(end));
         duration = Utility.diff(start, end);
         recordDetailDuration.setText(duration);
     }

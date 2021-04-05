@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,14 @@ public class PneumaticDatabase extends SQLiteOpenHelper {
          SQLiteDatabase db = this.getWritableDatabase();
          db.delete(TABLE_NAME,COL_ID + "=?", new String[]{Long.toString(mdl.getID())});
      }
+    public void deleterow(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COL_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        Log.d("deleting: ", "id: "+id);
+
+        db.close();
+    }
 
   /*  public void deleterow(int id) {
         SQLiteDatabase db = this.getWritableDatabase();

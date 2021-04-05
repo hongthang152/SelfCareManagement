@@ -120,6 +120,90 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/PC"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/treatment_menu_button_height"
+                    android:layout_marginBottom="@dimen/treatment_menu_button_spacing"
+                    android:background="@drawable/pc_bg"
+                    android:orientation="horizontal"
+                    android:text="Pneumatic Compression"
+                    android:textColor="@color/colorWhiteBackground">
+                    <TextView
+                        android:id="@+id/last_pc_detailed_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/last_duration"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="00:00:04"
+                        android:textColor="#00a2ed"
+                        android:textSize="11sp" />
+                    <ImageView
+                        android:id="@+id/pc_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/air_pump" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/pc_icon">
+
+                    <TextView
+                        android:id="@+id/pc_treatment_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pneumatic Compression"
+                        android:textColor="@color/colorWhiteBackground"
+                        android:textSize="17sp"
+                        android:textStyle="bold"></TextView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/pc_treatment_name"
+                        android:id="@+id/latest_pc_detail_container">
+                        <TextView
+                            android:id="@+id/last_pc_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:text="3h"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/dot_pc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:gravity="center"
+                            android:text="·"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/pc_days_ago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="54 days ago"
+                            android:textColor="@color/colorWhiteBackground"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/SC"
@@ -130,6 +214,8 @@
                     android:orientation="horizontal"
                     android:text="Skincare "
                     android:textColor="@color/colorWhiteBackground">
+
+
 
                     <ImageView
                         android:id="@+id/sc_icon"

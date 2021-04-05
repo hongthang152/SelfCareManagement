@@ -110,6 +110,10 @@ public class TreatmentModuleFragment extends Fragment {
     TextView lastSC;
     TextView lastNote;
     TextView scDot;
+    LinearLayout latestPCDetailContainer;
+    TextView lastPCDuration;
+    TextView PCDaysAgoTextView;
+    TextView lastPCDetailedDurationTextView;
 
     //navigation drawer item identification numbers
     final int  NAV_INFO = 4, NAVSETTINGS = 6,  NAV_PROFILE = 8, NAV_LOGOUT = 9, NAV_CATEGORIES = 100, NAV_POLICY = 10, NAV_TERMS = 11;
@@ -135,6 +139,12 @@ public class TreatmentModuleFragment extends Fragment {
         lastSC = view.findViewById(R.id.sc_days_ago);
         lastNote = view.findViewById(R.id.last_sc_note);
         scDot = view.findViewById(R.id.dot_sc);
+
+
+        latestPCDetailContainer = view.findViewById(R.id.latest_pc_detail_container);
+        lastPCDuration = view.findViewById(R.id.last_pc_duration);
+        PCDaysAgoTextView = view.findViewById(R.id.pc_days_ago);
+        lastPCDetailedDurationTextView = view.findViewById(R.id.last_pc_detailed_duration);
         //enable/disable Firebase topic subscription
 //        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 //        if (sharedPref.getBoolean("pref_enable_push_notifications", true))
@@ -229,6 +239,7 @@ public class TreatmentModuleFragment extends Fragment {
         RelativeLayout skincare = view.findViewById(R.id.SC);
         Button Exe = view.findViewById(R.id.Exe);
         Button measure = view.findViewById(R.id.measure);
+        RelativeLayout PC = view.findViewById(R.id.PC);
 //        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
 //        Button sendDataEmail = view.findViewById(R.id.send_data_email);
 
@@ -238,6 +249,14 @@ public class TreatmentModuleFragment extends Fragment {
             public void onClick(View btn) {
                 Intent goToMLD = new Intent(getActivity(), com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLD.class);
                 TreatmentModuleFragment.this.startActivity(goToMLD);
+            }
+        });
+
+        PC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View btn) {
+                Intent goToPC = new Intent(getActivity(), Pneumatic.class);
+                TreatmentModuleFragment.this.startActivity(goToPC);
             }
         });
 

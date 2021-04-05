@@ -145,6 +145,7 @@
         <activity android:name=".Measurements" />
         <activity android:name=".treatment.pneumatic.Pneumatic" />
         <activity android:name=".treatment.pneumatic.PneumaticRecordDetail" />
+        <activity android:name=".treatment.pneumatic.PneumaticList" />
     </application>
 
 </manifest>
