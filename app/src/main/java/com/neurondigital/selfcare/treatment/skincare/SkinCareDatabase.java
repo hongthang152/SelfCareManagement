@@ -157,6 +157,21 @@ public class SkinCareDatabase extends SQLiteOpenHelper {
     }
 
 
+    //get list as models
+    public ArrayList<SkinCareModel> getAllModels(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<SkinCareModel> scList = new ArrayList<>();
+        String query = "SELECT * FROM "+ TABLE_NAME;
+        Cursor cursor = db.rawQuery(query,null);
+        while (cursor.moveToNext()){
+            SkinCareModel model = new SkinCareModel();
+            model.setID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COL_ID))));
+            model.setDate(cursor.getString(cursor.getColumnIndex(COLUMN1)));
+            model.setNote(cursor.getString(cursor.getColumnIndex(COLUMN2)));
+            scList.add(model);
+        }
+        return  scList;
+    }
 
 }
 

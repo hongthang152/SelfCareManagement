@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import com.neurondigital.selfcare.Configurations;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
+import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
+import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +30,13 @@ import static com.neurondigital.selfcare.service.AuthenticationAPI.AUTHENTICATIO
 public class SyncAPI extends AsyncTask<String, String, JSONObject> {
     Context context;
     MLDDatabase mldDB;
+    SkinCareDatabase scDB;
     AsyncResponse<JSONObject> response;
 
     public SyncAPI(Context ctx, AsyncResponse<JSONObject> asyncResponse) {
         this.context = ctx;
         this.mldDB = new MLDDatabase(this.context);
+        this.scDB = new SkinCareDatabase(this.context);
         this.response = asyncResponse;
     }
 
@@ -56,7 +60,15 @@ public class SyncAPI extends AsyncTask<String, String, JSONObject> {
                 mldJSONArray.put(mld.toJSONObject());
             }
 
+            //Make json array of skincare records
+            List<SkinCareModel> scList = scDB.getAllModels();
+            JSONArray scJSONArray = new JSONArray();
+            for(SkinCareModel scModel : scList) {
+                scJSONArray.put(scModel.toJSONObject());
+            }
+
             jsonObject.put("mld", mldJSONArray);
+            jsonObject.put("sc", scJSONArray);
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
             wr.writeBytes(jsonObject.toString());
