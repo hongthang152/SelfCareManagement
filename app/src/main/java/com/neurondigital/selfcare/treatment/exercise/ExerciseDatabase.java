@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
+import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ExerciseDatabase extends SQLiteOpenHelper {
@@ -124,6 +128,18 @@ public class ExerciseDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ExerciseModel getLatest() {
+        List<ExerciseModel> list = this.getAll();
+        Collections.sort(list, (m1, m2) -> {
+            try {
+                return ExerciseModel.DATE_FORMATTER.parse(m2.getStartTime()).compareTo(ExerciseModel.DATE_FORMATTER.parse(m1.getStartTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        });
+        return list.isEmpty() ? null : list.get(0);
+    }
 }
 
 

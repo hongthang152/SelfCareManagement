@@ -12,9 +12,13 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.neurondigital.selfcare.R;
 
 import java.text.SimpleDateFormat;
@@ -36,49 +40,94 @@ public class Exercise extends AppCompatActivity {
     EditText etExeName;
     Button btnOk;
     String name;
+    Button startTimer;
+    RelativeLayout reset_exe_continue_container;
+    TextView exe_continue_btn,reset_exe_btn;
+    FloatingActionButton event_list_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exe);
+        setContentView(R.layout.activity_exe_2);
 
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
 
-        etExeName = findViewById(R.id.etExeName);
-        btnOk = findViewById(R.id.btnOk);
+        etExeName = findViewById(R.id.enterNote);
+        startTimer = findViewById(R.id.startTimer);
+        reset_exe_continue_container = findViewById(R.id.reset_exe_continue_container);
+        exe_continue_btn = findViewById(R.id.exe_continue_btn);
+        reset_exe_btn = findViewById(R.id.reset_exe_btn);
+        event_list_btn = findViewById(R.id.event_list_btn);
 
-        btnOk.setOnClickListener(new View.OnClickListener() {
+        startTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etExeName.getText().toString().isEmpty()){
-                    Toast.makeText(Exercise.this, "Please Enter exercise name!", Toast.LENGTH_SHORT).show();
+                if (startTimer.getText().toString().equalsIgnoreCase("Stop\nTimer")){
+                    pauseChronometer(v);
+                    startTimer.setText("Save\nExercise");
+                    reset_exe_continue_container.setVisibility(View.VISIBLE);
+                }else if(startTimer.getText().toString().equalsIgnoreCase("Save\nExercise")){
+                    StopChronometer(v);
+                    startTimer.setText("Start\nTimer");
+                    reset_exe_continue_container.setVisibility(View.GONE);
                 }else{
-                    name = etExeName.getText().toString().trim();
-                    findViewById(R.id.linear).setVisibility(View.VISIBLE);
-                    findViewById(R.id.enterLayout).setVisibility(View.GONE);
-                    startChronometer(v);
+                    if(etExeName.getText().toString().isEmpty()){
+                        Toast.makeText(Exercise.this, "Please Enter exercise name!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        name = etExeName.getText().toString().trim();
+                        startChronometer(v);
+                        startTimer.setText("Stop\nTimer");
+                    }
                 }
             }
         });
 
-        ListView lv = findViewById(R.id.user_list);
 
-        records = db.getAll();
 
-        adapter = new ExerciseRecordAdapter(this, records);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        exe_continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Exercise.this, ExerciseRecordDetail.class);
-                intent.putExtra("record", records.get(position));
-                startActivityForResult(intent, 0);
+            public void onClick(View v) {
+                startChronometer(v);
+                reset_exe_continue_container.setVisibility(View.GONE);
+                startTimer.setText("Stop\nTimer");
             }
         });
-        loadDataFromDatabase();
-        registerForContextMenu(lv);
+
+        reset_exe_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetChronometer(v);
+                startChronometer(v);
+                reset_exe_continue_container.setVisibility(View.GONE);
+                startTimer.setText("Stop\nTimer");
+
+            }
+        });
+
+        event_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Exercise.this,ExerciseListActivity.class));
+            }
+        });
+//        ListView lv = findViewById(R.id.user_list);
+//
+//        records = db.getAll();
+//
+//        adapter = new ExerciseRecordAdapter(this, records);
+//        lv.setAdapter(adapter);
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(Exercise.this, ExerciseRecordDetail.class);
+//                intent.putExtra("record", records.get(position));
+//                startActivityForResult(intent, 0);
+//            }
+//        });
+//        //loadDataFromDatabase();
+//        registerForContextMenu(lv);
     }
 
     public void startName(View v){
@@ -105,6 +154,7 @@ public class Exercise extends AppCompatActivity {
     }
 
     public void resetChronometer(View v) {
+        reset_exe_continue_container.setVisibility(View.GONE);
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
     }
@@ -113,29 +163,33 @@ public class Exercise extends AppCompatActivity {
         ExerciseDatabase db = new ExerciseDatabase(this);
 
         if (running) {
+            reset_exe_continue_container.setVisibility(View.GONE);
             endTime = Calendar.getInstance().getTime();
+            chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.stop();
+            pauseOffset = 0;
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String start = formatter.format(startTime);
             String end = formatter.format(endTime);
             db.addmodel(new ExerciseModel(name,start, chronometer.getText().toString(), end));
-            loadDataFromDatabase();
+            //loadDataFromDatabase();
             running = false;
+            resetChronometer(v);
         }
     }
 
-    public void loadDataFromDatabase() {
-        records.clear();
-        records.addAll(db.getAll());
-        Collections.reverse(records);
-        adapter.notifyDataSetChanged();
-    }
+//    public void loadDataFromDatabase() {
+//        records.clear();
+//        records.addAll(db.getAll());
+//        Collections.reverse(records);
+//        adapter.notifyDataSetChanged();
+//    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loadDataFromDatabase();
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        loadDataFromDatabase();
+//    }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,

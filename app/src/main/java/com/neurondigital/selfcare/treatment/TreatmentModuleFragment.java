@@ -48,7 +48,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.neurondigital.helpers.Utility;
-import com.neurondigital.selfcare.BuildConfig;
 import com.neurondigital.selfcare.Configurations;
 import com.neurondigital.selfcare.CongestionTherapy;
 import com.neurondigital.selfcare.Measurements;
@@ -242,6 +241,14 @@ public class TreatmentModuleFragment extends Fragment {
 //        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
         RelativeLayout sendDataEmail = view.findViewById(R.id.send_data_email);
 
+        RelativeLayout Exercise = view.findViewById(R.id.Exercise);
+        Exercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoExe = new Intent(getActivity(), com.neurondigital.selfcare.treatment.exercise.Exercise.class);
+                TreatmentModuleFragment.this.startActivityForResult(gotoExe,3);
+            }
+        });
 
         MLD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +285,7 @@ public class TreatmentModuleFragment extends Fragment {
 
         this.displayLatestMLD();
         this.displayLatestSC();
-
+        this.displayLatestEX();
 
 
 //        LLIS.setOnClickListener(new View.OnClickListener() {
@@ -408,6 +415,23 @@ public class TreatmentModuleFragment extends Fragment {
         return view;
     }
 
+    private void displayLatestEX() {
+        ExerciseModel latestExe = exerciseDB.getLatest();
+        if(latestExe == null) {
+            view.findViewById(R.id.latest_ex_detail_container).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.last_ex_detailed_duration).setVisibility(View.INVISIBLE);
+        } else {
+            try {
+                ((TextView)view.findViewById(R.id.last_ex_detailed_duration)).setText(Utility.getReadableDuration(latestExe.getDuration()));
+                Date latestStartTime = ExerciseModel.DATE_FORMATTER.parse(latestExe.getStartTime());
+                ((TextView)view.findViewById(R.id.last_ct_note)).setText(latestExe.getName());
+                ((TextView)view.findViewById(R.id.ex_days_ago)).setText(Utility.getDaysAgoStr(latestStartTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void displayLatestSC(){
         HashMap<String, String> latestSC = skinCareDB.getLatest();
         if(latestSC == null) {
@@ -529,6 +553,7 @@ public class TreatmentModuleFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         this.displayLatestSC();
         this.displayLatestMLD();
+        this.displayLatestEX();
     }
 
     @Override

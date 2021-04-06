@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".treatment.exercise.Exercise"
+        android:background="@color/colorWhiteBackground">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mld_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/md_orange_A700"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:title="Add a Exercise activity"
+            app:titleTextColor="@color/colorWhiteBackground" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/firstLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/enterNote"
+                    android:layout_width="327dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:hint="Enter name of exercise..."
+                    android:gravity="top"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_marginBottom="16dp"
+                />
+
+            <Button
+                android:id="@+id/startTimer"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_save_button_orange"
+                android:text="Start\nTimer"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhiteBackground" />
+
+            <RelativeLayout
+                android:id="@+id/reset_exe_continue_container"
+                android:layout_width="170dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_orange_A700"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/reset_exe_btn"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coninue_str"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_orange_A700"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/exe_continue_btn"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/event_list_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/event_list"
+        app:srcCompat="@drawable/ic_event_note_24dp"
+        app:backgroundTint="@color/md_orange_A700" />
+</FrameLayout>
+
+
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/mld_toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/appcolor"-->
+    <!--        android:minHeight="?attr/actionBarSize"-->
+    <!--        android:theme="?attr/actionBarTheme"-->
+    <!--        app:title="@string/mld_massage"-->
+    <!--        app:titleTextColor="@color/brown" />-->
+
+    <!--    <Chronometer-->
+    <!--        android:id="@+id/chronometer"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/mld_toolbar"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:textSize="30sp" />-->
+    <!--    &lt;!&ndash; Toolbar is the actual app bar with text and the action items &ndash;&gt;-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linear"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:layout_below="@id/chronometer"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:orientation="horizontal"-->
+
+
+    <!--        >-->
+
+
+    <!--        <Button-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/custom_button"-->
+    <!--            android:onClick="startChronometer"-->
+    <!--            android:text="Start" />-->
+
+    <!--        <Button-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/custom_button"-->
+    <!--            android:onClick="pauseChronometer"-->
+    <!--            android:text="Pause" />-->
+
+    <!--        <Button-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/custom_button"-->
+    <!--            android:onClick="resetChronometer"-->
+    <!--            android:text="Reset" />-->
+
+    <!--        <Button-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/custom_button"-->
+    <!--            android:onClick="StopChronometer"-->
+    <!--            android:text="Stop" />-->
+
+    <!--        &lt;!&ndash;        <Button&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:id="@+id/btnHelp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:onClick="help"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:text="Help"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:background="@drawable/custom_button"/>&ndash;&gt;-->
+
+
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/help_vid_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/linear"-->
+    <!--        android:layout_marginBottom="5dp"-->
+    <!--        android:gravity="center">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/help_vid_text"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:height="40dp"-->
+    <!--            android:gravity="center"-->
+    <!--            android:onClick="help"-->
+    <!--            android:text="@string/show_help_video" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearfortimesave"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:layout_below="@id/help_vid_layout"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/savetime"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_below="@id/linear"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:inputType="textPersonName"-->
+    <!--            android:text="Date"-->
+    <!--            android:textColor="@color/brown"-->
+    <!--            android:textSize="15dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/DateTime"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_below="@id/savetime"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:inputType="textPersonName"-->
+    <!--            android:text="Duration"-->
+    <!--            android:textColor="@color/brown"-->
+    <!--            android:textSize="15dp" />-->
+
+    <!--    </LinearLayout>-->
+
+
+    <!--    <ListView-->
+    <!--        android:layout_below="@id/linearfortimesave"-->
+    <!--        android:id="@+id/user_list"-->
+    <!--        android:longClickable="true"-->
+    <!--        android:layout_width="fill_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:dividerHeight="1dp" />-->
+
+    <!--    <Spinner-->
+    <!--        android:id="@+id/planets_spinner"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->

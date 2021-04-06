@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -22,6 +21,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
         tools:targetApi="m">
+        <activity android:name=".treatment.exercise.ExerciseListActivity"></activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.neurondigital.selfcare"
@@ -35,7 +36,7 @@
         <activity
             android:name=".graph.eventlist.EventListActivity"
             android:label="@string/title_activity_event_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".treatment.compressiontherapy.CTRecordListActivity" />
         <activity android:name=".treatment.compressiontherapy.CTRecordDetailsActivity" />
 
@@ -65,7 +66,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title" />
-        <activity android:name=".treatment.manuallymphdrainagemassage.MLDList"
+        <activity
+            android:name=".treatment.manuallymphdrainagemassage.MLDList"
             android:label="MLD List" />
         <activity android:name=".MainActivity" />
         <activity
