@@ -6,7 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CTDatabase extends SQLiteOpenHelper {
@@ -89,5 +93,16 @@ public class CTDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-
+    public CTRecord getLatest() {
+        List<CTRecord> list = getAllCTRecords();
+        Collections.sort(list, (m1, m2) -> {
+            try {
+                return CTRecordDetailsActivity.DATE_FORMATTER.parse(m2.getStartTime()).compareTo(CTRecordDetailsActivity.DATE_FORMATTER.parse(m1.getStartTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        });
+        return list.isEmpty() ? null : list.get(0);
+    }
 }

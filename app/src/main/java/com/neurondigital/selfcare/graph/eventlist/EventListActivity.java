@@ -140,7 +140,7 @@ public class EventListActivity extends AppCompatActivity {
                     dayMap.put(startDateStr, new ArrayList<>());
                 Intent intent = new Intent(EventListActivity.this, ExerciseRecordDetail.class);
                 intent.putExtra("record", ct);
-                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.therapy),
+                dayMap.get(startDateStr).add(new ItemEvent(getResources().getDrawable(R.drawable.clothe),
                         "Compression Garment worn: " + Utility.getReadableDuration(ct.getDuration()),
                         ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(ct.getStartTime())) + " - " + ItemEvent.TIME_SIMPLE_DATE_FORMAT.format(PneumaticModel.DATE_FORMATTER.parse(ct.getEndTime())),
                         intent));

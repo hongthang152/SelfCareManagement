@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#DDC3A7"
+    android:background="@color/blue"
     tools:context=".treatment.skincare.Day">
 
     <Button
         style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/garment1"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
+        android:background="@color/md_light_blue_50"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:text="Elastic Compression Garment"
@@ -26,8 +27,10 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/garment2"
         android:layout_width="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
+        android:background="@color/md_light_blue_50"
         android:textSize="30dp"
+        android:layout_marginTop="15dp"
         android:layout_height="200dp"
         android:text="Inelastic Velcro garment"
         android:layout_marginLeft="20dp"

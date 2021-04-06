@@ -63,6 +63,7 @@ import com.neurondigital.selfcare.service.AuthenticationAPI;
 import com.neurondigital.selfcare.service.SyncAPI;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordDetailsActivity;
 import com.neurondigital.selfcare.treatment.exercise.Exercise;
 import com.neurondigital.selfcare.treatment.exercise.ExerciseDatabase;
 import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
@@ -250,6 +251,15 @@ public class TreatmentModuleFragment extends Fragment {
             }
         });
 
+        RelativeLayout ctt = view.findViewById(R.id.ct);
+        ctt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoCT = new Intent(getActivity(), CongestionTherapy.class);
+                TreatmentModuleFragment.this.startActivityForResult(gotoCT,0);
+            }
+        });
+
         MLD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View btn) {
@@ -286,7 +296,7 @@ public class TreatmentModuleFragment extends Fragment {
         this.displayLatestMLD();
         this.displayLatestSC();
         this.displayLatestEX();
-
+        this.displayLatestCT();
 
 //        LLIS.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -554,6 +564,24 @@ public class TreatmentModuleFragment extends Fragment {
         this.displayLatestSC();
         this.displayLatestMLD();
         this.displayLatestEX();
+        this.displayLatestCT();
+    }
+
+    private void displayLatestCT() {
+        CTRecord latestCT = compressionTherapyDB.getLatest();
+        if(latestCT == null) {
+            view.findViewById(R.id.latest_ct_detail_container).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.last_ct_detailed_duration).setVisibility(View.INVISIBLE);
+        } else {
+            try {
+                ((TextView)view.findViewById(R.id.last_ct_detailed_duration)).setText(Utility.getReadableDuration(latestCT.getDuration()));
+                Date latestStartTime = CTRecordDetailsActivity.DATE_FORMATTER.parse(latestCT.getStartTime());
+                ((TextView)view.findViewById(R.id.last_ctt_note)).setText(latestCT.getName());
+                ((TextView)view.findViewById(R.id.ct_days_ago)).setText(Utility.getDaysAgoStr(latestStartTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
