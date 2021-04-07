@@ -1,5 +1,8 @@
 package com.neurondigital.selfcare.treatment.exercise;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -30,6 +33,20 @@ public class ExerciseModel implements Serializable {
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
+    }
+
+    public JSONObject toJSONObject() {
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("startTime", getStartTime());
+            jsonObject.put("endTime", getEndTime());
+            jsonObject.put("duration", getDuration());
+            jsonObject.put("name", getName());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+
     }
 
     public int getID() {

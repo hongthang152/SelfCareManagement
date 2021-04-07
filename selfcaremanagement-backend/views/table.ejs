@@ -39,5 +39,64 @@
             <% } %>
         </table>
 
+    <p>List of Pneumatic Compression Pump sessions</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+        </tr>
+        <% for(var rec of pcpRecords) { %>
+            <tr>
+                <td><%= rec._id %></td>
+                <td><%= rec.startTime %></td>
+                <td><%= rec.endTime %></td>
+                <td><%= rec.duration %></td>
+            </tr>
+        <% } %>
+    </table>
+    <p>List of Exercise sessions</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+            <th>Name</th>
+        </tr>
+        <% for(var rec of exeRecords) { %>
+            <tr>
+                <td><%= rec._id %></td>
+                <td><%= rec.startTime %></td>
+                <td><%= rec.endTime %></td>
+                <td><%= rec.duration %></td>
+                <td><%= rec.name %></td>
+            </tr>
+        <% } %>
+    </table>
+
+    <p>List of Compression Therapy sessions</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+            <th>Name</th>
+            <th>Day or Night time</th>
+        </tr>
+        <% for(var rec of ctRecords) { %>
+            <tr>
+                <td><%= rec._id %></td>
+                <td><%= rec.startTime %></td>
+                <td><%= rec.endTime %></td>
+                <td><%= rec.duration %></td>
+                <td><%= rec.name %></td>
+                <td><%= rec.daynightTime %></td>
+            </tr>
+        <% } %>
+    </table>
+
 </body>
 </html>
