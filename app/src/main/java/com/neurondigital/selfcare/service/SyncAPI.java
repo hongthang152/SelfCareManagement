@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import com.neurondigital.selfcare.Configurations;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
+import com.neurondigital.selfcare.treatment.pneumatic.PneumaticModel;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareDatabase;
 import com.neurondigital.selfcare.treatment.skincare.SkinCareModel;
 
@@ -31,12 +33,14 @@ public class SyncAPI extends AsyncTask<String, String, JSONObject> {
     Context context;
     MLDDatabase mldDB;
     SkinCareDatabase scDB;
+    PneumaticDatabase pneumaticDB;
     AsyncResponse<JSONObject> response;
 
     public SyncAPI(Context ctx, AsyncResponse<JSONObject> asyncResponse) {
         this.context = ctx;
         this.mldDB = new MLDDatabase(this.context);
         this.scDB = new SkinCareDatabase(this.context);
+        this.pneumaticDB = new PneumaticDatabase((this.context));
         this.response = asyncResponse;
     }
 
@@ -65,6 +69,12 @@ public class SyncAPI extends AsyncTask<String, String, JSONObject> {
             JSONArray scJSONArray = new JSONArray();
             for(SkinCareModel scModel : scList) {
                 scJSONArray.put(scModel.toJSONObject());
+            }
+
+            List<PneumaticModel> pneumaticModelList = pneumaticDB.getAll();
+            JSONArray pnJSONArray = new JSONArray();
+            for(PneumaticModel pnModel : pneumaticModelList) {
+                pnJSONArray.put(pnModel.toJSONObject());
             }
 
             jsonObject.put("mld", mldJSONArray);

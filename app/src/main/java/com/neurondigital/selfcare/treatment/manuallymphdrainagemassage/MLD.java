@@ -205,8 +205,6 @@ public class MLD extends AppCompatActivity {
     }
 
     private void saveTimerListener(View v) {
-            ProgressDialog pd = ProgressDialog.show(this, "Loading", "Saving session...");
-            endTime = Calendar.getInstance().getTime();
             if(endTime.compareTo(startTime) < 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.error)
@@ -215,11 +213,13 @@ public class MLD extends AppCompatActivity {
                 builder.show();
                 return;
             }
+            ProgressDialog pd = ProgressDialog.show(this, "Loading", "Saving session...");
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String start = formatter.format(startTime);
             String end = formatter.format(endTime);
             db.addmodel(new MLDModel(start, chronometer.getText().toString(), end));
             pd.dismiss();
+            Toast.makeText(getBaseContext(), "Massage session saved", Toast.LENGTH_SHORT);
             startActivity(new Intent(getBaseContext(), MLDList.class));
     }
 

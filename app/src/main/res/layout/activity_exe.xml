@@ -1,129 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".treatment.manuallymphdrainagemassage.MLD"
-    android:background="#ffce99">
+    android:layout_height="match_parent">
 
-    <Chronometer
-        android:id="@+id/chronometer"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".treatment.exercise.Exercise"
+        android:background="@color/colorWhiteBackground">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mld_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/appcolor"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:title="Add an exercise activity"
+            app:titleTextColor="@color/colorWhiteBackground" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:id="@+id/start_time_cap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/start_time"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/new_record_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:ems="10"
+                    android:gravity="end"
+                    android:text="@string/dummy_start_time"
+                    android:textSize="18sp"
+                    android:paddingBottom="1dp"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:alpha="0.2"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+
+                <TextView
+                    android:id="@+id/end_time_cap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/end_time"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/new_record_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:gravity="end"
+                    android:text="@string/dummy_end_time"
+                    android:textSize="18sp"
+                    android:paddingBottom="1dp"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:alpha="0.2"/>
+
+            <RelativeLayout
+                android:id="@+id/firstLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/enterNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:hint="Enter name of exercise..."
+                    android:gravity="top"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_marginBottom="16dp"
+                />
+
+            <Button
+                android:id="@+id/timer_btn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_save_button"
+                android:text="Start\nTimer"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhiteBackground" />
+
+            <RelativeLayout
+                android:id="@+id/reset_continue_container"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:textSize="18sp"
+                    android:textColor="@color/appcolor"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/reset_btn"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coninue_str"
+                    android:textSize="18sp"
+                    android:textColor="@color/appcolor"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/continue_btn"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/event_list_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp"
-        />
-    <!-- Toolbar is the actual app bar with text and the action items -->
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/event_list"
+        app:srcCompat="@drawable/ic_event_note_24dp"
+        app:backgroundTint="@color/appcolor" />
+</FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/chronometer"
-        android:orientation="horizontal"
-
-
-        >
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="startName"
-            android:text="Start"
-            android:background="@drawable/custom_button"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="pauseChronometer"
-            android:text="Pause"
-            android:background="@drawable/custom_button"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="resetChronometer"
-            android:text="Reset"
-            android:background="@drawable/custom_button"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="StopChronometer"
-            android:text="Stop"
-            android:background="@drawable/custom_button"/>
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_below="@id/linear"
-        android:id="@+id/enterLayout"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:text="Please Enter Exercise Name:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/etExeName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnOk"
-            android:background="@drawable/custom_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearfortimesave"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/enterLayout"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/savetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="15dp"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:layout_below="@id/linear"
-            android:inputType="textPersonName"
-            android:text="DATE "
-            />
-        <TextView
-            android:id="@+id/DateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:textColor="@color/brown"
-            android:layout_below="@id/savetime"
-            android:inputType="textPersonName"
-            android:text="Duration"
-            />
-
-    </LinearLayout>
-    <ListView
-        android:layout_below="@id/linearfortimesave"
-        android:id="@+id/user_list"
-        android:longClickable="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="1dp" />
-</RelativeLayout>

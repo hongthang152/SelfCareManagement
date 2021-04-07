@@ -1,5 +1,8 @@
 package com.neurondigital.selfcare.treatment.pneumatic;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -28,6 +31,19 @@ public class PneumaticModel implements Serializable {
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
+    }
+
+    public JSONObject toJSONObject() {
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("startTime", getStartTime());
+            jsonObject.put("endTime", getEndTime());
+            jsonObject.put("duration", getDuration());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+
     }
 
 

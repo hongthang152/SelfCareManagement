@@ -1,27 +1,12 @@
 package com.neurondigital.selfcare.treatment;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.icu.util.ULocale;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,40 +16,29 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.neurondigital.helpers.Utility;
 import com.neurondigital.selfcare.Configurations;
 import com.neurondigital.selfcare.CongestionTherapy;
-import com.neurondigital.selfcare.Measurements;
-import com.neurondigital.selfcare.PolicyActivity;
-import com.neurondigital.selfcare.Preference;
-import com.neurondigital.selfcare.ProfileActivity;
 import com.neurondigital.selfcare.R;
-import com.neurondigital.selfcare.SettingsActivity;
-import com.neurondigital.selfcare.TermsActivity;
 import com.neurondigital.selfcare.User;
-import com.neurondigital.selfcare.infoactivity;
 import com.neurondigital.selfcare.service.AuthenticationAPI;
 import com.neurondigital.selfcare.service.SyncAPI;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordDetailsActivity;
-import com.neurondigital.selfcare.treatment.exercise.Exercise;
 import com.neurondigital.selfcare.treatment.exercise.ExerciseDatabase;
 import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
@@ -234,12 +208,10 @@ public class TreatmentModuleFragment extends Fragment {
         RelativeLayout MLD = view.findViewById(R.id.MLD);
         RelativeLayout sync = view.findViewById(R.id.sync_btn);
         Button LLIS = view.findViewById(R.id.LLIS);
-        Button CT = view.findViewById(R.id.CT);
         RelativeLayout skincare = view.findViewById(R.id.SC);
         Button Exe = view.findViewById(R.id.Exe);
         Button measure = view.findViewById(R.id.measure);
         RelativeLayout PC = view.findViewById(R.id.PC);
-//        Button pneumaticbtn = view.findViewById(R.id.pneumatic);
         RelativeLayout sendDataEmail = view.findViewById(R.id.send_data_email);
 
         RelativeLayout Exercise = view.findViewById(R.id.Exercise);
@@ -247,7 +219,7 @@ public class TreatmentModuleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent gotoExe = new Intent(getActivity(), com.neurondigital.selfcare.treatment.exercise.Exercise.class);
-                TreatmentModuleFragment.this.startActivityForResult(gotoExe,3);
+                TreatmentModuleFragment.this.startActivityForResult(gotoExe,0);
             }
         });
 
@@ -272,7 +244,7 @@ public class TreatmentModuleFragment extends Fragment {
             @Override
             public void onClick(View btn) {
                 Intent goToPC = new Intent(getActivity(), Pneumatic.class);
-                TreatmentModuleFragment.this.startActivity(goToPC);
+                TreatmentModuleFragment.this.startActivityForResult(goToPC, 0);
             }
         });
 
@@ -297,6 +269,7 @@ public class TreatmentModuleFragment extends Fragment {
         this.displayLatestSC();
         this.displayLatestEX();
         this.displayLatestCT();
+        this.displayLatestPCP();
 
 //        LLIS.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -565,6 +538,29 @@ public class TreatmentModuleFragment extends Fragment {
         this.displayLatestMLD();
         this.displayLatestEX();
         this.displayLatestCT();
+        this.displayLatestPCP();
+    }
+
+    private void displayLatestPCP() {
+        PneumaticModel latestPCP = pneumaticDB.getLatest();
+        if(latestPCP == null) {
+            view.findViewById(R.id.latest_pc_detail_container).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.last_pc_detailed_duration).setVisibility(View.INVISIBLE);
+        } else {
+            try {
+//                lastMassageDuration.setText(Utility.getReadableDuration(latestMLD.getDuration()));
+//                Date latestStartTime = MLDModel.DATE_FORMATTER.parse(latestMLD.getStartTime());
+//                massageDaysAgoTextView.setText(Utility.getDaysAgoStr(latestStartTime));
+//                lastMassageDetailedDurationTextView.setText(latestMLD.getDuration());
+
+                ((TextView)view.findViewById(R.id.last_pc_duration)).setText(Utility.getReadableDuration(latestPCP.getDuration()));
+                Date latestStartTime = CTRecordDetailsActivity.DATE_FORMATTER.parse(latestPCP.getStartTime());
+                ((TextView)view.findViewById(R.id.pc_days_ago)).setText(Utility.getDaysAgoStr(latestStartTime));
+                ((TextView)view.findViewById(R.id.last_pc_detailed_duration)).setText(latestPCP.getDuration());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void displayLatestCT() {

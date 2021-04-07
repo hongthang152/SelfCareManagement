@@ -7,7 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordDetailsActivity;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PneumaticDatabase extends SQLiteOpenHelper {
@@ -114,4 +119,17 @@ public class PneumaticDatabase extends SQLiteOpenHelper {
       db.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(mld.getID())});
       db.close(); // Closing database connection
   }
+
+    public PneumaticModel getLatest() {
+        List<PneumaticModel> list = getAll();
+        Collections.sort(list, (m1, m2) -> {
+            try {
+                return CTRecordDetailsActivity.DATE_FORMATTER.parse(m2.getStartTime()).compareTo(CTRecordDetailsActivity.DATE_FORMATTER.parse(m1.getStartTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        });
+        return list.isEmpty() ? null : list.get(0);
+    }
 }
