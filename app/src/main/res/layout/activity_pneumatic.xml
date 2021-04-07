@@ -10,14 +10,15 @@
         android:orientation="vertical"
         tools:context="PC"
         android:background="@color/colorWhiteBackground">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/pc_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/mustardYellow"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:background="@color/appcolor"
             android:theme="@style/ToolbarColoredBackArrow"
-            app:title="Add a massage session"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Add a PCP session"
             app:titleTextColor="@color/colorWhiteBackground" />
 
         <LinearLayout
@@ -121,37 +122,40 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_pc_button"
+                android:background="@drawable/rounded_save_button"
                 android:text="@string/start_timer"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhiteBackground" />
+                android:textColor="@color/colorWhiteBackground"
+                android:textStyle="bold" />
             <RelativeLayout
                 android:id="@+id/reset_PC_continue_container"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
+
                 <TextView
+                    android:id="@+id/reset_PC_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reset"
-                    android:textSize="18sp"
-                    android:textColor="@color/mustardYellow"
-                    android:textStyle="bold"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
-                    android:id="@+id/reset_PC_btn"/>
+                    android:text="@string/reset"
+                    android:textColor="@color/appcolor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/PC_continue_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/coninue_str"
-                    android:textSize="18sp"
-                    android:textColor="@color/mustardYellow"
-                    android:textStyle="bold"
                     android:layout_alignParentRight="true"
-                    android:id="@+id/PC_continue_btn"/>
+                    android:text="@string/coninue_str"
+                    android:textColor="@color/appcolor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/event_list_btn"
         android:layout_width="wrap_content"
@@ -160,7 +164,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/event_list"
         android:src="@drawable/ic_event_note_24dp"
-        app:backgroundTint="@color/mustardYellow" />
+        app:backgroundTint="@color/appcolor" />
 </FrameLayout>
 
 <!--

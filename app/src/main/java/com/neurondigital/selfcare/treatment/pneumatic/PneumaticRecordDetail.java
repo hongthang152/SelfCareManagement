@@ -85,7 +85,7 @@ public class PneumaticRecordDetail extends AppCompatActivity {
                     .defaultDate(start)
                     .minutesStep(1)
                     .backgroundColor(getResources().getColor(R.color.colorWhite))
-                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .titleTextColor(getResources().getColor(R.color.colorWhite))
                     .listener((Date date) -> {
                         start = date;
@@ -99,7 +99,7 @@ public class PneumaticRecordDetail extends AppCompatActivity {
                     .title(getResources().getString(R.string.select_date_time))
                     .backgroundColor(getResources().getColor(R.color.colorWhite))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .titleTextColor(getResources().getColor(R.color.colorWhite))
                     .listener((Date date) -> {
                         end = date;

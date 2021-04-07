@@ -5,7 +5,10 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -34,8 +37,11 @@ public class ExerciseRecordDetail extends AppCompatActivity {
     TextView recordDetailEndDateCap;
     TextView recordDetailDurationCap;
     TextView recordDetailDuration;
+    TextView exeNote;
+    RelativeLayout noteContainer;
 
     Button recordDetailSaveBtn;
+    Button editButton;
 
     ExerciseModel record;
     ExerciseDatabase db;
@@ -43,6 +49,7 @@ public class ExerciseRecordDetail extends AppCompatActivity {
     Date start;
     Date end;
     String duration;
+    EditText newNote;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,6 +63,11 @@ public class ExerciseRecordDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         record = (ExerciseModel) getIntent().getSerializableExtra("record");
+
+        noteContainer = findViewById(R.id.noteContainer);
+        noteContainer.setVisibility(View.VISIBLE);
+
+        exeNote = findViewById(R.id.exe_note);
 
         recordDetailStartDate = findViewById(R.id.record_detail_start_date);
         recordDetailEndDate = findViewById(R.id.record_detail_end_date);
@@ -71,13 +83,16 @@ public class ExerciseRecordDetail extends AppCompatActivity {
         recordDetailEndDateCap.setTypeface(recordDetailEndDateCap.getTypeface(), Typeface.BOLD);
         recordDetailDurationCap.setTypeface(recordDetailEndDateCap.getTypeface(), Typeface.BOLD);
 
+        editButton = findViewById(R.id.editButton);
+        newNote = findViewById(R.id.new_note);
+
         try {
             start = MLDModel.DATE_FORMATTER.parse(record.getStartTime());
             end = MLDModel.DATE_FORMATTER.parse(record.getEndTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        duration = record.getDuration();
+        exeNote.setText(record.getName());
 
         update();
         recordDetailStartDate.setOnClickListener(e -> {
@@ -108,9 +123,10 @@ public class ExerciseRecordDetail extends AppCompatActivity {
                     }).display();
         });
 
-
-
-//        recordDu
+        newNote.setVisibility(View.INVISIBLE);
+        editButton.setOnClickListener(e -> {
+            newNote.setVisibility(View.VISIBLE);
+        });
 
         recordDetailSaveBtn.setOnClickListener(e -> {
             if(end.compareTo(start) < 0) {
@@ -121,6 +137,13 @@ public class ExerciseRecordDetail extends AppCompatActivity {
                 builder.show();
                 return;
             }
+
+            if(!newNote.getText().toString().isEmpty()){
+                String str = newNote.getText().toString();
+                exeNote.setText(str);
+                record.setName(str);
+            }
+
             record.setStartTime(MLDModel.DATE_FORMATTER.format(start));
             record.setEndTime(MLDModel.DATE_FORMATTER.format(end));
             record.setDuration(Utility.diff(start, end));

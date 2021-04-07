@@ -27,7 +27,7 @@ public class ExerciseListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_list);
-        ListView lv = findViewById(R.id.user_list);
+        ListView lv = findViewById(R.id.record_list);
 
         records = db.getAll();
 

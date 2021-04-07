@@ -19,6 +19,7 @@ import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -167,7 +168,7 @@ public class Pneumatic extends AppCompatActivity {
                     .defaultDate(startTime == null ? new Date() : startTime)
                     .title(getResources().getString(R.string.select_date_time))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         startTime = date;
                         newRecordStartTextView.setText(DATE_FORMATTER.format(startTime));
@@ -180,7 +181,7 @@ public class Pneumatic extends AppCompatActivity {
                     .defaultDate(endTime == null ? new Date() : endTime)
                     .title(getResources().getString(R.string.select_date_time))
                     .minutesStep(1)
-                    .mainColor(getResources().getColor(R.color.mustardYellow))
+                    .mainColor(getResources().getColor(R.color.appcolor))
                     .listener((Date date) -> {
                         endTime = date;
                         newRecordEndTextView.setText(DATE_FORMATTER.format(endTime));
@@ -232,17 +233,23 @@ public class Pneumatic extends AppCompatActivity {
     }
 
     private void saveTimerListener(View v) {
+        if(endTime.compareTo(startTime) < 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.error)
+                    .setMessage(R.string.start_date_must_be_before_end_date)
+                    .setPositiveButton(R.string.OK, null);
+            builder.show();
+            return;
+        }
         ProgressDialog pd = ProgressDialog.show(this, "Loading", "Saving session...");
-        endTime = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String start = formatter.format(startTime);
         String end = formatter.format(endTime);
         db.addModel(new PneumaticModel(start, chronometer.getText().toString(), end));
         pd.dismiss();
+        Toast.makeText(getBaseContext(), "PCP session saved", Toast.LENGTH_SHORT);
         startActivity(new Intent(getBaseContext(), PneumaticList.class));
     }
-
-
 
 
     public void pauseChronometer() {
