@@ -4,6 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.neurondigital.selfcare.Configurations;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTDatabase;
+import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecord;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseDatabase;
+import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDDatabase;
 import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 import com.neurondigital.selfcare.treatment.pneumatic.PneumaticDatabase;
@@ -34,13 +38,17 @@ public class SyncAPI extends AsyncTask<String, String, JSONObject> {
     MLDDatabase mldDB;
     SkinCareDatabase scDB;
     PneumaticDatabase pneumaticDB;
+    ExerciseDatabase exerciseDB;
+    CTDatabase ctDB;
     AsyncResponse<JSONObject> response;
 
     public SyncAPI(Context ctx, AsyncResponse<JSONObject> asyncResponse) {
         this.context = ctx;
         this.mldDB = new MLDDatabase(this.context);
         this.scDB = new SkinCareDatabase(this.context);
-        this.pneumaticDB = new PneumaticDatabase((this.context));
+        this.pneumaticDB = new PneumaticDatabase(this.context);
+        this.exerciseDB = new ExerciseDatabase(this.context);
+        this.ctDB = new CTDatabase(this.context);
         this.response = asyncResponse;
     }
 
@@ -77,8 +85,23 @@ public class SyncAPI extends AsyncTask<String, String, JSONObject> {
                 pnJSONArray.put(pnModel.toJSONObject());
             }
 
+            List<ExerciseModel> exerciseModelList = exerciseDB.getAll();
+            JSONArray exeJSONArray = new JSONArray();
+            for(ExerciseModel exeModel : exerciseModelList) {
+                exeJSONArray.put(exeModel.toJSONObject());
+            }
+
+            List<CTRecord> ctList = ctDB.getAllCTRecords();
+            JSONArray ctJSONArray = new JSONArray();
+            for(CTRecord ctModel : ctList) {
+                ctJSONArray.put(ctModel.toJSONObject());
+            }
+
             jsonObject.put("mld", mldJSONArray);
             jsonObject.put("sc", scJSONArray);
+            jsonObject.put("pcp", pnJSONArray);
+            jsonObject.put("exe", exeJSONArray);
+            jsonObject.put("ct", ctJSONArray);
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
             wr.writeBytes(jsonObject.toString());
