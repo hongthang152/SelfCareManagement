@@ -1,5 +1,8 @@
 package com.neurondigital.selfcare.treatment.compressiontherapy;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class CTRecord implements Serializable {
@@ -75,7 +78,20 @@ public class CTRecord implements Serializable {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) { this.endTime = endTime; }
+
+    public JSONObject toJSONObject() {
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("startTime", getStartTime());
+            jsonObject.put("endTime", getEndTime());
+            jsonObject.put("daynightTime", getDaynightTime());
+            jsonObject.put("name", getName());
+            jsonObject.put("duration", getDuration());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+
     }
 }
