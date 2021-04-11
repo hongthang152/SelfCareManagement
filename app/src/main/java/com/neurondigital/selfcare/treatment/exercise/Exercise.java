@@ -20,13 +20,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.neurondigital.selfcare.R;
-import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLD;
-import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDList;
-import com.neurondigital.selfcare.treatment.manuallymphdrainagemassage.MLDModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,6 +51,7 @@ public class Exercise extends AppCompatActivity {
     FloatingActionButton event_list_btn;
     TextView newRecordStartTextView;
     TextView newRecordEndTextView;
+    Toolbar toolbar;
 
     RelativeLayout resetContinueContainer;
 
@@ -67,6 +66,12 @@ public class Exercise extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
+
+        toolbar = findViewById(R.id.exe_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         newRecordStartTextView = findViewById(R.id.new_record_start_date);
         newRecordEndTextView = findViewById(R.id.new_record_end_date);
@@ -218,7 +223,7 @@ public class Exercise extends AppCompatActivity {
         String end = formatter.format(endTime);
         db.addmodel(new ExerciseModel(etExeName.getText().toString(), start,chronometer.getText().toString(), end));
         pd.dismiss();
-        Toast.makeText(getBaseContext(), "Exercise session saved", Toast.LENGTH_SHORT);
+        Toast.makeText(getBaseContext(), "Exercise session saved", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getBaseContext(), ExerciseListActivity.class));
     }
 
@@ -302,6 +307,11 @@ public class Exercise extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 }
 

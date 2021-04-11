@@ -2,6 +2,7 @@ package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.neurondigital.helpers.Utility;
@@ -30,6 +32,7 @@ public class CTRecordDetailsActivity extends AppCompatActivity implements View.O
     private TextView tv_end_date;
     private TextView tv_detail_duration;
     private Button recordDetailSaveBtn;
+    private Toolbar toolbar;
 
     private CTDatabase db;
     private CTRecord ctRecord;
@@ -55,6 +58,12 @@ public class CTRecordDetailsActivity extends AppCompatActivity implements View.O
         tv_end_date = findViewById(R.id.tv_end_date);
         tv_detail_duration = findViewById(R.id.tv_duration);
         recordDetailSaveBtn = findViewById(R.id.btn_save);
+        toolbar = findViewById(R.id.ct_record_detail_bar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //if we want to update record then this condition will be true
         if(getIntent().hasExtra("updateRecord")) {
@@ -107,9 +116,7 @@ public class CTRecordDetailsActivity extends AppCompatActivity implements View.O
                         .title(getResources().getString(R.string.select_date_time))
                         .defaultDate(start)
                         .minutesStep(1)
-                        .backgroundColor(getResources().getColor(R.color.appcolor))
-                        .mainColor(getResources().getColor(R.color.brown))
-                        .titleTextColor(getResources().getColor(R.color.appcolor))
+                        .mainColor(getResources().getColor(R.color.appcolor))
                         .listener((Date date) -> {
                             start = date;
                             setupScreen();
@@ -120,10 +127,8 @@ public class CTRecordDetailsActivity extends AppCompatActivity implements View.O
                 new SingleDateAndTimePickerDialog.Builder(this)
                         .defaultDate(end)
                         .title(getResources().getString(R.string.select_date_time))
-                        .backgroundColor(getResources().getColor(R.color.appcolor))
                         .minutesStep(1)
-                        .mainColor(getResources().getColor(R.color.brown))
-                        .titleTextColor(getResources().getColor(R.color.appcolor))
+                        .mainColor(getResources().getColor(R.color.appcolor))
                         .listener((Date date) -> {
                             end = date;
                             setupScreen();
@@ -151,11 +156,17 @@ public class CTRecordDetailsActivity extends AppCompatActivity implements View.O
                 //otherwise update the record
                 else
                     db.updateCTRecord(ctRecord);
-
+                Toast.makeText(getBaseContext(), "CT session saved", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CTRecordDetailsActivity.this,CTRecordListActivity.class));
                 finish();
 
                 break;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

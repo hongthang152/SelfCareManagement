@@ -35,6 +35,7 @@ import java.util.List;
 public class ScList extends AppCompatActivity {
 
     private ListView lv;
+    private Toolbar toolbar;
     String note = "N/A";
     private ArrayList<HashMap<String, String>> scList;
     SkinCareDatabase db = new SkinCareDatabase(this);
@@ -43,6 +44,13 @@ public class ScList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sc_list);
+
+        toolbar = findViewById(R.id.sc_toolbar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Log.d("SkinCare.java", "onCreate: creating db");
         SkinCareDatabase db = new SkinCareDatabase(this);
@@ -146,5 +154,11 @@ public class ScList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadDataFromDatabase(db);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -247,7 +247,7 @@ public class Pneumatic extends AppCompatActivity {
         String end = formatter.format(endTime);
         db.addModel(new PneumaticModel(start, chronometer.getText().toString(), end));
         pd.dismiss();
-        Toast.makeText(getBaseContext(), "PCP session saved", Toast.LENGTH_SHORT);
+        Toast.makeText(getBaseContext(), "PCP session saved", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getBaseContext(), PneumaticList.class));
     }
 

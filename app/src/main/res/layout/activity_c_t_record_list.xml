@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/appcolor"
+    android:background="@color/colorWhiteBackground"
     tools:context=".treatment.compressiontherapy.CTRecordListActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,7 +15,8 @@
         android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="CT Record List"
-        app:titleTextColor="@color/brown" />
+        app:titleTextColor="@color/colorWhiteBackground"
+        android:theme="@style/ToolbarColoredBackArrow"/>
 
     <LinearLayout
         android:layout_marginTop="10dp"

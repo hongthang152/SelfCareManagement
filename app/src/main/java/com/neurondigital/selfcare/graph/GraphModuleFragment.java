@@ -126,7 +126,7 @@ public class GraphModuleFragment extends Fragment {
                     continue;
 
                 WeekViewEvent event = new WeekViewEvent(mld.getID(), "MLD", calStart, calEnd);
-                event.setColor(getResources().getColor(R.color.brown));
+                event.setColor(getResources().getColor(R.color.mld_color));
                 eventList.add(event);
             }
 
@@ -155,7 +155,7 @@ public class GraphModuleFragment extends Fragment {
                         calStart.get(Calendar.YEAR) != newYear || calEnd.get(Calendar.YEAR) != newYear)
                     continue;
                 WeekViewEvent event = new WeekViewEvent(p.getID(), "PN", calStart, calEnd);
-                event.setColor(getResources().getColor(R.color.gray));
+                event.setColor(getResources().getColor(R.color.appcolor));
                 eventList.add(event);
             }
 
@@ -177,7 +177,7 @@ public class GraphModuleFragment extends Fragment {
                     continue;
 
                 WeekViewEvent event = new WeekViewEvent(ctRecord.getId(), "CT", calStart, calEnd);
-                event.setColor(getResources().getColor(R.color.blue));
+                event.setColor(getResources().getColor(R.color.md_light_blue_200));
                 eventList.add(event);
             }
 
@@ -200,7 +200,7 @@ public class GraphModuleFragment extends Fragment {
                     continue;
 
                 WeekViewEvent event = new WeekViewEvent(mld.getID(), "Exe", calStart, calEnd);
-                event.setColor(getResources().getColor(R.color.md_yellow_A700));
+                event.setColor(getResources().getColor(R.color.md_orange_A700));
                 eventList.add(event);
             }
 
@@ -243,7 +243,7 @@ public class GraphModuleFragment extends Fragment {
         }
         else{
         WeekViewEvent event = new WeekViewEvent(Integer.parseInt(sc.get("_id")), "Skincare", calStart, calEnd);
-        event.setColor(getResources().getColor(R.color.blue));
+        event.setColor(getResources().getColor(R.color.colorPurple));
 
         return event;}
 

@@ -219,7 +219,7 @@ public class MLD extends AppCompatActivity {
             String end = formatter.format(endTime);
             db.addmodel(new MLDModel(start, chronometer.getText().toString(), end));
             pd.dismiss();
-            Toast.makeText(getBaseContext(), "Massage session saved", Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(), "Massage session saved", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getBaseContext(), MLDList.class));
     }
 

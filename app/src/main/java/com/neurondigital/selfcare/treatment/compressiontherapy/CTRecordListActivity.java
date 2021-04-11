@@ -1,6 +1,7 @@
 package com.neurondigital.selfcare.treatment.compressiontherapy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,11 +21,19 @@ public class CTRecordListActivity extends AppCompatActivity {
     ListView ct_list;
     List<CTRecord> records;
     ArrayAdapter<CTRecord> adapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c_t_record_list);
+
+        toolbar = findViewById(R.id.record_detail_bar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //initializing database
         db = new CTDatabase(this);
