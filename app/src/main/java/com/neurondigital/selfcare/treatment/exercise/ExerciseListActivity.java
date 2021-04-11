@@ -1,6 +1,7 @@
 package com.neurondigital.selfcare.treatment.exercise;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,12 +23,19 @@ public class ExerciseListActivity extends AppCompatActivity {
     ExerciseDatabase db = new ExerciseDatabase(this);
     List<ExerciseModel> records;
     ArrayAdapter<ExerciseModel> adapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_list);
         ListView lv = findViewById(R.id.record_list);
+        toolbar = findViewById(R.id.exe_toolbar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         records = db.getAll();
 
@@ -78,5 +86,11 @@ public class ExerciseListActivity extends AppCompatActivity {
                 return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

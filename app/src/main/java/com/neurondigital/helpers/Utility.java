@@ -49,6 +49,7 @@ public class Utility {
         if(!durArr[2].equals("00")) {
             builder.append(Integer.parseInt(durArr[2])).append("s ");
         }
+        if(builder.toString().isEmpty()) return "0s";
 
         return builder.toString().trim();
     }

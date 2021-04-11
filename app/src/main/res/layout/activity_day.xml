@@ -4,37 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/blue"
-    tools:context=".treatment.skincare.Day">
+    android:background="@color/colorWhiteBackground">
 
-    <Button
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/garment1"
-        android:textColor="#000000"
-        android:background="@color/md_light_blue_50"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/day_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="Elastic Compression Garment"
-        android:textSize="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:drawablePadding="-50dp"
-        />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/appcolor"
+        android:gravity="center"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="Choose your garment"
+        app:titleTextColor="@color/colorWhiteBackground"
+        app:theme="@style/ToolbarColoredBackArrow"/>
 
-    <Button
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/garment2"
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:textColor="#000000"
-        android:background="@color/md_light_blue_50"
-        android:textSize="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_height="200dp"
-        android:text="Inelastic Velcro garment"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorWhiteBackground">
 
+        <LinearLayout
+            android:id="@+id/garment1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="20dp"
+            android:background="@drawable/ct_daytime_or_nighttime_btn"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:text="Elastic Compression Garment"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/garment2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:background="@drawable/ct_daytime_or_nighttime_btn"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:text="Inelastic Velcro Garment"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

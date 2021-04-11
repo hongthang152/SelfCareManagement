@@ -2,6 +2,7 @@ package com.neurondigital.selfcare.treatment.skincare;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.neurondigital.selfcare.R;
@@ -28,6 +30,7 @@ public class SkinCare extends AppCompatActivity {
     private EditText userInput;
     private ListView lv;
     private Button clear;
+    private Toolbar toolbar;
     FloatingActionButton eventListBtn;
     String note = "N/A";
     private ArrayList<HashMap<String, String>> scList;
@@ -45,6 +48,13 @@ public class SkinCare extends AppCompatActivity {
         addButton = (Button)findViewById(R.id.addButton);
         userInput = (EditText)findViewById(R.id.enterNote);
         eventListBtn = findViewById(R.id.event_list_btn);
+
+        toolbar = findViewById(R.id.sc_toolbar);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         clear = (Button)findViewById(R.id.clear);
         lv = findViewById(R.id.scList);
@@ -71,6 +81,7 @@ public class SkinCare extends AppCompatActivity {
             if(!userInput.getText().toString().isEmpty()){
                 db.addmodel(sc);
                 userInput.setText("");
+                Toast.makeText(getBaseContext(), "Record has been saved", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -100,6 +111,10 @@ public class SkinCare extends AppCompatActivity {
         alert.show();
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
 

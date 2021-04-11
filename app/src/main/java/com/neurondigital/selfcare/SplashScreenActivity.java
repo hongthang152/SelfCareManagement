@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
@@ -93,6 +94,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AuthenticationAPI authAPI = new AuthenticationAPI(getApplicationContext(), (JSONObject result) -> {
+                    if(result == null) {
+                        Toast.makeText(getApplicationContext(), "Wrong username and password", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     Intent intent = new Intent(activity, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

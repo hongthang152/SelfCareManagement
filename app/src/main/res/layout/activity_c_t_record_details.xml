@@ -1,182 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical" android:layout_width="match_parent"
+android:background="@color/colorWhiteBackground"
+android:layout_height="match_parent">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/ct_record_detail_bar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/appcolor"
-    android:layout_height="match_parent">
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:title="CT Record Details"
+    app:titleTextColor="@color/colorWhiteBackground"
+    app:theme="@style/ToolbarColoredBackArrow"/>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/record_detail_bar"
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/appcolor"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="CT Record Details"
-        app:titleTextColor="@color/brown" />
+        android:layout_height="50dp">
 
+        <TextView
+            android:id="@+id/tv_day_night_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/day_night"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/tv_day_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:gravity="end"
+            android:textSize="18sp" />
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="50dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
+        <TextView
+            android:id="@+id/tv_name_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/name"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_day_night_cap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/day_night"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:gravity="end"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_day_night"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:ems="10"
-                android:gravity="end"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <TextView
-                android:id="@+id/tv_name_cap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/name"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:ems="10"
-                android:gravity="end"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/start_time"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:text="@string/dummy_start_time"
-                android:ems="10"
-                android:gravity="end"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/end_time"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/dummy_end_time"
-                android:ems="10"
-                android:gravity="end"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/duration"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:gravity="end"
-                android:textColor="@color/brown"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/start_time"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:text="@string/dummy_start_time"
+            android:ems="10"
+            android:gravity="end"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/end_time"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/dummy_end_time"
+            android:ems="10"
+            android:gravity="end"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/duration"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="end"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:layout_marginBottom="20dp"
+    android:layout_weight="0"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        android:layout_weight="0"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_save"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/custom_button"
-            android:text="@string/save"
-            android:textColor="@color/brown" />
-    </LinearLayout>
+        android:background="@drawable/custom_button"
+        android:text="@string/save"
+        android:textColor="@color/colorWhiteBackground" />
+</LinearLayout>
 
 
 </LinearLayout>
+

@@ -1,25 +1,31 @@
 package com.neurondigital.selfcare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
+import android.widget.LinearLayout;
 
 import com.neurondigital.selfcare.treatment.compressiontherapy.CTRecordListActivity;
 import com.neurondigital.selfcare.treatment.skincare.Day;
 import com.neurondigital.selfcare.treatment.skincare.Night;
 
 public class CongestionTherapy extends AppCompatActivity {
-Toolbar toolbar;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_congestion_therapy);
-        Button day = findViewById(R.id.day);
-        Button night = findViewById(R.id.night);
+        LinearLayout day = findViewById(R.id.day);
+        LinearLayout night = findViewById(R.id.night);
+        toolbar = findViewById(R.id.congestion_therapy_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Button btn_open_ct_record_list = findViewById(R.id.btn_open_ct_record_list);
         day.setOnClickListener(new View.OnClickListener() {
             @Override

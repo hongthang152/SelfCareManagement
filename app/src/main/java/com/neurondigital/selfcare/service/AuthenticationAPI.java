@@ -1,8 +1,10 @@
 package com.neurondigital.selfcare.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.neurondigital.selfcare.Configurations;
 
@@ -35,6 +37,10 @@ public class AuthenticationAPI extends AsyncTask<String, String, JSONObject> {
 
     public static boolean isAuthenticated(Context context) {
         return context.getSharedPreferences(AUTHENTICATION_SHARED_PREF, MODE_PRIVATE).getString(TOKEN_SHARED_PREEF_KEY, null) != null;
+    }
+
+    public static void logout(Context context) {
+        context.getSharedPreferences(AUTHENTICATION_SHARED_PREF, MODE_PRIVATE).edit().remove(TOKEN_SHARED_PREEF_KEY).commit();
     }
 
     @Override
@@ -80,13 +86,15 @@ public class AuthenticationAPI extends AsyncTask<String, String, JSONObject> {
 
     protected void onPostExecute(JSONObject result) {
         try {
+            if(result == null) {
+                this.response.processFinish(null);
+                return;
+            }
             String token = result.getString("token");
             SharedPreferences.Editor editor = context.getSharedPreferences(AUTHENTICATION_SHARED_PREF, MODE_PRIVATE).edit();
             editor.putString(TOKEN_SHARED_PREEF_KEY, token);
             editor.apply();
-            if(this.response != null) {
-                this.response.processFinish(result);
-            }
+            this.response.processFinish(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }

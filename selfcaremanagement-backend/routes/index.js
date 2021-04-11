@@ -50,6 +50,25 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
+router.post('/register', async (req, res, next) => {
+  var user = await User.findOne({ username : req.body.username });
+  if(user) return res.status(409)
+  if (user === null) { 
+    return res.status(400).send({ 
+        message : "User not found."
+    }); 
+  }
+
+  if (user.validPassword(req.body.password)) { 
+    var token = jwt.sign({userID: user.id}, 'static-secret', {expiresIn: '2h'});
+    return res.status(200).send({ token: token });
+  } else { 
+    return res.status(400).send({ 
+        message : "Wrong Password"
+    });
+  }
+})
+
 
 router.post('/sync', authMiddleware, async (req, res, next) => {
   var body = req.body;

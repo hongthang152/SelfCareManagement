@@ -13,6 +13,7 @@ import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.neurondigital.selfcare.graph.GraphModuleFragment;
+import com.neurondigital.selfcare.service.AuthenticationAPI;
 import com.neurondigital.selfcare.treatment.TreatmentModuleFragment;
 
 import java.util.ArrayList;
@@ -98,31 +100,37 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent;
                         switch ((int) drawerItem.getIdentifier()) {
                             case NAV_INFO:
-                                intent = new Intent(MainActivity.this, infoactivity.class);
-                                startActivity(intent);
+//                                intent = new Intent(MainActivity.this, infoactivity.class);
+//                                startActivity(intent);
+                                Toast.makeText(getBaseContext(), "Please wait for this feature to be implemented in the future", Toast.LENGTH_SHORT).show();
                                 break;
 
                             case NAVSETTINGS:
-                                intent = new Intent(context, SettingsActivity.class);
-                                startActivity(intent);
+//                                intent = new Intent(context, SettingsActivity.class);
+//                                startActivity(intent);
+                                Toast.makeText(getBaseContext(), "Please wait for this feature to be implemented in the future", Toast.LENGTH_SHORT).show();
                                 break;
 
                             case NAV_PROFILE:
-                                if (User.isUserLoggedInElseTry(activity)) {
-                                    intent = new Intent(context, ProfileActivity.class);
-                                    startActivity(intent);
-                                }
+//                                if (User.isUserLoggedInElseTry(activity)) {
+//                                    intent = new Intent(context, ProfileActivity.class);
+//                                    startActivity(intent);
+//                                }
+                                Toast.makeText(getBaseContext(), "Please wait for this feature to be implemented in the future", Toast.LENGTH_SHORT).show();
                                 break;
                             case NAV_LOGOUT:
                                 User.logout(context);
+                                startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
                                 break;
                             case NAV_POLICY:
-                                intent = new Intent(context, PolicyActivity.class);
-                                startActivity(intent);
+//                                intent = new Intent(context, PolicyActivity.class);
+//                                startActivity(intent);
+                                Toast.makeText(getBaseContext(), "Please wait for this feature to be implemented in the future", Toast.LENGTH_SHORT).show();
                                 break;
                             case NAV_TERMS:
-                                intent = new Intent(context, TermsActivity.class);
-                                startActivity(intent);
+//                                intent = new Intent(context, TermsActivity.class);
+//                                startActivity(intent);
+                                Toast.makeText(getBaseContext(), "Please wait for this feature to be implemented in the future", Toast.LENGTH_SHORT).show();
                                 break;
                             default:
                                 //opens the categories displayed in drawer
@@ -177,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 //
         drawerItems.add(new SecondaryDrawerItem().withIdentifier(NAVSETTINGS).withName(R.string.nav_settings).withIcon(FontAwesome.Icon.faw_cog));
         if (Configurations.ENABLE_USER_SYSTEM) {
-            if (User.isUserLoggedIn(activity))
+            if (AuthenticationAPI.isAuthenticated(getApplicationContext()))
                 drawerItems.add(new SecondaryDrawerItem().withIdentifier(NAV_LOGOUT).withName(R.string.nav_logout).withIcon(FontAwesome.Icon.faw_sign_out));
         }
 //

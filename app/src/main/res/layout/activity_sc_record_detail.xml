@@ -13,6 +13,7 @@
         android:background="@color/appcolor"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/record_detail"
+        android:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="@color/colorWhiteBackground" />
 
     <LinearLayout

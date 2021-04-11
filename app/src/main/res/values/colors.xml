@@ -8,6 +8,7 @@
     <color name="brown">#A83B33</color>
     <color name="appcolor">#8EC3DB</color>
     <color name="blue">#49B2C7</color>
+    <color name="mld_color">#00a2ed</color>
 
     <!--redo search overlay color-->
     <color name="color_mapOverlay">#aa03A9F4</color>
