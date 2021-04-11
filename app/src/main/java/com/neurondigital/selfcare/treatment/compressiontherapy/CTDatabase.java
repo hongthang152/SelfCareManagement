@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.neurondigital.selfcare.treatment.exercise.ExerciseModel;
 
@@ -104,5 +105,14 @@ public class CTDatabase extends SQLiteOpenHelper {
             return 0;
         });
         return list.isEmpty() ? null : list.get(0);
+    }
+
+    public void deleterow(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COL_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        Log.d("deleting: ", "id: "+id);
+
+        db.close();
     }
 }

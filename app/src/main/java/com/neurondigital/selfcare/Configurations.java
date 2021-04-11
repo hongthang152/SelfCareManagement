@@ -6,7 +6,7 @@ package com.neurondigital.selfcare;
 public class Configurations {
 
 
-    public static String SERVER_URL = "http://10.0.2.2:3000/";
+    public static String SERVER_URL = "https://localhost:3000/";
 //    public static String SERVER_URL = "http://cityguide.neurondigital.com/";
 
     public final static boolean ENABLE_USER_SYSTEM = true;
